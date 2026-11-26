@@ -221,6 +221,16 @@ table.pl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric
 table.pl th,table.pl td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
 table.pl th:first-child,table.pl td:first-child{text-align:left}
 .sbxbar{position:fixed;z-index:35;top:0;left:50%;transform:translateX(-50%);background:#c2402f;color:#fff;font-size:11px;font-weight:800;padding:2px 12px;border-radius:0 0 10px 10px;pointer-events:none}
+/* P03–P04 */
+.pcard{border-radius:14px;padding:10px 12px;border:2px solid rgba(255,255,255,.18);background:linear-gradient(160deg,var(--pc1),var(--pc2))}
+.p-etsy{--pc1:rgba(241,100,30,.35);--pc2:rgba(0,0,0,.2)}.p-gumroad{--pc1:rgba(255,144,232,.3);--pc2:rgba(0,0,0,.2)}.p-payhip{--pc1:rgba(80,160,255,.3);--pc2:rgba(0,0,0,.2)}
+.pcard .pb{height:6px;border-radius:3px;background:rgba(0,0,0,.35);overflow:hidden;margin:6px 0}.pcard .pb i{display:block;height:100%;background:linear-gradient(90deg,#ffe08a,#fff)}
+.kv{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:2px 8px;font-size:12px}.kv span{color:var(--dim)}.kv b{font-variant-numeric:tabular-nums}
+.spark{display:flex;align-items:flex-end;gap:2px;height:90px;padding:6px;border-radius:10px;background:rgba(0,0,0,.25)}.spark i{flex:1;background:linear-gradient(#7ff0b0,#2f9a6a);border-radius:2px 2px 0 0;min-width:3px}.spark i.neg{background:linear-gradient(#ff9c95,#c2402f)}
+.bars{display:grid;gap:4px}.br{display:grid;grid-template-columns:7em minmax(0,1fr) 3em;gap:8px;align-items:center;font-size:12px}.br .bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.br .bt{height:10px;border-radius:5px;background:rgba(0,0,0,.3);overflow:hidden}.br .bt i{display:block;height:100%;background:linear-gradient(90deg,#5ec2ff,#b18cff)}.br .bv{text-align:right;font-variant-numeric:tabular-nums}
+.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.cc{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.2);color:var(--ink);font-size:13px;min-height:44px}.cc .m{font-size:11px;color:var(--dim)}
+.rep .rl{margin:6px 0 0;padding-left:18px;font-size:13px}.rep .rl li{margin:3px 0}
+.plv{margin-top:6px}
 /* 旋转提示 */
 .rotate{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;background:radial-gradient(circle at 50% 40%,#1d3c70,#081530)}
 .phone{width:56px;height:96px;border:4px solid var(--gold2);border-radius:12px;animation:rot 2.2s ease-in-out infinite;position:relative}
@@ -269,7 +279,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 
-<!-- PWA (build_pwa.py 20261126-1217-e79bae65) -->
+<!-- PWA (build_pwa.py 20261126-1400-6662c9b5) -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -284,7 +294,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <script>
 (function(){
-  window.HQ_PWA_VERSION='20261126-1217-e79bae65';
+  window.HQ_PWA_VERSION='20261126-1400-6662c9b5';
   if('serviceWorker' in navigator && location.protocol!=='file:'){
     window.addEventListener('load',function(){
       navigator.serviceWorker.register('sw.js').then(function(r){window.HQ_SW=r;}).catch(function(e){console.warn('SW register failed',e);});
@@ -348,7 +358,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
  <div><div class="loadbox" id="loadbox"><div class="lbar"><i id="lbar"></i></div><div class="ltxt" id="ltxt">正在载入引擎…</div></div>
  <div class="sbtns" id="sbtns" hidden><button class="gb" id="btnCont"><svg class="i"><use href="#i-play"/></svg>继续经营</button><button class="gb blue" id="btnNew">开始游戏</button><div class="row2"><button class="gb dark" id="btnSet"><svg class="i"><use href="#i-gear"/></svg>游戏设置</button><button class="gb dark" id="btnData"><svg class="i"><use href="#i-cloud"/></svg>备份恢复</button></div><div class="save" id="saveSum"></div></div></div>
 </div>
-<div class="ver" id="ver">P02 测试版 · 模拟经营，金币无真实价值</div><div class="sbxbar" id="sbxbar" hidden>测试沙盒 · 虚构交易 · 不会写入正式存档</div>
+<div class="ver" id="ver">版本 P03-P04 正式版 · v3.4.0 · 模拟经营，金币无真实价值</div><div class="sbxbar" id="sbxbar" hidden>测试沙盒 · 虚构交易 · 不会写入正式存档</div>
 <div class="rotate" id="rotate" hidden><div class="phone"></div><h2 style="margin:0">请横置手机</h2><p class="sub" style="max-width:320px;margin:0">My Company 为横屏游戏设计。若 Claude App 不随手机旋转，可以继续使用竖屏简化布局。</p><button class="gb dark" id="portraitOk">继续竖屏</button></div>
 <div class="fx" id="fx"></div>
 <div class="tut" id="tut" hidden><div class="card" id="tutCard"></div></div>
@@ -462,7 +472,8 @@ const dname=d=>DEPTS[d]?DEPTS[d].n:d;
    B 账本：模拟经营金币 —— 只追加流水；错误用冲正处理，不修改历史。
    两个账本互不转换，都不具备真实货币价值。 */
 const ECON_CFG={coinPerXp:1,status:'配置方案 v1：1 XP = 1 任务金币（待董事长确认）'};
-const MARKET_OPEN=false; /* P03/P04 开放前，正式存档不会产生任何模拟订单 */
+const MARKET_OPEN=true; /* P03–P04：模拟市场已开放；只有通过研发、测试、风险审核的产品可在正式存档上架 */
+const simMonthOf=d=>Math.floor(Math.max(0,d-1)/30)+1;const monthLabel=k=>k==='S00'?'模拟日历启用前':k[0]==='S'?'模拟第 '+(+k.slice(1))+' 月':k+'（旧记录）';
 const W_TH=[0,1,10,50,100,250,500,1000,2500,5000,10000,20000,50000,100000,250000,500000,1000000,2500000,5000000,10000000];
 const TIERS=[['黑铁',100],['青铜',500],['白银',1000],['黄金',2000],['铂金',5000],['钻石',10000],['大师',20000],['宗师',50000],['传奇',100000],['帝王',1000000]];
 const TIERC={黑铁:'#7a7f88',青铜:'#c4834a',白银:'#c9d1db',黄金:'#f0c75e',铂金:'#7fe0d8',钻石:'#7fc8ff',大师:'#c49bff',宗师:'#ff8aa8',传奇:'#ffb34a',帝王:'#ffe39a'};
@@ -478,13 +489,13 @@ function ledgerA(s){return s.tasks.filter(t=>t.status==='approved').map(t=>({id:
 const revSet=s=>new Set(econInit(s).b.filter(e=>e.type==='reversal').map(e=>e.ref));
 const contrib=e=>e.type==='sale'?e.amt:(e.type==='refund'||e.type==='fee'||e.type==='cost')?-e.amt:0;
 function econCalc(s){const E=econInit(s),A=ledgerA(s);const aBal=A.reduce((x,a)=>x+a.amt,0);const byId={};E.b.forEach(e=>byId[e.id]=e);
- const sum={capital:0,sale:0,refund:0,fee:0,cost:0},month={},prod={},plat={},mk=ld().slice(0,7);
- const add=(e,sign,date)=>{const t=e.type;if(sum[t]===undefined)return;sum[t]+=sign*e.amt;if(t==='capital')return;const n=sign*contrib(e);const m=date.slice(0,7);month[m]=(month[m]||0)+n;
+ const sum={capital:0,sale:0,refund:0,fee:0,cost:0},month={},prod={},plat={},kind={},mk='S'+String(simMonthOf(Math.max(1,(s.sim&&s.sim.day)||1))).padStart(2,'0');
+ const add=(e,sign,date,sd)=>{const t=e.type;if(sum[t]===undefined)return;sum[t]+=sign*e.amt;if(t==='capital')return;const n=sign*contrib(e);const m=sd!=null&&sd>0?'S'+String(simMonthOf(sd)).padStart(2,'0'):'S00';month[m]=(month[m]||0)+n;if(t==='cost'){const kk=e.kind||'other';kind[kk]=r2((kind[kk]||0)+sign*e.amt)}
   [[prod,e.product||'未关联产品'],[plat,e.platform||'无平台']].forEach(([o,k])=>{o[k]=o[k]||{rev:0,ref:0,fee:0,cost:0,net:0};const x=o[k];if(t==='sale')x.rev+=sign*e.amt;else x[t==='refund'?'ref':t]+=sign*e.amt;x.net+=n})};
- E.b.forEach(e=>{if(e.type==='reversal'){const o=byId[e.ref];if(o)add(o,-1,e.date)}else add(e,1,e.date)});
+ E.b.forEach(e=>{if(e.type==='reversal'){const o=byId[e.ref];if(o)add(o,-1,e.date,e.simDay!=null?e.simDay:o.simDay)}else add(e,1,e.date,e.simDay)});
  Object.keys(sum).forEach(k=>sum[k]=r2(sum[k]));const net=r2(sum.sale-sum.refund-sum.fee-sum.cost);const cash=r2(sum.capital+net);
  let w=0;W_TH.forEach((th,i)=>{if(net>=th)w=i+1});const mNet=r2(month[mk]||0);let tier=null;TIERS.forEach(([n,th])=>{if(mNet>=th)tier=n});
- const nextW=w<20?W_TH[w]:null;return {A,aBal,sum,net,cash,w,nextW,mNet,mk,month,tier,prod,plat,wMax:Math.max(E.wMax,w)}}
+ const nextW=w<20?W_TH[w]:null;return {A,aBal,sum,net,cash,w,nextW,mNet,mk,month,tier,prod,plat,kind,wMax:Math.max(E.wMax,w)}}
 function ledgerPost(s,tx){const E=econInit(s);
  if(!BTYPES[tx.type]||tx.type==='reversal')throw '未知流水类型';
  const amt=+tx.amt;if(!isFinite(amt)||amt<=0||amt>1e9)throw '金额必须是大于 0 的数字';
@@ -495,23 +506,1186 @@ function ledgerPost(s,tx){const E=econInit(s);
  const ext=String(tx.ext||'').trim().slice(0,60);if(!ext)throw '缺少来源编号（用于防重复）';
  if(E.b.some(e=>e.ext===ext))throw '重复流水：来源编号 '+ext+' 已入账';
  const date=/^\d{4}-\d{2}-\d{2}$/.test(tx.date||'')?tx.date:ld();
- E.seq++;const e={id:'B-'+String(E.seq).padStart(6,'0'),ext,date,type:tx.type,amt:r2(amt),product:String(tx.product||'').slice(0,40),platform:String(tx.platform||'').slice(0,20),src:tx.src||'manual',note:String(tx.note||'').slice(0,200),ts:Date.now()};E.b.push(e);return e}
+ E.seq++;const e={id:'B-'+String(E.seq).padStart(6,'0'),ext,date,type:tx.type,amt:r2(amt),product:String(tx.product||'').slice(0,40),platform:String(tx.platform||'').slice(0,20),src:tx.src||'manual',note:String(tx.note||'').slice(0,200),ts:Date.now()};if(Number.isInteger(tx.simDay))e.simDay=tx.simDay;if(tx.kind)e.kind=String(tx.kind).slice(0,20);E.b.push(e);return e}
+function ledgerAtomic(s,fn){const snap=JSON.stringify(econInit(s));try{return fn()}catch(err){s.econ=JSON.parse(snap);throw err}}
 function ledgerReverse(s,id,reason){const E=econInit(s);const o=E.b.find(e=>e.id===id);if(!o)throw '找不到流水';if(o.type==='reversal')throw '冲正记录不能再冲正';if(revSet(s).has(id))throw '该流水已冲正';if(!String(reason||'').trim())throw '请填写冲正原因';
- E.seq++;const e={id:'B-'+String(E.seq).padStart(6,'0'),ext:'REV-'+id,date:ld(),type:'reversal',ref:id,amt:o.amt,product:o.product,platform:o.platform,src:o.src,note:String(reason).slice(0,200),ts:Date.now()};E.b.push(e);return e}
+ E.seq++;const e={id:'B-'+String(E.seq).padStart(6,'0'),ext:'REV-'+id,date:ld(),type:'reversal',ref:id,amt:o.amt,product:o.product,platform:o.platform,src:o.src,note:String(reason).slice(0,200),ts:Date.now()};if(o.simDay!=null)e.simDay=s.sim&&s.sim.day?s.sim.day:o.simDay;E.b.push(e);return e}
 /* P03/P04 统一交易接口（预留）：订单 = 销售收入 + 平台费用；退款、经营成本独立入账；同一来源编号只能入账一次 */
 const MarketAPI={
  src:()=>MODE==='sandbox'?'test':'market',
- order(s,o){const r=[ledgerPost(s,{type:'sale',amt:o.price,ext:o.ext,product:o.product,platform:o.platform,date:o.date,src:this.src(),note:'订单 '+o.ext})];if(+o.fee>0)r.push(ledgerPost(s,{type:'fee',amt:o.fee,ext:o.ext+'-FEE',product:o.product,platform:o.platform,date:o.date,src:this.src(),note:'平台费用 '+o.ext}));return r},
- refund(s,o){return ledgerPost(s,{type:'refund',amt:o.amt,ext:o.ext+'-REFUND',product:o.product,platform:o.platform,date:o.date,src:this.src(),note:'退款 '+o.ext})},
- cost(s,o){return ledgerPost(s,{type:'cost',amt:o.amt,ext:o.ext,product:o.product,platform:o.platform,date:o.date,src:this.src(),note:o.note||'经营成本'})}};
+ order(s,o){return ledgerAtomic(s,()=>{const r=[ledgerPost(s,{type:'sale',amt:o.price,ext:o.ext,product:o.product,platform:o.platform,date:o.date,simDay:o.simDay,src:this.src(),note:'订单 '+o.ext})];if(o.fee!=null&&!(isFinite(+o.fee)&&+o.fee>=0))throw '平台费用无效';if(+o.fee>0)r.push(ledgerPost(s,{type:'fee',amt:o.fee,ext:o.ext+'-FEE',product:o.product,platform:o.platform,date:o.date,simDay:o.simDay,src:this.src(),note:'平台费用 '+o.ext}));return r})},
+ refund(s,o){return ledgerPost(s,{type:'refund',amt:o.amt,ext:o.ext+'-REFUND',product:o.product,platform:o.platform,date:o.date,simDay:o.simDay,src:this.src(),note:'退款 '+o.ext+(o.reason?'（'+o.reason+'）':'')})},
+ cost(s,o){return ledgerPost(s,{type:'cost',amt:o.amt,ext:o.ext,product:o.product,platform:o.platform,date:o.date,simDay:o.simDay,kind:o.kind,src:this.src(),note:o.note||'经营成本'})}};
 function econTrack(s){const E=econInit(s),c=econCalc(s);if(E.wCur===undefined)E.wCur=c.w;else if(E.wCur!==c.w){E.wHist.push({d:ld(),from:E.wCur,to:c.w,net:c.net});if(E.wHist.length>200)E.wHist=E.wHist.slice(-200);E.wCur=c.w}E.wMax=Math.max(E.wMax,c.w);return c}
 /* 导入校验：流水结构、唯一编号、冲正引用；正式存档拒绝测试流水 */
-function econSanitize(o,notes){const src=o&&o.econ&&Array.isArray(o.econ.b)?o.econ.b:[];const out=[],ids=new Set(),exts=new Set();let bad=0,test=0,closed=0,seq=0;
+/* 正式存档订单核对：商品存在且属于正式存档、产品满足正式发布条件、价格出现在商品价格记录、日期不晚于模拟日历 */
+function liveListingOk(o,sim,l){if(!l||l.mode!=='live')return false;const p=(o.products||[]).find(x=>x&&x.id===l.productId);if(!p)return false;try{return SimEngine.productLevel({tasks:Array.isArray(o.tasks)?o.tasks:[]},p,sim,'live').eligible}catch(e){return false}}
+function liveOrderOk(o,sim,x){if(!x||x.mode!=='live'||!Number.isInteger(x.day)||x.day<1||x.day>sim.day)return false;const l=(sim.listings||[]).find(q=>q&&q.id===x.listingId);if(!liveListingOk(o,sim,l)||l.productId!==x.productId||l.platform!==x.platform)return false;const log=Array.isArray(l.priceLog)?l.priceLog:[l.price,l.salePrice];return log.some(v=>v!=null&&Math.abs(v-x.price)<.005)}
+function marketOk(o,e){const sim=o&&o.sim;if(!sim||!Array.isArray(sim.orders)||!Number.isInteger(sim.day))return false;const base=String(e.ext).replace(/-(FEE|REFUND)$/,'').replace(/-R\d+$/,'');
+ if(e.type==='sale')return sim.orders.some(x=>x.id===e.ext&&Math.abs(x.price-e.amt)<.005&&liveOrderOk(o,sim,x));if(e.type==='fee'||e.type==='refund')return sim.orders.some(x=>x.id===base&&liveOrderOk(o,sim,x));
+ if(e.type==='cost'){const m=/^(MKT|LFEE)-(L-\d{4})-/.exec(e.ext);return !!m&&Array.isArray(sim.listings)&&sim.listings.some(l=>l.id===m[2])}return false}
+function econSanitize(o,notes){const src=o&&o.econ&&Array.isArray(o.econ.b)?o.econ.b:[];const out=[],ids=new Set(),exts=new Set();let bad=0,test=0,closed=0,unv=0,seq=0;
  src.forEach(e=>{if(!e||!BTYPES[e.type]||!/^B-\d{6}$/.test(e.id)||ids.has(e.id)||!e.ext||exts.has(e.ext)){bad++;return}const amt=+e.amt;if(!isFinite(amt)||amt<=0){bad++;return}
-  if(e.src==='test'&&MODE!=='sandbox'){test++;return}if(MODE!=='sandbox'&&!['capital','reversal'].includes(e.type)&&!(e.src==='market'&&MARKET_OPEN)){closed++;return}if(e.type==='reversal'&&!ids.has(e.ref)){bad++;return}
-  ids.add(e.id);exts.add(e.ext);seq=Math.max(seq,+e.id.slice(2));out.push({id:e.id,ext:String(e.ext).slice(0,60),date:/^\d{4}-\d{2}-\d{2}$/.test(e.date)?e.date:ld(),type:e.type,amt:r2(amt),product:String(e.product||'').slice(0,40),platform:String(e.platform||'').slice(0,20),src:['manual','market','test'].includes(e.src)?e.src:'manual',note:String(e.note||'').slice(0,200),ref:e.type==='reversal'?e.ref:undefined,ts:+e.ts||0})});
- if(bad)notes.push('丢弃 '+bad+' 条无效流水');if(test)notes.push('拒绝 '+test+' 条测试沙盒流水（不能进入正式存档）');if(closed)notes.push('拒绝 '+closed+' 条经营流水（P03 开放前正式存档不能有模拟订单）');
+  if(e.src==='test'&&MODE!=='sandbox'){test++;return}
+  if(e.src==='market'&&e.type!=='reversal'&&MODE!=='sandbox'&&!marketOk(o,e)){unv++;return}if(MODE!=='sandbox'&&!['capital','reversal'].includes(e.type)&&!(e.src==='market'&&MARKET_OPEN)){closed++;return}if(e.type==='reversal'&&!ids.has(e.ref)){bad++;return}
+  ids.add(e.id);exts.add(e.ext);seq=Math.max(seq,+e.id.slice(2));out.push({id:e.id,ext:String(e.ext).slice(0,60),date:/^\d{4}-\d{2}-\d{2}$/.test(e.date)?e.date:ld(),type:e.type,amt:r2(amt),product:String(e.product||'').slice(0,40),platform:String(e.platform||'').slice(0,20),src:['manual','market','test'].includes(e.src)?e.src:'manual',note:String(e.note||'').slice(0,200),ref:e.type==='reversal'?e.ref:undefined,ts:+e.ts||0,simDay:Number.isInteger(e.simDay)?e.simDay:undefined,kind:e.kind?String(e.kind).slice(0,20):undefined})});
+ if(MODE!=='sandbox'&&o.sim&&Array.isArray(o.sim.orders)){const okSale=new Set(out.filter(e=>e.type==='sale'&&e.src==='market').map(e=>e.ext));const baseOf=e=>String(e.ext).replace(/-(FEE|REFUND)$/,'').replace(/-R\d+$/,'');let orph=0;for(let i=out.length-1;i>=0;i--){const e=out[i];if(e.src==='market'&&(e.type==='fee'||e.type==='refund')&&!okSale.has(baseOf(e))){out.splice(i,1);orph++}}
+  const n0=o.sim.orders.length;o.sim.orders=o.sim.orders.filter(x=>okSale.has(x.id));const dropO=n0-o.sim.orders.length;if(dropO){const ok=new Set(o.sim.orders.map(x=>x.id));o.sim.reviews=(o.sim.reviews||[]).filter(r=>ok.has(r.orderId))}
+  if(orph||dropO)notes.push('因销售流水不合格，连带剔除 '+dropO+' 笔订单及 '+orph+' 条费用/退款流水（保持订单与账本一致）');
+  const liveIds=new Set(out.map(e=>e.id));const rv=out.filter(e=>e.type==='reversal'&&!liveIds.has(e.ref));if(rv.length){rv.forEach(e=>out.splice(out.indexOf(e),1));notes.push('剔除 '+rv.length+' 条失去原流水的冲正')}}
+ if(unv)notes.push('拒绝 '+unv+' 条无法对应模拟订单的市场流水');
+ if(bad)notes.push('丢弃 '+bad+' 条无效流水');if(test)notes.push('拒绝 '+test+' 条测试沙盒流水（不能进入正式存档）');if(closed)notes.push('拒绝 '+closed+' 条经营流水（正式存档只接受市场模块产生的经营流水）');
  const oe=(o&&o.econ)||{};return {v:1,b:out,seq,wMax:Math.min(20,Math.max(0,oe.wMax|0)),wHist:Array.isArray(oe.wHist)?oe.wHist.slice(-200).map(h=>({d:String(h.d||'').slice(0,10),from:h.from|0,to:h.to|0,net:+h.net||0})):[],wCur:oe.wCur===undefined?undefined:(oe.wCur|0)}}
+
+
+/* ---- rng.js ---- */
+/* 可复现随机数（mulberry32）：状态可保存、可恢复 */
+const SimRng = (() => {
+  function make(state) {
+    const r = { state: state >>> 0 };
+    r.next = () => { let t = (r.state = (r.state + 0x6D2B79F5) >>> 0); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    r.int = (a, b) => a + Math.floor(r.next() * (b - a + 1));
+    r.pick = arr => arr[Math.floor(r.next() * arr.length)];
+    r.chance = p => r.next() < p;
+    r.normal = (m = 0, sd = 1) => { const u = Math.max(1e-12, r.next()), v = r.next(); return m + sd * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    return r;
+  }
+  return { make };
+})();
+
+/* ---- market.js ---- */
+/* SimMarket · 平台费用 / 流量 / 平台等级（模拟）
+ * 默认费用档案：马来西亚卖家（马来西亚银行账户、向全球买家卖数字下载），opts.country 默认 'MY'；旧的美国档案保留为 'US'。
+ * 货币 G：模拟币，仅“按美元标价”作为定价参考（1 G 当作 1 USD 来换算美元费用）。G 没有任何真实价值，也不等于令吉（RM）。
+ * 以令吉计的固定费用用 FX_MYR_PER_USD（假设汇率，见下）换算成 G。
+ * 所有流量/点击参数都是建模假设（evidence:'assumption'），费用来自平台官方页面（见 docs/sources.md）。
+ */
+const SimMarket = (() => {
+  const CHECKED = '2026-11-26';
+  const CATS = ['personal-finance', 'seller-tools', 'real-estate-templates', 'productivity-templates', 'software-tool'];
+
+  /* 假设：1 USD = 4.10 MYR（2026-11-26 参考 Trading Economics USD/MYR≈4.1155 后取整；只用于把 RM 固定费换算成 G，不随时间变动） */
+  const FX_MYR_PER_USD = 4.10;
+  const myr = x => x / FX_MYR_PER_USD; // RM → G（未取整，各费用项最后统一 2 位小数）
+  const COUNTRIES = ['MY', 'US'];
+  const r2 = x => Math.round((x + Number.EPSILON) * 100) / 100;
+  const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+  const src = (param, value, unit, source, url, evidence) => ({ param, value, unit, source, url, date: CHECKED, evidence });
+  const ASSUME = (param, value, unit, note) => src(param, value, unit, note || '模型假设（未找到可核实的公开数据）', '', 'assumption');
+
+  const LINKS = {
+    etsyFees: 'https://help.etsy.com/hc/en-us/articles/115014483627-',
+    etsyPP: 'https://help.etsy.com/hc/articles/115015628847',
+    etsyVat: 'https://help.etsy.com/hc/en-us/articles/360040584433-How-VAT-Is-Collected-on-Seller-Fees',
+    gumFees: 'https://gumroad.com/help/article/66-gumroads-fees.html',
+    gumPricing: 'https://gumroad.com/pricing',
+    gumPaid: 'https://gumroad.com/help/article/13-getting-paid',
+    gumTax: 'https://gumroad.com/help/article/121-sales-tax-on-gumroad',
+    payhip: 'https://help.payhip.com/article/102-billing-and-upgrading',
+    payhipStripe: 'https://help.payhip.com/article/65-connecting-your-stripe-account',
+    stripe: 'https://stripe.com/pricing',
+    stripeMY: 'https://stripe.com/de-my/pricing',
+    stripeGlobal: 'https://stripe.com/global',
+    paypal: 'https://www.paypal.com/us/webapps/mpp/merchant-fees',
+    paypalROW: 'https://www.paypalobjects.com/marketing/ua/pdf/row/row-en-merchant-fees-october-28-2026.pdf',
+    fx: 'https://tradingeconomics.com/malaysia/currency',
+    shopifyCr: 'https://www.shopify.com/blog/etsy-conversion-rate'
+  };
+
+  const PLATFORMS = {
+    etsy: {
+      id: 'etsy', name: 'Etsy',
+      audience: '全球手作/创意市集买家，搜索驱动；可打印模板、规划表类数字下载需求大，但同类卖家极多（受众描述为假设）',
+      categories: { 'personal-finance': 1.3, 'seller-tools': 1.0, 'real-estate-templates': 1.1, 'productivity-templates': 1.6, 'software-tool': 0.2 },
+      baseDailyVisitors: 20, competitionLevel: 0.85,
+      trafficSources: [{ name: 'etsy_search', share: 0.7 }, { name: 'etsy_ads', share: 0.15 }, { name: 'offsite', share: 0.15 }],
+      params: {
+        listingFee: 0.20, listingDays: 120, renewOnSaleFee: 0.20,
+        transactionPct: 0.065,
+        // MY 默认：4.5% + RM2（固定费换算成 G）；付款账户币种 MYR，商品以 USD 标价时收 2.5% 货币转换费
+        processingPct: 0.045, processingFixedMYR: 2, processingFixed: myr(2), paymentCurrency: 'MYR', fxPct: 0.025,
+        feeTaxPctMY: 0.08,
+        offsiteAdsPct: 0.15, offsiteAdsPctHigh: 0.12, offsiteAdsCap: 100,
+        baseCtr: 0.025, paidK: 120, paidB0: 1
+      },
+      sources: [
+        src('listingFee', 0.20, 'USD/listing, lasts 4 months', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('renewOnSaleFee', 0.20, 'USD per auto-renew after a sale', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('transactionPct', 6.5, '% of order total (incl. shipping/gift wrap)', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('processingFee(MY)', '4.5% + RM 2', '% of sale + MYR per order (Malaysian bank account); RM2 → G via FX_MYR_PER_USD', 'Etsy Help: What are Payment Processing Fees for Selling on Etsy?', LINKS.etsyPP, 'research'),
+        src('processingFee(US)', '3% + 0.25', '% of sale + USD per order (US bank account; opts.country:\'US\')', 'Etsy Help: What are Payment Processing Fees for Selling on Etsy?', LINKS.etsyPP, 'research'),
+        src('currencyConversionFee', 2.5, '% of order when listing currency ≠ payment account currency (MY account = MYR; listing in USD by default)', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('regulatoryOperatingFee(MY)', 0, 'not charged: Malaysia not in the list (UK, FR, IT, IN, ES, TR, VN, CA)', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('taxOnSellerFees(MY)', 'Malaysia listed', 'Etsy may collect tax on seller fees for MY shops without a tax ID; rate not stated on Etsy page', 'Etsy Help: How VAT Is Collected on Seller Fees', LINKS.etsyVat, 'research'),
+        src('taxOnSellerFeesRate(MY)', 8, '% (Malaysia service tax on digital services; opt-in opts.taxOnFees, not in default)', 'Fonoa: Malaysia increases SST rate as of 1 March 2024', 'https://www.fonoa.com/resources/blog/malaysia-increases-sst-rate-as-of-1-march-2024', 'secondary'),
+        src('FX_MYR_PER_USD', FX_MYR_PER_USD, 'MYR per USD, fixed assumption for converting RM fees to G (USD/MYR 4.1155 on 2026-11-26)', 'Trading Economics: Malaysian Ringgit', LINKS.fx, 'secondary'),
+        src('offsiteAdsPct', '15% (<$10k/yr sales) / 12% (>=$10k)', '% of order, capped at USD 100/order, only on orders from offsite ads', 'Etsy Help: Fees and Taxes', LINKS.etsyFees, 'research'),
+        src('goodConversionRange', '1%–5%', 'visit→order, attributed to Etsy Seller Handbook (context only, not used directly here)', 'Shopify blog', LINKS.shopifyCr, 'secondary'),
+        ASSUME('baseDailyVisitors', 20, 'search impressions/day per new listing at quality 0.5, LV1'),
+        ASSUME('baseCtr', 0.025, 'impression→click'),
+        ASSUME('paidK/paidB0', '120 / 1', 'paid impressions = K·ln(1+budget/B0)；校准：1 G/天约 3–4 次付费点击（相当于每次点击约 0.25–0.35，假设）'),
+        ASSUME('competitionLevel', 0.85, '0..1'),
+        ASSUME('categories', 'see table', 'demand weight 0..2')
+      ]
+    },
+    gumroad: {
+      id: 'gumroad', name: 'Gumroad',
+      audience: '创作者与独立开发者的直销平台，流量主要来自卖家自己的社媒/邮件；Discover 市场带来少量站内流量（受众描述为假设）',
+      categories: { 'personal-finance': 0.9, 'seller-tools': 1.2, 'real-estate-templates': 0.5, 'productivity-templates': 1.3, 'software-tool': 1.5 },
+      baseDailyVisitors: 6, competitionLevel: 0.55,
+      trafficSources: [{ name: 'own_social', share: 0.55 }, { name: 'discover', share: 0.25 }, { name: 'direct_link', share: 0.2 }],
+      params: {
+        directPct: 0.10, directFixed: 0.50, highVolumePct: 0.05, highVolumeThreshold: 20000,
+        discoverPct: 0.30, cardPct: 0.029, cardFixed: 0.30,
+        baseCtr: 0.04, paidK: 50, paidB0: 1
+      },
+      sources: [
+        src('directFee', '10% + 0.50', '% of sale + USD per direct sale; same for MY sellers (Gumroad charges in USD as merchant of record)', 'Gumroad Help: Gumroad\'s fees', LINKS.gumFees, 'research'),
+        src('highVolumeDirectFee', '5% + 0.50', 'after USD 20,000 paid sales in a calendar month', 'Gumroad Help: Gumroad\'s fees', LINKS.gumFees, 'research'),
+        src('discoverFee', 30, '% flat per Discover sale, includes processing', 'Gumroad Help: Gumroad\'s fees', LINKS.gumFees, 'research'),
+        src('cardProcessing(direct)', '2.9% + 0.30', '% + USD; help page: the 10% + 0.50 "does not include: Credit card processing (2.9% + $0.30)" → charged in addition, not double counted', 'Gumroad Help: Gumroad\'s fees', LINKS.gumFees, 'research'),
+        src('pricingPageFee', '10% + 50¢ direct / 30% Discover', 'pricing page is silent on processing; help article is more specific', 'Gumroad Pricing', LINKS.gumPricing, 'research'),
+        src('merchantOfRecord', 'yes', 'Gumroad collects & remits sales tax/VAT at checkout (buyer pays; not a seller fee here)', 'Gumroad Help: Sales tax on Gumroad', LINKS.gumTax, 'research'),
+        src('payout(MY)', 'bank payout in MYR, min RM 133', 'no payout fee stated for bank payouts; mid-market FX; PayPal payouts (other countries) 2%', 'Gumroad Help: Getting paid by Gumroad', LINKS.gumPaid, 'research'),
+        ASSUME('baseDailyVisitors', 6, 'impressions/day per new product without own audience'),
+        ASSUME('baseCtr', 0.04, 'impression→click'),
+        ASSUME('paidK/paidB0', '50 / 1', 'off-platform promo impressions = K·ln(1+budget/B0)'),
+        ASSUME('competitionLevel', 0.55, '0..1'),
+        ASSUME('categories', 'see table', 'demand weight 0..2')
+      ]
+    },
+    payhip: {
+      id: 'payhip', name: 'Payhip',
+      audience: '自建店铺型平台（电子书、课程、模板），几乎没有站内市场流量，需要卖家自己引流（受众描述为假设）',
+      categories: { 'personal-finance': 1.0, 'seller-tools': 0.9, 'real-estate-templates': 0.7, 'productivity-templates': 1.1, 'software-tool': 0.8 },
+      baseDailyVisitors: 3, competitionLevel: 0.35,
+      trafficSources: [{ name: 'own_social', share: 0.6 }, { name: 'search_engine', share: 0.25 }, { name: 'direct_link', share: 0.15 }],
+      params: {
+        planPct: { free: 0.05, plus: 0.02, pro: 0 }, planMonthly: { free: 0, plus: 29, pro: 99 },
+        // MY 默认（Stripe 马来西亚账户）：3% + RM1；国际卡 +1%；需要货币转换 +2%（以 USD 收款、MYR 结算）
+        stripePct: 0.03, stripeFixedMYR: 1, stripeFixed: myr(1), stripeIntlPct: 0.01, stripeFxPct: 0.02,
+        // MY 默认（PayPal 马来西亚商业交易）：国内 3.90%、跨境 4.40% + 固定费（USD 收款 0.30 USD；MYR 收款 RM2）；转换 2.5%
+        paypalDomPct: 0.039, paypalIntlPct: 0.044, paypalFixedUSD: 0.30, paypalFixedMYR: 2, paypalFxPct: 0.025,
+        payoutCurrency: 'MYR',
+        baseCtr: 0.04, paidK: 50, paidB0: 1
+      },
+      sources: [
+        src('freePlanFee', 5, '% per sale, USD 0/month', 'Payhip Help: Billing and Upgrading', LINKS.payhip, 'research'),
+        src('plusPlan', '2% fee, 29', '% per sale; USD/month', 'Payhip Help: Billing and Upgrading', LINKS.payhip, 'research'),
+        src('proPlan', '0% fee, 99', '% per sale; USD/month', 'Payhip Help: Billing and Upgrading', LINKS.payhip, 'research'),
+        src('processorFeesSeparate', 'yes', 'Payhip: "Payment processors such as PayPal and Stripe will still charge their standard transaction fees"', 'Payhip Help: Billing and Upgrading', LINKS.payhip, 'research'),
+        src('stripeAvailableMY', 'yes', 'Malaysia listed by Payhip and by Stripe as a supported Stripe country', 'Payhip Help: Connect Your Stripe Account', LINKS.payhipStripe, 'research'),
+        src('stripeProcessing(MY)', '3% + RM 1', '% + MYR per successful domestic card charge (Stripe Malaysia standard pricing)', 'Stripe Pricing (Malaysia)', LINKS.stripeMY, 'research'),
+        src('stripeIntlCard(MY)', 1, '% extra for international cards (default buyer: international)', 'Stripe Pricing (Malaysia)', LINKS.stripeMY, 'research'),
+        src('stripeFx(MY)', 2, '% extra if currency conversion is required (default sale currency USD, MY payout MYR)', 'Stripe Pricing (Malaysia)', LINKS.stripeMY, 'research'),
+        src('paypalDomestic(MY)', '3.90% + RM 2', '% + MYR, commercial transaction MY buyer→MY seller', 'PayPal Merchant Fees (ROW, updated 28 Oct 2026)', LINKS.paypalROW, 'research'),
+        src('paypalIntl(MY)', '4.40% + 0.30 USD', '% + fixed fee in received currency, "All other markets" seller row (MY), any buyer market', 'PayPal Merchant Fees (ROW, updated 28 Oct 2026)', LINKS.paypalROW, 'research'),
+        src('paypalFx(MY)', 2.5, '% conversion of USD received to MYR (row "Malaysia 2.5%"; read via PDF text extraction, table layout ambiguous)', 'PayPal Merchant Fees (ROW, updated 28 Oct 2026)', LINKS.paypalROW, 'research'),
+        src('stripeProcessing(US)', '2.9% + 0.30', '% + USD, US domestic card (opts.country:\'US\'; intl/FX not modelled for US)', 'Stripe pricing', LINKS.stripe, 'research'),
+        src('paypalProcessing(US)', '3.49% + 0.49', '% + USD, PayPal Checkout US commercial rate (opts.country:\'US\')', 'PayPal Merchant Fees', LINKS.paypal, 'research'),
+        ASSUME('baseDailyVisitors', 3, 'impressions/day per new product without own audience'),
+        ASSUME('baseCtr', 0.04, 'impression→click'),
+        ASSUME('paidK/paidB0', '50 / 1', 'off-platform promo impressions = K·ln(1+budget/B0)'),
+        ASSUME('competitionLevel', 0.35, '0..1'),
+        ASSUME('categories', 'see table', 'demand weight 0..2')
+      ]
+    }
+  };
+
+  /* 国家档案：在 PLATFORMS[x].params（= MY 默认）之上覆盖。US = 旧版美国卖家数值（行为与旧代码一致） */
+  const COUNTRY_OVERRIDES = {
+    MY: { etsy: {}, gumroad: {}, payhip: {} },
+    US: {
+      etsy: { processingPct: 0.03, processingFixed: 0.25, processingFixedMYR: 0, paymentCurrency: 'USD', feeTaxPctMY: 0 },
+      gumroad: {},
+      payhip: { stripePct: 0.029, stripeFixed: 0.30, stripeFixedMYR: 0, stripeIntlPct: 0, stripeFxPct: 0,
+        paypalDomPct: 0.0349, paypalIntlPct: 0.0349, paypalFixedUSD: 0.49, paypalFixedMYR: 0, paypalFxPct: 0, payoutCurrency: 'USD' }
+    }
+  };
+  for (const id of Object.keys(PLATFORMS)) PLATFORMS[id].countries = { MY: COUNTRY_OVERRIDES.MY[id], US: COUNTRY_OVERRIDES.US[id] };
+
+  function plat(id) {
+    const p = PLATFORMS[id];
+    if (!p) throw new Error('unknown platform: ' + id);
+    return p;
+  }
+
+  /* 每笔订单费用（G，2 位小数）。price<=0：免费领取不经过支付，费用 0（假设）。
+   * opts 通用: country 'MY'(默认)|'US'
+   *       etsy {offsiteAds, highVolumeSeller, autoRenewSold=true, listingCurrency='USD', taxOnFees=false}
+   *       gumroad {discover, monthSales}
+   *       payhip {plan:'free'|'plus'|'pro', processor:'stripe'|'paypal', buyer:'intl'|'domestic', currency:'USD'|'MYR'}
+   * MY 默认假设：商品以 USD 标价、买家在海外（国际卡/跨境），收入结算到马来西亚 MYR 账户 → 会产生转换费。 */
+  function feeFor(platformId, price, opts) {
+    const p = plat(platformId), o = opts || {};
+    const country = o.country || 'MY';
+    if (!COUNTRIES.includes(country)) throw new Error('unknown country: ' + country);
+    const k = Object.assign({}, p.params, p.countries[country]);
+    const amt = Math.max(0, Number(price) || 0);
+    const bd = [];
+    if (amt > 0) {
+      if (platformId === 'etsy') {
+        bd.push({ name: 'etsy_transaction', amt: r2(amt * k.transactionPct) });
+        bd.push({ name: 'etsy_processing', amt: r2(amt * k.processingPct + k.processingFixed) });
+        if ((o.listingCurrency || 'USD') !== k.paymentCurrency) bd.push({ name: 'etsy_currency_conversion', amt: r2(amt * k.fxPct) });
+        if (o.autoRenewSold !== false) bd.push({ name: 'etsy_renew_on_sale', amt: k.renewOnSaleFee });
+        if (o.offsiteAds) {
+          const pct = o.highVolumeSeller ? k.offsiteAdsPctHigh : k.offsiteAdsPct;
+          bd.push({ name: 'etsy_offsite_ads', amt: r2(Math.min(k.offsiteAdsCap, amt * pct)) });
+        }
+        if (o.taxOnFees && k.feeTaxPctMY > 0) {
+          const base = bd.reduce((s, b) => s + b.amt, 0);
+          bd.push({ name: 'etsy_tax_on_fees', amt: r2(base * k.feeTaxPctMY) });
+        }
+      } else if (platformId === 'gumroad') {
+        // Gumroad 官方帮助页：10% + 0.50 不含信用卡处理费 2.9% + 0.30 → 两项都收，不是重复计算
+        if (o.discover) {
+          bd.push({ name: 'gumroad_discover', amt: r2(amt * k.discoverPct) });
+        } else {
+          const pct = (o.monthSales || 0) >= k.highVolumeThreshold ? k.highVolumePct : k.directPct;
+          bd.push({ name: 'gumroad_direct', amt: r2(amt * pct + k.directFixed) });
+          bd.push({ name: 'card_processing', amt: r2(amt * k.cardPct + k.cardFixed) });
+        }
+      } else {
+        const plan = k.planPct[o.plan] !== undefined ? o.plan : 'free';
+        const pct = k.planPct[plan];
+        const intl = (o.buyer || (country === 'US' ? 'domestic' : 'intl')) !== 'domestic';
+        const cur = o.currency || 'USD';
+        const fx = cur !== k.payoutCurrency;
+        if (pct > 0) bd.push({ name: 'payhip_' + plan, amt: r2(amt * pct) });
+        if (o.processor === 'paypal') {
+          const fixed = cur === 'MYR' && k.paypalFixedMYR > 0 ? myr(k.paypalFixedMYR) : k.paypalFixedUSD;
+          bd.push({ name: 'paypal_processing', amt: r2(amt * (intl ? k.paypalIntlPct : k.paypalDomPct) + fixed) });
+          if (fx && k.paypalFxPct > 0) bd.push({ name: 'paypal_fx', amt: r2(amt * k.paypalFxPct) });
+        } else {
+          bd.push({ name: 'stripe_processing', amt: r2(amt * k.stripePct + k.stripeFixed) });
+          if (intl && k.stripeIntlPct > 0) bd.push({ name: 'stripe_intl_card', amt: r2(amt * k.stripeIntlPct) });
+          if (fx && k.stripeFxPct > 0) bd.push({ name: 'stripe_fx', amt: r2(amt * k.stripeFxPct) });
+        }
+      }
+    }
+    const total = r2(bd.reduce((s, b) => s + b.amt, 0));
+    return { total, breakdown: bd };
+  }
+
+  function listingCost(platformId) {
+    const p = plat(platformId);
+    if (platformId === 'etsy') return { amt: p.params.listingFee, every: p.params.listingDays, name: 'etsy_listing' };
+    return { amt: 0, every: 0, name: 'none' };
+  }
+
+  /* ---------- 流量 ---------- */
+  function levelFactor(lv) { return 1 + 2 * Math.log(clamp(lv || 1, 1, 100)) / Math.log(100); } // LV1→1, LV100→3
+  function qualityOrganic(q) { return 0.05 + 1.6 * Math.pow(clamp(q, 0, 1), 1.5); }             // q0→0.05, q0.5→0.62, q1→1.65
+
+  /* 期望值（无随机），供 UI 预估与测试 */
+  function expectedTraffic(platformId, listing, ctx) {
+    const p = plat(platformId), k = p.params, c = ctx || {};
+    if (!listing || listing.status === 'paused') return { impressions: 0, clicks: 0, ctr: 0 };
+    const demand = (p.categories[listing.category] || 0) * Math.max(0, c.demandMult === undefined ? 1 : c.demandMult);
+    if (demand <= 0) return { impressions: 0, clicks: 0, ctr: 0 };
+    const q = clamp(listing.listingQuality || 0, 0, 1);
+    const pressure = clamp(c.pressure || 0, 0, 1);
+    const comp = (1 - 0.5 * p.competitionLevel) * (1 - 0.6 * pressure);
+    const lvF = levelFactor(c.platformLevel);
+    const organic = p.baseDailyVisitors * demand * qualityOrganic(q) * comp * lvF;
+    const budget = Math.max(0, Number(listing.mktBudget) || 0);
+    // 付费曝光：对数递减收益；受需求影响（需求弱时广告也难有人看），竞争抬高单价
+    const paid = budget > 0 ? k.paidK * Math.log(1 + budget / k.paidB0) * Math.min(1.5, demand) * (1 - 0.4 * pressure) : 0;
+    const impressions = organic + paid;
+    const ctr = clamp(k.baseCtr * (0.25 + 1.5 * q) * (listing.hasImage ? 1 : 0.4) * (1 - 0.3 * pressure), 0, 0.25);
+    return { impressions, clicks: impressions * ctr, ctr };
+  }
+
+  function poisson(rng, lambda) {
+    if (lambda <= 0) return 0;
+    if (lambda > 40) return Math.max(0, Math.round(rng.normal(lambda, Math.sqrt(lambda))));
+    const L = Math.exp(-lambda);
+    let k = 0, pr = 1;
+    do { k++; pr *= rng.next(); } while (pr > L);
+    return k - 1;
+  }
+  function binomial(rng, n, p) {
+    if (n <= 0 || p <= 0) return 0;
+    if (n > 200) return clamp(poisson(rng, n * p), 0, n);
+    let s = 0;
+    for (let i = 0; i < n; i++) if (rng.next() < p) s++;
+    return s;
+  }
+
+  function dailyTraffic(platformId, listing, ctx) {
+    const c = ctx || {};
+    const e = expectedTraffic(platformId, listing, c);
+    if (e.impressions <= 0) return { impressions: 0, clicks: 0 };
+    const rng = c.rng;
+    if (!rng) throw new Error('dailyTraffic needs ctx.rng');
+    const noise = Math.exp(rng.normal(0, 0.3) - 0.045); // 日波动，均值≈1
+    const impressions = poisson(rng, e.impressions * noise);
+    const clicks = binomial(rng, impressions, e.ctr);
+    return { impressions, clicks };
+  }
+
+  /* ---------- 平台经验与等级（全部为游戏化假设） ---------- */
+  function platformXp(stats) {
+    const s = stats || {};
+    const orders = Math.max(0, s.orders || 0), revenue = Math.max(0, s.revenue || 0), refunds = Math.max(0, s.refunds || 0);
+    const rating = Number(s.ratingAvg) || 0;
+    const ratingXp = rating > 0 && orders > 0 ? (rating - 3) * 4 * Math.min(orders, 1000) : 0; // 5★ 加分，1–2★ 扣分
+    return Math.max(0, Math.round(orders * 10 + revenue * 1 + ratingXp - refunds * 30));
+  }
+  const xpFor = lv => Math.round(20 * Math.pow(lv - 1, 1.8)); // LV 所需累计经验：LV2=20, LV10≈1046, LV100≈78k
+  function platformLevel(xp) {
+    const x = Math.max(0, Number(xp) || 0);
+    let lv = 1;
+    while (lv < 100 && x >= xpFor(lv + 1)) lv++;
+    if (lv >= 100) return { lv: 100, cur: x - xpFor(100), next: 0 };
+    return { lv, cur: x - xpFor(lv), next: xpFor(lv + 1) - xpFor(lv) }; // cur/next = 本级进度
+  }
+
+  const LABELS = {
+    platforms: { etsy: 'Etsy', gumroad: 'Gumroad', payhip: 'Payhip' },
+    categories: { 'personal-finance': '个人理财', 'seller-tools': '卖家工具', 'real-estate-templates': '房地产模板', 'productivity-templates': '效率模板', 'software-tool': '软件工具' },
+    fees: {
+      etsy_listing: 'Etsy 上架费（每 4 个月）', etsy_transaction: 'Etsy 交易费 6.5%', etsy_processing: 'Etsy 支付处理费（马来西亚 4.5% + RM2；美国 3% + 0.25）',
+      etsy_currency_conversion: 'Etsy 货币转换费 2.5%（标价币种≠收款账户币种）', etsy_tax_on_fees: 'Etsy 代收卖家费用服务税（马来西亚 8%，可选）',
+      etsy_renew_on_sale: 'Etsy 售出后自动续期上架费', etsy_offsite_ads: 'Etsy 站外广告费', gumroad_direct: 'Gumroad 直销费 10% + 0.50',
+      gumroad_discover: 'Gumroad Discover 市场费 30%', card_processing: '信用卡处理费 2.9% + 0.30', payhip_free: 'Payhip 免费版交易费 5%',
+      payhip_plus: 'Payhip Plus 交易费 2%', stripe_processing: 'Stripe 处理费（马来西亚 3% + RM1；美国 2.9% + 0.30）',
+      stripe_intl_card: 'Stripe 国际卡附加 1%', stripe_fx: 'Stripe 货币转换 2%',
+      paypal_processing: 'PayPal 处理费（马来西亚 跨境 4.40% / 国内 3.90% + 固定费；美国 3.49% + 0.49）', paypal_fx: 'PayPal 货币转换 2.5%', none: '无'
+    },
+    trafficSources: { etsy_search: '站内搜索', etsy_ads: '站内广告', offsite: '站外推荐', own_social: '自有社媒', discover: 'Discover 市场', direct_link: '直接链接', search_engine: '搜索引擎' },
+    evidence: { research: '已核实（官方页面）', secondary: '第三方资料', assumption: '模型假设' },
+    traffic: { impressions: '曝光', clicks: '点击', level: '平台等级', xp: '平台经验' },
+    currencyNote: '假设：G 按美元标价作参考（1 G 当 1 USD 换算）；令吉固定费按 1 USD = 4.10 MYR（2026-11-26 假设）换算；G 是模拟币，没有真实价值，不等于令吉',
+    countries: { MY: '马来西亚卖家（默认）', US: '美国卖家（旧档案）' },
+    simNote: '流量为模拟估算，不代表真实平台数据'
+  };
+
+  return { PLATFORMS, CATEGORIES: CATS, COUNTRIES, FX_MYR_PER_USD, feeFor, listingCost, dailyTraffic, expectedTraffic, platformXp, platformLevel, LABELS };
+})();
+
+/* ---- customers.js ---- */
+/* 虚拟顾客模块（SimCustomers）：100 位规则驱动的虚构顾客。全部为模拟，非真实用户。 */
+const SimCustomers = (() => {
+  const CATS = ['personal-finance', 'seller-tools', 'real-estate-templates', 'productivity-templates', 'software-tool'];
+  const PLATS = ['etsy', 'gumroad', 'payhip'];
+
+  // ---- 私有 mulberry32，仅用于 generate ----
+  function mulberry32(seed) {
+    let s = seed >>> 0;
+    return () => { let t = (s = (s + 0x6D2B79F5) >>> 0); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+  const r2 = x => Math.round(x * 100) / 100;
+  const r3 = x => Math.round(x * 1000) / 1000;
+
+  // ---- 常量表（假设，非事实数据） ----
+  // quota: 100 人中的名额；budgetMult: 相对购买力（assumption）；plat: 平台偏好基准
+  const REGIONS = [
+    { region: 'US', quota: 20, langs: ['en', 'en', 'es'], budgetMult: 1.0, plat: [1.2, 1.0, 0.6], first: ['Emily', 'Jacob', 'Madison', 'Tyler', 'Brianna', 'Marcus', 'Kayla', 'Dylan', 'Rosa', 'Hunter'], last: ['Whitfield', 'Barlow', 'Kendrick', 'Ostrander', 'Pruitt', 'Delgado', 'Haverford', 'Lindqvist'] },
+    { region: 'UK', quota: 11, langs: ['en'], budgetMult: 0.95, plat: [1.1, 0.7, 1.0], first: ['Harriet', 'Oliver', 'Imogen', 'Callum', 'Poppy', 'Rhys', 'Freya', 'Alfie'], last: ['Ashcombe', 'Pennington', 'Hollis', 'Thackery', 'Morrow', 'Featherstone', 'Brindley'] },
+    { region: 'Canada', quota: 8, langs: ['en', 'en', 'fr'], budgetMult: 0.9, plat: [1.1, 0.9, 0.8], first: ['Chloe', 'Liam', 'Gabrielle', 'Owen', 'Maëlle', 'Nolan'], last: ['Tremblay-Rowe', 'MacAulay', 'Gagnier', 'Fenwick', 'Beaulac'] },
+    { region: 'Australia', quota: 7, langs: ['en'], budgetMult: 0.95, plat: [1.0, 0.9, 0.9], first: ['Matilda', 'Hamish', 'Ruby', 'Lachlan', 'Indi', 'Cooper'], last: ['Kelso', 'Waratah-Hill', 'Brennan', 'Dunmore', 'Cattaway'] },
+    { region: 'Germany', quota: 7, langs: ['de', 'de', 'en'], budgetMult: 0.9, plat: [0.9, 1.0, 0.9], first: ['Lena', 'Jonas', 'Mila', 'Lukas', 'Frieda', 'Niklas'], last: ['Brandtner', 'Kesselring', 'Wohlfahrt', 'Ostermeier', 'Lindenau'] },
+    { region: 'Malaysia', quota: 11, langs: ['ms', 'zh', 'en'], budgetMult: 0.5, plat: [0.9, 1.0, 1.0], first: ['Aisyah', 'Hafiz', 'Mei Ling', 'Wei Jie', 'Kavitha', 'Irfan', 'Siew Lan', 'Darren'], last: ['Rahmat', 'Tan', 'Lim', 'Subramaniam', 'Abdullah', 'Ooi', 'Yusof'] },
+    { region: 'Singapore', quota: 6, langs: ['en', 'zh'], budgetMult: 1.0, plat: [0.9, 1.1, 0.9], first: ['Jia Hui', 'Ryan', 'Nurul', 'Xavier', 'Shu Fen', 'Arjun'], last: ['Goh', 'Koh', 'Rahman', 'Teo', 'Pillai'] },
+    { region: 'Philippines', quota: 8, langs: ['en', 'tl'], budgetMult: 0.4, plat: [0.8, 1.1, 1.0], first: ['Maricel', 'Jomar', 'Kristine', 'Paolo', 'Andrea', 'Rodel'], last: ['Dimaculangan', 'Santos-Reyes', 'Villaruel', 'Manalastas', 'Bautista'] },
+    { region: 'India', quota: 7, langs: ['en', 'hi'], budgetMult: 0.4, plat: [0.7, 1.2, 0.9], first: ['Ananya', 'Rohan', 'Priya', 'Vikram', 'Sneha', 'Karthik'], last: ['Raghunathan', 'Deshpande', 'Malhotra', 'Iyengar', 'Chaturvedi'] },
+    { region: 'Japan', quota: 4, langs: ['ja'], budgetMult: 0.9, plat: [1.0, 0.8, 0.6], first: ['Yui', 'Haruto', 'Sakura', 'Ren'], last: ['Takamori', 'Inaba', 'Kurosawa-Ito', 'Mizutani'] },
+    { region: 'France', quota: 3, langs: ['fr'], budgetMult: 0.9, plat: [1.0, 0.8, 0.9], first: ['Camille', 'Théo', 'Inès'], last: ['Delacroix-Vian', 'Moreau-Lys', 'Fontenay'] },
+    { region: 'Brazil', quota: 3, langs: ['pt'], budgetMult: 0.45, plat: [0.9, 1.0, 0.8], first: ['Larissa', 'Thiago', 'Bianca'], last: ['Carvalhedo', 'Paranhos', 'Moura-Lins'] },
+    { region: 'Netherlands', quota: 3, langs: ['nl', 'en'], budgetMult: 1.0, plat: [1.0, 0.9, 1.0], first: ['Sanne', 'Daan', 'Fleur'], last: ['van Oosterom', 'Bakkerveld', 'de Wildt'] },
+    { region: 'Mexico', quota: 2, langs: ['es'], budgetMult: 0.45, plat: [0.9, 1.0, 0.8], first: ['Ximena', 'Mateo'], last: ['Arrieta', 'Villaseñor'] },
+  ];
+  // 职业 → 主要需求 + 可能的次要需求 + 平台偏好修正
+  const JOBS = [
+    { job: '新婚夫妻（一方为会计）', need: 'personal-finance', alt: ['productivity-templates'], plat: [1.2, 0.8, 1.0] },
+    { job: '双薪家庭家长', need: 'personal-finance', alt: ['productivity-templates'], plat: [1.2, 0.8, 1.0] },
+    { job: '准备结婚的情侣', need: 'personal-finance', alt: [], plat: [1.3, 0.8, 0.9] },
+    { job: '刚工作的大学毕业生', need: 'personal-finance', alt: ['productivity-templates', 'software-tool'], plat: [1.0, 1.0, 1.0] },
+    { job: 'Etsy 手工饰品卖家', need: 'seller-tools', alt: ['productivity-templates'], plat: [1.6, 0.6, 0.8] },
+    { job: '数码印刷品卖家', need: 'seller-tools', alt: ['software-tool'], plat: [1.4, 0.9, 0.9] },
+    { job: '二手服装网店店主', need: 'seller-tools', alt: ['personal-finance'], plat: [1.2, 0.8, 1.0] },
+    { job: '家庭烘焙网店主', need: 'seller-tools', alt: ['productivity-templates'], plat: [1.2, 0.7, 1.1] },
+    { job: '房产经纪人', need: 'real-estate-templates', alt: ['productivity-templates'], plat: [1.0, 1.0, 1.0] },
+    { job: '新入行的租赁中介', need: 'real-estate-templates', alt: ['seller-tools'], plat: [1.1, 0.9, 1.0] },
+    { job: '物业管理助理', need: 'real-estate-templates', alt: ['software-tool'], plat: [0.9, 1.0, 1.1] },
+    { job: '自由职业设计师', need: 'productivity-templates', alt: ['software-tool', 'personal-finance'], plat: [1.0, 1.2, 0.9] },
+    { job: '研究生', need: 'productivity-templates', alt: ['personal-finance'], plat: [1.1, 1.0, 0.9] },
+    { job: '项目经理', need: 'productivity-templates', alt: ['software-tool'], plat: [0.8, 1.2, 1.0] },
+    { job: '居家妈妈 / 爸爸', need: 'productivity-templates', alt: ['personal-finance'], plat: [1.4, 0.7, 0.9] },
+    { job: '独立开发者', need: 'software-tool', alt: ['productivity-templates'], plat: [0.6, 1.5, 0.9] },
+    { job: '小企业老板', need: 'software-tool', alt: ['seller-tools', 'personal-finance'], plat: [0.8, 1.2, 1.0] },
+    { job: '内容创作者', need: 'software-tool', alt: ['seller-tools', 'productivity-templates'], plat: [0.7, 1.4, 1.1] },
+    { job: '远程客服专员', need: 'productivity-templates', alt: ['software-tool'], plat: [1.0, 1.0, 1.0] },
+    { job: '退休教师', need: 'personal-finance', alt: ['productivity-templates'], plat: [1.2, 0.7, 0.9] },
+  ];
+  const TRAITS = ['deal_hunter', 'review_reader', 'impulse_buyer', 'loyal', 'skeptical', 'early_adopter', 'gift_giver', 'mobile_first'];
+  const HABIT_A = ['常在午休时用手机浏览', '习惯晚上睡前逛', '周末集中在电脑上研究', '通勤路上随手刷', '只在需要时才搜索'];
+  const HABIT_B = ['购买前会对比两三家', '很看重评价数量和星级', '容易被封面图吸引', '一定先找免费版本', '喜欢打折时才下单', '更相信详细的功能说明', '会先看退款政策'];
+  const HABIT_C = ['不喜欢复杂的设置。', '买过的东西会认真用。', '对夸大宣传很反感。', '愿意为省时间付费。', '常把好东西推荐给朋友。', '预算卡得很紧。'];
+
+  function generate(seed) {
+    const R = mulberry32((seed | 0) ^ 0x5EEDC0DE);
+    const pick = arr => arr[Math.floor(R() * arr.length)];
+    const between = (a, b) => a + (b - a) * R();
+    // 按名额展开地区，再洗牌（保证多样性）
+    const regionList = [];
+    REGIONS.forEach(rg => { for (let i = 0; i < rg.quota; i++) regionList.push(rg); });
+    for (let i = regionList.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [regionList[i], regionList[j]] = [regionList[j], regionList[i]]; }
+    const usedNames = {};
+    const out = [];
+    for (let i = 0; i < 100; i++) {
+      const rg = regionList[i];
+      const jb = JOBS[(i + Math.floor(R() * JOBS.length)) % JOBS.length];
+      let name, tries = 0;
+      do { name = pick(rg.first) + ' ' + pick(rg.last); tries++; } while (usedNames[name] && tries < 20);
+      if (usedNames[name]) name += ' ' + String.fromCharCode(65 + (i % 26)) + '.';
+      usedNames[name] = 1;
+      const u = R();
+      const income = u < 0.3 ? 'low' : u < 0.8 ? 'mid' : 'high';
+      const base = income === 'low' ? [between(0, 2), between(3, 8)] : income === 'mid' ? [between(2, 5), between(8, 22)] : [between(5, 15), between(22, 60)];
+      const bm = rg.budgetMult * (jb.need === 'software-tool' || jb.need === 'real-estate-templates' ? 1.3 : 1);
+      const budget = { min: r2(base[0] * bm), max: r2(Math.max(base[0] * bm + 1, base[1] * bm)) };
+      const needs = [jb.need];
+      jb.alt.forEach(c => { if (R() < 0.45) needs.push(c); });
+      const priceSens = r3(clamp((income === 'low' ? 0.75 : income === 'mid' ? 0.5 : 0.28) + (R() - 0.5) * 0.4, 0, 1));
+      const qualityReq = r3(clamp(0.25 + R() * 0.6 + (income === 'high' ? 0.08 : 0), 0, 1));
+      const trust = r3(clamp(0.2 + R() * 0.6, 0, 1));
+      const freePref = r3(clamp(priceSens * 0.6 + R() * 0.4, 0, 1));
+      const w = PLATS.map((_, k) => rg.plat[k] * jb.plat[k] * (0.4 + R()));
+      const tot = w[0] + w[1] + w[2];
+      let e = Math.max(0.05, r3(w[0] / tot)), g = Math.max(0.05, r3(w[1] / tot));
+      if (e + g > 0.95) { const f = 0.95 / (e + g); e = r3(e * f); g = r3(g * f); }
+      const platformPrefs = { etsy: e, gumroad: g, payhip: r3(1 - e - g) };
+      const traits = [];
+      TRAITS.forEach(t => { if (R() < 0.18) traits.push(t); });
+      if (priceSens > 0.7 && !traits.includes('deal_hunter')) traits.push('deal_hunter');
+      const habits = pick(HABIT_A) + ' ' + PLATS.reduce((a, b) => platformPrefs[a] >= platformPrefs[b] ? a : b).replace(/^./, c => c.toUpperCase()) + '，' + pick(HABIT_B) + '，' + pick(HABIT_C);
+      out.push({
+        id: 'VC-' + String(i + 1).padStart(3, '0'), name, region: rg.region, language: pick(rg.langs), job: jb.job,
+        income, budget, needs, priceSens, qualityReq, habits, trust, freePref, platformPrefs, traits,
+      });
+    }
+    return out;
+  }
+
+  // ---- 访客选择 ----
+  function needMatch(c, category) {
+    const k = c.needs.indexOf(category);
+    return k < 0 ? 0 : k === 0 ? 1 : 0.7;
+  }
+  function pickVisitor(customers, platformId, category, rng) {
+    if (!customers || !customers.length) return null;
+    let tot = 0;
+    const ws = customers.map(c => { const w = ((c.platformPrefs && c.platformPrefs[platformId]) || 0) * needMatch(c, category); tot += w; return w; });
+    if (tot <= 0) return null;
+    let x = rng.next() * tot;
+    for (let i = 0; i < customers.length; i++) { x -= ws[i]; if (x < 0 && ws[i] > 0) return customers[i]; }
+    for (let i = customers.length - 1; i >= 0; i--) if (ws[i] > 0) return customers[i];
+    return null;
+  }
+
+  // ---- 购买决策（透明打分） ----
+  // 假设（assumption）的权重，便于调参与解释
+  const W = { need: 0.35, quality: 0.6, price: 0.45, trust: 0.25, rating: 0.12, platform: 0.15, badExp: 0.4, threshold: 0.3, noise: 0.07 };
+  const FREE_BASE_QUALITY = { 'personal-finance': 0.4, 'seller-tools': 0.3, 'real-estate-templates': 0.3, 'productivity-templates': 0.45, 'software-tool': 0.25 };
+
+  function refPrice(c) { return Math.max(1, (c.budget.min + c.budget.max) / 2); }
+  function priceTerm(c, price) {
+    if (price <= 0) return 0.12; // 免费本身有吸引力
+    const ratio = price / refPrice(c);
+    return -W.price * c.priceSens * clamp(ratio, 0, 4) + W.price * 0.5 * c.priceSens; // ratio=0.5 时为 0 附近
+  }
+  function utility(c, nm, q, price, trust, extra) {
+    return W.need * nm + W.quality * (q - c.qualityReq) + priceTerm(c, price) + W.trust * (trust - 0.5) + (extra || 0);
+  }
+
+  // ---- 两个概念分开（reviewer 指令）----
+  // productQuality：内部研发审计分（listing.evidence），买家看不到；只影响购后体验（评分/投诉/退款），
+  //   再通过评价间接影响后续销量。
+  // consumerTrust：买家在商品页上能看到的信号（商品页质量、图片、可见评价数与均分、销量、平台等级、试看/演示）。
+  //   decide() 只用 consumerTrust，不读 evidence。所有权重均为 assumption。
+  const TW = { page: 0.55, reviews: 0.3, sales: 0.04, platform: 0.08, preview: 0.03, priorMean: 3.5, priorN: 3, salesHalf: 20 };
+  function productQuality(listing) { return clamp(+((listing && listing.evidence) || 0), 0, 1); }
+  function trust(listing, ctx) {
+    const L = listing || {}, st = L.stats || {};
+    const lq = clamp(+(L.listingQuality || 0), 0, 1);
+    const page = 0.8 * lq + 0.2 * (L.hasImage ? 1 : 0);
+    const n = Math.max(0, st.ratingN | 0), sum = n > 0 ? +(st.ratingSum || 0) : 0;
+    const avgRating = n > 0 ? sum / n : null;
+    // 贝叶斯收缩：评价少时趋向中性 3.5 星（零评价 = 中性，不是 0 分，避免冷启动卡死）
+    const shrunk = (sum + TW.priorMean * TW.priorN) / (n + TW.priorN);
+    const reviews = clamp((shrunk - 1) / 4, 0, 1);
+    const orders = Math.max(0, st.orders | 0);
+    const sales = orders / (orders + TW.salesHalf);
+    const lv = clamp(+((ctx && ctx.platformLevel) || 1), 1, 100);
+    const platform = Math.log(lv) / Math.log(100);
+    const preview = (L.hasPreview || L.hasDemo || L.preview) ? 1 : 0;
+    const score = clamp(TW.page * page + TW.reviews * reviews + TW.sales * sales + TW.platform * platform + TW.preview * preview, 0, 1);
+    return { score: r3(score), components: { page: r3(page), reviews: r3(reviews), sales: r3(sales), platform: r3(platform), preview },
+      reviewN: n, avgRating: avgRating == null ? null : r2(avgRating), orders, provenance: 'assumption' };
+  }
+
+  function decide(customer, offer, ctx) {
+    const c = customer, rng = ctx.rng, L = offer.listing;
+    const hist = (ctx && ctx.history) || { purchases: [], refunds: [] };
+    const price = Math.max(0, offer.price != null ? offer.price : (L.salePrice != null ? L.salePrice : L.price));
+    const platform = offer.platform || L.platform;
+    const has = t => c.traits && c.traits.includes(t);
+    const noise = () => rng.normal(0, W.noise);
+    const res = (buy, reason, score, choice, competitorId) => {
+      const r = { buy, reason, score: r3(score), choice };
+      if (competitorId) r.competitorId = competitorId;
+      return r;
+    };
+
+    if (L.status && L.status !== 'live') return res(false, 'not_available', 0, 'none');
+    const nm = needMatch(c, L.category);
+    if (nm === 0) return res(false, 'no_need', 0, 'none');
+
+    // 已拥有：极小概率复购（送礼 / 升级）
+    const owned = (hist.purchases || []).some(p => p.listingId === L.id);
+    if (owned) {
+      const p = has('gift_giver') ? 0.06 : 0.02;
+      if (rng.chance(p) && price <= c.budget.max) return res(true, has('gift_giver') ? 'gift_repurchase' : 'upgrade_repurchase', 0.5, 'ours');
+      return res(false, 'already_owned', 0, 'none');
+    }
+
+    // 与我们之前的不良体验
+    const badExp = (hist.purchases || []).some(p => p.rating != null && p.rating <= 2) || (hist.refunds || []).length > 0;
+
+    // 感知质量 = 买家可见的商品页可信度（consumerTrust），不读取内部研发证据 evidence
+    const T = trust(L, { platformLevel: (ctx && ctx.platformLevel) != null ? ctx.platformLevel : offer.platformLevel });
+    const st = L.stats || {};
+    // 谨慎型顾客：评价很少时额外扣分（可见信号不足）
+    const q = T.score - (has('skeptical') && T.reviewN < 3 ? 0.06 : 0);
+    const ratingTerm = st.ratingN > 0 ? W.rating * (has('review_reader') ? 1.8 : 1) * ((st.ratingSum / st.ratingN) - 3.5) / 1.5 : (has('review_reader') ? -0.04 : 0);
+    const platTerm = W.platform * (((c.platformPrefs || {})[platform] || 0) - 1 / 3);
+    const saleTerm = (L.salePrice != null && L.salePrice < L.price && has('deal_hunter')) ? 0.06 : 0;
+    const oursU = utility(c, nm, q, price, c.trust, ratingTerm + platTerm + saleTerm + (badExp ? -W.badExp : 0)) + noise();
+
+    // 预算硬约束（价格敏感者更严格）
+    const hardCap = c.budget.max * (1 + (1 - c.priceSens) * 0.3);
+    const overBudget = price > 0 && price > hardCap;
+
+    // 备选：竞品 + 通用免费替代品
+    const options = [];
+    (offer.competitors || []).forEach(cp => {
+      if (!cp || cp.active === false) return;
+      if (cp.category && cp.category !== L.category) return;
+      if (cp.platform && cp.platform !== 'any' && cp.platform !== platform) return;
+      if (!rng.chance(0.75)) return; // 顾客未必看到每个竞品
+      const cpPrice = Math.max(0, cp.price || 0);
+      if (cpPrice > 0 && cpPrice > hardCap) return;
+      const free = cpPrice === 0 || cp.type === 'free';
+      const u = utility(c, nm, cp.quality == null ? 0.5 : cp.quality, cpPrice, cp.trust == null ? 0.5 : cp.trust, free ? 0.3 * c.freePref - 0.1 : 0) + noise();
+      options.push({ choice: free ? 'free' : 'competitor', id: cp.id, u });
+    });
+    const fq = FREE_BASE_QUALITY[L.category] != null ? FREE_BASE_QUALITY[L.category] : 0.3;
+    options.push({ choice: 'free', id: null, u: utility(c, nm, fq, 0, 0.45, 0.3 * c.freePref - 0.18) + noise() });
+
+    const threshold = W.threshold - (has('impulse_buyer') ? 0.08 : 0) + rng.normal(0, 0.05);
+    let best = options[0];
+    options.forEach(o => { if (o.u > best.u) best = o; });
+
+    // 购买意愿闸门（assumption）：多数点击者只是看看，即使评分合格也未必当场下单
+    const intent = clamp(0.3 + (nm === 1 ? 0.1 : 0) + (has('impulse_buyer') ? 0.15 : 0), 0, 1);
+    const wouldAct = (!overBudget && oursU >= threshold && oursU >= best.u) || (best.u >= threshold && (overBudget || best.u > oursU));
+    if (wouldAct && !rng.chance(intent)) return res(false, 'just_browsing', oursU, 'none');
+    if (!overBudget && oursU >= threshold && oursU >= best.u) {
+      const reason = q >= c.qualityReq + 0.15 ? 'trusted_quality' : (price <= refPrice(c) * 0.6 ? 'good_value' : 'fits_need');
+      return res(true, reason, oursU, 'ours');
+    }
+    if (best.u >= threshold && (overBudget || best.u > oursU)) {
+      if (best.choice === 'competitor') return res(false, 'chose_competitor', oursU, 'competitor', best.id);
+      return res(false, 'chose_free', oursU, 'free', best.id || undefined);
+    }
+    // 不买任何东西：给出最主要的原因
+    let reason;
+    if (overBudget) reason = 'over_budget';
+    else if (badExp) reason = 'bad_experience';
+    else {
+      const gaps = [
+        ['too_expensive', -priceTerm(c, price)],
+        ['low_trust', (c.qualityReq - q) * W.quality * 0.6 + (0.5 - c.trust) * W.trust - (ratingTerm < 0 ? ratingTerm : 0)],
+        ['poor_listing', (0.6 - (L.listingQuality || 0)) * W.quality * 0.4 + (L.hasImage ? 0 : 0.05)],
+      ].sort((a, b) => b[1] - a[1]);
+      reason = gaps[0][1] > 0.02 ? gaps[0][0] : 'just_browsing';
+    }
+    return res(false, reason, oursU, 'none');
+  }
+
+  // ---- 购后体验 ----
+  const TEXT = {
+    5: ['和商品描述基本一致，用起来顺手，觉得这个价格值。', '结构清楚、省了不少时间，会推荐给朋友。'],
+    4: ['整体不错，有一两处希望更详细一些。', '符合预期，说明可以再清楚一点。'],
+    3: ['还行，但和期待的有点差距。', '能用，不过感觉价格偏高。'],
+    2: ['和描述的不太一样，用起来比较费劲。', '内容比较单薄，有点失望。'],
+    1: ['完全不符合期待，感觉白花钱了。', '描述写得很好，但拿到后发现差很多。'],
+  };
+  const COMPLAINT_TEXT = {
+    not_as_described: '感觉与描述不符', missing_features: '缺少想要的功能', hard_to_use: '上手困难', poor_value: '性价比低', low_quality: '质量粗糙', compatibility_issue: '在自己的设备上打开有问题',
+  };
+
+  function experience(customer, listing, ctx) {
+    const c = customer, L = listing, rng = ctx.rng;
+    const price = Math.max(0, ctx.price != null ? ctx.price : (L.salePrice != null ? L.salePrice : L.price));
+    // 内部产品质量（买家看不到）只在这里起作用：决定实际体验 → 评分 / 投诉 / 退款
+    const ev = productQuality(L), lq = L.listingQuality || 0;
+    const actual = clamp(0.8 * ev + 0.2 * lq + rng.normal(0, 0.1), 0, 1);
+    const expectation = 0.5 * lq + 0.5 * c.qualityReq;
+    const rp = refPrice(c);
+    const valueTerm = price <= 0 ? 0.3 : clamp((rp - price) / rp, -2, 1) * c.priceSens * 0.6;
+    const raw = 3.3 + 3.2 * (actual - c.qualityReq) + 1.2 * Math.min(0, actual - expectation) + valueTerm + rng.normal(0, 0.45);
+    const rating = clamp(Math.round(raw), 1, 5);
+
+    let complaint = null;
+    if (rating <= 2 || (rating === 3 && rng.chance(0.25))) {
+      const opts = [];
+      if (lq - actual > 0.25) opts.push(['not_as_described', lq - actual]);
+      if (L.category === 'software-tool' && ev < 0.5) opts.push(['compatibility_issue', 0.5 - ev + 0.05]);
+      if (ev < c.qualityReq) opts.push([L.category === 'software-tool' ? 'missing_features' : 'low_quality', c.qualityReq - ev]);
+      if (price > rp) opts.push(['poor_value', (price - rp) / rp * 0.5]);
+      opts.push(['hard_to_use', 0.08 + rng.next() * 0.1]);
+      opts.sort((a, b) => b[1] - a[1]);
+      complaint = opts[0][0];
+    }
+    let refund = false, refundReason = null;
+    if (price > 0 && rating <= 3) {
+      const priceFactor = clamp(price / Math.max(1, c.budget.max), 0, 1.5);
+      const p = rating === 1 ? 0.3 + 0.35 * priceFactor : rating === 2 ? 0.12 + 0.3 * priceFactor : 0.02 * priceFactor;
+      if (rng.chance(clamp(p, 0, 0.9))) {
+        refund = true;
+        refundReason = complaint === 'not_as_described' ? 'refund_not_as_described' : (complaint === 'poor_value' || priceFactor > 0.8) ? 'refund_too_expensive' : 'refund_poor_quality';
+      }
+    }
+    const pool = TEXT[rating];
+    let text = '【模拟评价】' + c.name + '（虚拟顾客 ' + c.id + '，' + c.region + '）：' + pool[Math.floor(rng.next() * pool.length)];
+    if (complaint) text += '主要问题：' + COMPLAINT_TEXT[complaint] + '。';
+    if (refund) text += '已申请退款。';
+    text += '（基于模拟体验生成，并非真实使用记录）';
+    return { rating, text, complaint, refund, refundReason };
+  }
+
+  const REASONS = {
+    // 购买
+    trusted_quality: '商品页与评价看起来可信', good_value: '价格划算', fits_need: '正好满足需求',
+    gift_repurchase: '已拥有，但买来送人', upgrade_repurchase: '已拥有，为升级版本再次购买',
+    // 拒绝
+    not_available: '商品未上架', no_need: '没有这方面的需求', already_owned: '已经买过，不再重复购买',
+    over_budget: '超出预算', too_expensive: '觉得太贵',
+    low_trust: '商品页不够可信（图片/介绍/评价不足）', poor_listing: '商品页文案或图片不够好',
+    low_evidence: '商品页不够可信（旧版记录，原“缺乏质量证据”）', /* 兼容旧存档 reject 计数 */ bad_experience: '之前在我们这里体验不好',
+    chose_competitor: '选择了竞品', chose_free: '选择了免费替代品', just_browsing: '只是随便看看',
+    // 投诉
+    not_as_described: '与描述不符', missing_features: '缺少功能', hard_to_use: '难以上手', poor_value: '性价比低',
+    low_quality: '质量粗糙', compatibility_issue: '兼容性问题（模拟）',
+    // 退款
+    refund_not_as_described: '退款：与描述不符', refund_poor_quality: '退款：质量不满意', refund_too_expensive: '退款：觉得不值这个价',
+  };
+
+  return { generate, pickVisitor, decide, experience, trust, productQuality, TRUST_WEIGHTS: TW, REASONS };
+})();
+
+/* ---- competition.js ---- */
+/* SimCompetition · 竞争对手与市场事件（全部为模拟，非真实品牌/新闻） */
+const SimCompetition = (() => {
+  const CATEGORIES = ['personal-finance', 'seller-tools', 'real-estate-templates', 'productivity-templates', 'software-tool'];
+  const PLATFORMS = ['etsy', 'gumroad', 'payhip'];
+  const TYPES = ['low_price', 'premium', 'free', 'brand', 'newcomer'];
+  const EVENT_TYPES = ['competitor_price_cut', 'demand_shift', 'seasonal', 'free_alternative', 'customer_complaint', 'demand_growth'];
+
+  // 假设（assumption）：各品类参考价（G），用于生成竞品价格与价格吸引力
+  const REF_PRICE = { 'personal-finance': 7, 'seller-tools': 12, 'real-estate-templates': 15, 'productivity-templates': 8, 'software-tool': 20 };
+  const CAT_NOUN = { 'personal-finance': 'Budget', 'seller-tools': 'Seller Kit', 'real-estate-templates': 'Realty Pack', 'productivity-templates': 'Planner', 'software-tool': 'App' };
+
+  // 各类型参数范围（假设）：价格倍数、质量、信任
+  const TYPE_PROFILE = {
+    low_price: { priceMult: [0.35, 0.55], quality: [0.30, 0.50], trust: [0.30, 0.50] },
+    premium:   { priceMult: [1.8, 2.6],   quality: [0.80, 0.95], trust: [0.60, 0.80] },
+    free:      { priceMult: [0, 0],       quality: [0.25, 0.55], trust: [0.30, 0.50] },
+    brand:     { priceMult: [1.1, 1.5],   quality: [0.65, 0.80], trust: [0.80, 0.95] },
+    newcomer:  { priceMult: [0.7, 1.0],   quality: [0.45, 0.62], trust: [0.10, 0.30] },
+  };
+
+  // 季节日历（假设，按模拟月份 1..12 循环；非真实数据）
+  const SEASONS = [
+    { key: 'newyear_budget', month: 1, months: 1, category: 'personal-finance', demandMult: 1.35, title: '新年预算季', why: '模拟第1月：新年做预算的需求上升' },
+    { key: 'tax_season', month: 3, months: 2, category: 'seller-tools', demandMult: 1.25, title: '报税季', why: '模拟第3–4月：卖家整理账目、报税需求上升' },
+    { key: 'spring_housing', month: 3, months: 3, category: 'real-estate-templates', demandMult: 1.2, title: '春季房产旺季', why: '模拟第3–5月：春季看房/租房活动增加' },
+    { key: 'back_to_plan', month: 9, months: 1, category: 'productivity-templates', demandMult: 1.2, title: '开学/重新规划季', why: '模拟第9月：开学与下半年规划需求上升' },
+    { key: 'holiday_prep', month: 11, months: 1, category: 'seller-tools', demandMult: 1.3, title: '年末促销备战', why: '模拟第11月：卖家准备年末大促' },
+    { key: 'winter_slow', month: 12, months: 1, category: 'real-estate-templates', demandMult: 0.85, title: '冬季房产淡季', why: '模拟第12月：冬季房产活动放缓' },
+  ];
+
+  // 参数来源（全部为建模假设）
+  const SOURCES = [
+    { param: 'REF_PRICE', source: 'Agent E 建模假设', date: 'sim', evidence: 'assumption' },
+    { param: 'TYPE_PROFILE', source: 'Agent E 建模假设', date: 'sim', evidence: 'assumption' },
+    { param: 'SEASONS', source: 'Agent E 建模假设（常识性季节规律，未经数据验证）', date: 'sim', evidence: 'assumption' },
+    { param: 'event probabilities', source: 'Agent E 建模假设', date: 'sim', evidence: 'assumption' },
+  ];
+
+  const P = { // 概率与阈值（假设）
+    cutRandom: 0.002,      // 每个付费竞品每天随机降价概率
+    cutUndercut: 0.05,     // 我方同品类同平台价格低于其 90% 时，每天降价概率
+    cutSoldWell: 0.08,     // 我方同品类近期热卖时，每天降价概率
+    cutCooldown: 30,       // 同一竞品两次降价间隔（天）
+    soldWellEma: 2,        // 订单 EMA 阈值（≈ 每天 0.3 单）
+    shiftSd: 0.05, shiftNotice: 0.09, demandMin: 0.7, demandMax: 1.3,
+    freeAlt: 0.005, maxPerCategory: 6,
+    growth: 0.003,
+    complaintCooldown: 10,
+  };
+
+  const LABELS = {
+    types: { low_price: '低价型', premium: '高端型', free: '免费替代', brand: '品牌老店', newcomer: '新进入者' },
+    events: {
+      competitor_price_cut: '竞品降价', demand_shift: '需求波动', seasonal: '季节性需求',
+      free_alternative: '免费替代品出现', customer_complaint: '顾客投诉影响', demand_growth: '需求增长',
+    },
+    categories: {
+      'personal-finance': '个人理财', 'seller-tools': '卖家工具', 'real-estate-templates': '房产模板',
+      'productivity-templates': '效率模板', 'software-tool': '软件工具',
+    },
+    platforms: { etsy: 'Etsy', gumroad: 'Gumroad', payhip: 'Payhip', any: '全平台' },
+    fields: { demandMult: '需求倍数', pressure: '竞争压力', durationDays: '持续天数', newPrice: '新价格', oldPrice: '原价' },
+    simulated: '模拟事件，非真实新闻',
+  };
+
+  // ---------- 工具 ----------
+  const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+  const r2 = x => Math.round(x * 100) / 100;
+  const r3 = x => Math.round(x * 1000) / 1000;
+  function mulberry(seed) {
+    let s = seed >>> 0;
+    return () => { let t = (s = (s + 0x6D2B79F5) >>> 0); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  const uni = (next, [a, b]) => a + (b - a) * next();
+  const ONSETS = ['Z', 'Qu', 'V', 'Th', 'Br', 'Kel', 'Mor', 'Tal', 'Ys', 'Dro', 'Fen', 'Ol', 'Pr', 'Wex', 'Cr'];
+  const VOWELS = ['a', 'e', 'i', 'o', 'u', 'ae', 'io'];
+  const CODAS = ['vane', 'ndor', 'mire', 'lix', 'quay', 'rith', 'bel', 'zo', 'nyx', 'thorn', 'vik', 'dell'];
+  const BLOCK = ['etsy', 'gumroad', 'payhip', 'notion', 'excel', 'canva', 'quickbooks', 'mint', 'ynab', 'tiller', 'shopify', 'zillow', 'trello', 'google', 'microsoft', 'apple', 'amazon', 'adobe', 'xero', 'intuit'];
+  function makeName(next, category, used) {
+    for (let i = 0; i < 50; i++) {
+      const w = ONSETS[Math.floor(next() * ONSETS.length)] + VOWELS[Math.floor(next() * VOWELS.length)] + CODAS[Math.floor(next() * CODAS.length)];
+      const name = w + ' ' + CAT_NOUN[category];
+      const low = name.toLowerCase();
+      if (!used.includes(name) && !BLOCK.some(b => low.includes(b))) { used.push(name); return name; }
+    }
+    const fallback = 'Sim-' + used.length + ' ' + CAT_NOUN[category];
+    used.push(fallback);
+    return fallback;
+  }
+  function makeCompetitor(next, id, type, category, platform, used) {
+    const p = TYPE_PROFILE[type];
+    const price = type === 'free' ? 0 : Math.max(0.99, r2(REF_PRICE[category] * uni(next, p.priceMult)));
+    return {
+      id, name: makeName(next, category, used), fictional: true, type, category, platform,
+      price, basePrice: price, quality: r3(uni(next, p.quality)), trust: r3(uni(next, p.trust)), active: true,
+    };
+  }
+  const cpId = n => 'CP-' + String(n).padStart(2, '0');
+  const evId = n => 'EV-' + String(n).padStart(4, '0');
+  const effPrice = l => (l.salePrice != null ? l.salePrice : l.price);
+  const platMatch = (cp, platform) => cp.platform === 'any' || platform === 'any' || cp.platform === platform;
+
+  // ---------- init ----------
+  function init(seed) {
+    const next = mulberry((seed | 0) ^ 0x5EED0E);
+    const used = [];
+    const competitors = [];
+    let n = 0;
+    CATEGORIES.forEach((cat, ci) => {
+      const count = 3 + (next() < 0.4 ? 1 : 0);
+      for (let k = 0; k < count; k++) {
+        const type = k < 3 ? TYPES[(ci + k) % TYPES.length] : TYPES[Math.floor(next() * TYPES.length)];
+        const platform = k === 0 ? 'any' : (next() < 0.25 ? 'any' : PLATFORMS[Math.floor(next() * PLATFORMS.length)]);
+        competitors.push(makeCompetitor(next, cpId(++n), type, cat, platform, used));
+      }
+    });
+    const demand = {};
+    CATEGORIES.forEach(c => { demand[c] = 1; });
+    return {
+      seed: seed | 0, nameSeed: Math.floor(next() * 1e9), lastDay: -1,
+      competitors, usedNames: used, nextCp: n + 1, nextEv: 1,
+      demand, events: [], log: [], expiredCount: 0,
+      cutLast: {}, complaintLast: {}, seasonFired: {}, ordersSeen: {}, salesEma: {},
+    };
+  }
+
+  // ---------- events ----------
+  function emit(state, day, type, title, desc, trigger, effects) {
+    const ev = {
+      id: evId(state.nextEv++), day, type, simulated: true, evidence: 'assumption',
+      title: '【模拟】' + title, desc: desc + '（' + LABELS.simulated + '）', trigger, effects,
+    };
+    state.events.push(ev);
+    state.log.push(ev);
+    if (state.log.length > 500) state.log.splice(0, state.log.length - 500);
+    return ev;
+  }
+
+  function expire(state, day) {
+    const keep = [];
+    for (const ev of state.events) {
+      const dur = ev.effects.durationDays || 0;
+      if (day >= ev.day + dur) {
+        state.expiredCount++;
+        if (ev.type === 'competitor_price_cut') {
+          const cp = state.competitors.find(c => c.id === ev.effects.competitorId);
+          if (cp && cp.price === ev.effects.newPrice) cp.price = ev.effects.oldPrice; // 限时降价到期恢复
+        }
+      } else keep.push(ev);
+    }
+    state.events = keep;
+  }
+
+  function step(state, day, ctx) {
+    const rng = ctx.rng;
+    const listings = (ctx.listings || []).filter(l => l && l.status !== 'paused');
+    const reviews = ctx.recentReviews || [];
+    const out = [];
+    expire(state, day);
+    state.lastDay = day;
+    const monthIdx = Math.floor(day / 30);           // 0-based simulated month
+    const moy = (monthIdx % 12) + 1;                 // month of year 1..12
+    const year = Math.floor(monthIdx / 12);
+
+    // 1) 我方销量追踪（订单 EMA）
+    const hot = {};
+    for (const l of listings) {
+      const orders = (l.stats && l.stats.orders) || 0;
+      const prev = state.ordersSeen[l.id] != null ? state.ordersSeen[l.id] : orders;
+      const ema = (state.salesEma[l.id] || 0) * 0.85 + Math.max(0, orders - prev);
+      state.ordersSeen[l.id] = orders;
+      state.salesEma[l.id] = r3(ema);
+      if (ema >= P.soldWellEma) hot[l.id] = ema;
+    }
+
+    // 2) 季节性（确定性日历）
+    for (const s of SEASONS) {
+      const key = year + ':' + s.key;
+      if (moy >= s.month && moy < s.month + s.months && !state.seasonFired[key]) {
+        state.seasonFired[key] = true;
+        const endDay = (monthIdx + (s.month + s.months - moy)) * 30;
+        const durationDays = Math.max(1, endDay - day);
+        out.push(emit(state, day, 'seasonal', s.title + '·' + LABELS.categories[s.category],
+          `模拟市场进入「${s.title}」，${LABELS.categories[s.category]}类需求倍数 ×${s.demandMult}，持续约${durationDays}天。`,
+          s.why + '（季节日历为建模假设）',
+          { category: s.category, demandMult: s.demandMult, durationDays }));
+      }
+    }
+
+    // 3) 需求随机游走（每 7 天更新；变化显著才发事件）
+    if (day % 7 === 0) {
+      for (const cat of CATEGORIES) {
+        const old = state.demand[cat];
+        const nv = r3(clamp(old * (1 + rng.normal(0, P.shiftSd)), P.demandMin, P.demandMax));
+        state.demand[cat] = nv;
+        const ch = nv / old - 1;
+        if (Math.abs(ch) >= P.shiftNotice) {
+          const up = ch > 0;
+          out.push(emit(state, day, 'demand_shift', LABELS.categories[cat] + (up ? '需求回暖' : '需求转淡'),
+            `模拟需求指数从 ${old.toFixed(2)} ${up ? '升' : '降'}至 ${nv.toFixed(2)}（范围 ${P.demandMin}–${P.demandMax}）。`,
+            `每周需求随机游走，本周变化 ${(ch * 100).toFixed(0)}%，超过 ±${P.shiftNotice * 100}% 提示线`,
+            { category: cat, demandLevel: nv, change: r3(ch), durationDays: 7 }));
+        }
+      }
+    }
+
+    // 4) 竞品降价（每步最多一次）
+    let cutDone = false;
+    for (const cp of state.competitors) {
+      if (cutDone) break;
+      if (!cp.active || cp.type === 'free' || cp.price <= 0.99) continue;
+      if (state.cutLast[cp.id] != null && day - state.cutLast[cp.id] < P.cutCooldown) continue;
+      if (state.events.some(e => e.type === 'competitor_price_cut' && e.effects.competitorId === cp.id)) continue;
+      const rel = listings.filter(l => l.category === cp.category && platMatch(cp, l.platform));
+      const under = rel.filter(l => effPrice(l) < cp.price * 0.9);
+      const sold = rel.filter(l => hot[l.id]);
+      let trigger = null, target = null;
+      if (sold.length && rng.chance(P.cutSoldWell)) { trigger = `我方商品 ${sold[0].id} 近期在同品类热卖（订单EMA ${hot[sold[0].id].toFixed(1)}），对手降价抢客`; target = sold[0]; }
+      else if (under.length && rng.chance(P.cutUndercut)) { trigger = `我方商品 ${under[0].id} 售价 ${effPrice(under[0])}G 低于对手（${cp.price}G）10%以上，对手跟进降价`; target = under[0]; }
+      else if (rng.chance(P.cutRandom)) { trigger = '对手自发促销（低概率随机事件）'; }
+      if (!trigger) continue;
+      let newPrice = cp.price * (1 - (0.1 + rng.next() * 0.2));
+      if (target) newPrice = Math.min(newPrice, Math.max(effPrice(target) * 1.02, cp.price * 0.6));
+      newPrice = Math.max(0.99, r2(newPrice));
+      if (newPrice >= cp.price) continue;
+      const oldPrice = cp.price;
+      cp.price = newPrice;
+      state.cutLast[cp.id] = day;
+      cutDone = true;
+      const durationDays = 14 + rng.int(0, 14);
+      out.push(emit(state, day, 'competitor_price_cut', `${cp.name} 限时降价`,
+        `模拟竞品「${cp.name}」（${LABELS.types[cp.type]}）在${LABELS.platforms[cp.platform]}将价格从 ${oldPrice}G 降到 ${newPrice}G，约 ${durationDays} 天后恢复。`,
+        trigger, { category: cp.category, platform: cp.platform, competitorId: cp.id, oldPrice, newPrice, durationDays }));
+    }
+
+    // 5) 免费替代品出现（罕见）
+    if (rng.chance(P.freeAlt)) {
+      const cat = rng.pick(CATEGORIES);
+      const n = state.competitors.filter(c => c.active && c.category === cat).length;
+      if (n < P.maxPerCategory) {
+        const next = mulberry((state.nameSeed + state.nextCp * 7919) >>> 0);
+        const platform = rng.chance(0.3) ? 'any' : rng.pick(PLATFORMS);
+        const cp = makeCompetitor(next, cpId(state.nextCp++), 'free', cat, platform, state.usedNames);
+        cp.since = day;
+        state.competitors.push(cp);
+        out.push(emit(state, day, 'free_alternative', `免费替代品「${cp.name}」出现`,
+          `${LABELS.platforms[platform]}出现一个免费的${LABELS.categories[cat]}类模拟产品（质量 ${cp.quality}），对价格敏感的顾客有吸引力。`,
+          '罕见随机事件（每天约 0.5% 概率），且该品类竞品数未达上限',
+          { category: cat, platform, competitorId: cp.id, demandMult: 0.92, durationDays: 21 }));
+      }
+    }
+
+    // 6) 顾客投诉（仅在我方收到 ≤2 星评价后）
+    const bad = {};
+    for (const rv of reviews) if (rv && rv.rating <= 2) (bad[rv.listingId] = bad[rv.listingId] || []).push(rv);
+    for (const lid of Object.keys(bad).sort()) {
+      if (state.complaintLast[lid] != null && day - state.complaintLast[lid] < P.complaintCooldown) continue;
+      const l = (ctx.listings || []).find(x => x.id === lid);
+      const k = bad[lid].length;
+      state.complaintLast[lid] = day;
+      const demandMult = k >= 2 ? 0.75 : 0.85;
+      const codes = bad[lid].map(r => r.complaint).filter(Boolean);
+      out.push(emit(state, day, 'customer_complaint', `商品 ${lid} 差评影响曝光`,
+        `模拟顾客对 ${lid}${l ? '（' + l.title + '）' : ''} 给出 ${k} 条 ≤2 星评价${codes.length ? '（' + codes.join('、') + '）' : ''}，平台短期降低曝光。`,
+        `最近收到 ${k} 条 ≤2 星评价`,
+        l ? { listingId: lid, category: l.category, platform: l.platform, demandMult, durationDays: 7 }
+          : { listingId: lid, durationDays: 7 }));  // 找不到商品时不施加全局需求影响
+    }
+
+    // 7) 需求增长（罕见正面）
+    if (rng.chance(P.growth)) {
+      const cat = rng.pick(CATEGORIES);
+      const mult = r2(1.15 + rng.next() * 0.2);
+      const durationDays = rng.int(21, 45);
+      out.push(emit(state, day, 'demand_growth', LABELS.categories[cat] + '需求增长',
+        `模拟市场中${LABELS.categories[cat]}类话题升温，需求倍数 ×${mult}，持续 ${durationDays} 天。`,
+        '罕见正面随机事件（每天约 0.3% 概率）',
+        { category: cat, demandMult: mult, durationDays }));
+    }
+
+    // 8) 新进入者每月可能成长
+    if (day % 30 === 29) {
+      for (const cp of state.competitors) {
+        if (cp.active && cp.type === 'newcomer' && rng.chance(0.5)) {
+          cp.quality = r3(Math.min(0.8, cp.quality + 0.02 + rng.next() * 0.03));
+          cp.trust = r3(Math.min(0.6, cp.trust + 0.03));
+        }
+      }
+    }
+    return out;
+  }
+
+  // ---------- queries ----------
+  function forListing(state, listing) {
+    if (!state || !listing) return [];
+    return state.competitors
+      .filter(c => c.active && c.category === listing.category && (c.platform === 'any' || c.platform === listing.platform))
+      .map(c => Object.assign({}, c));
+  }
+
+  function modifiers(state, day, category, platform) {
+    let demandMult = (state.demand && state.demand[category]) || 1;
+    for (const ev of state.events) {
+      const e = ev.effects;
+      if (day < ev.day || day >= ev.day + (e.durationDays || 0)) continue;
+      if (e.category && e.category !== category) continue;
+      if (e.platform && e.platform !== 'any' && platform && platform !== 'any' && e.platform !== platform) continue;
+      if (typeof e.demandMult === 'number') demandMult *= e.demandMult;
+    }
+    const comps = state.competitors.filter(c => c.active && c.category === category && platMatch(c, platform || 'any'));
+    let pressure = 0;
+    if (comps.length) {
+      const ref = REF_PRICE[category] || 10;
+      const str = comps.map(c => {
+        const priceAttr = c.price <= 0 ? 1 : clamp(1 - c.price / (ref * 2.5), 0, 1);
+        return clamp(0.5 * c.quality + 0.3 * c.trust + 0.2 * priceAttr, 0, 1);
+      });
+      const avg = str.reduce((a, b) => a + b, 0) / str.length;
+      const density = Math.min(1, comps.length / P.maxPerCategory);
+      pressure = clamp(0.4 * density + 0.35 * Math.max(...str) + 0.25 * avg, 0, 1);
+    }
+    return { demandMult: r3(clamp(demandMult, 0, 3)), pressure: r3(pressure) };
+  }
+
+  return { init, step, forListing, modifiers, LABELS, SOURCES, CATEGORIES, TYPES, EVENT_TYPES, SEASONS, PARAMS: P };
+})();
+
+/* ---- engine.js ---- */
+/* =================== P03–P04 模拟经营引擎（主 Claude） ===================
+   独立模拟日历；固定随机种子并保存随机状态；所有金额经 P02 统一交易接口入账；
+   订单+平台费原子入账；退款关联原订单且不超过可退金额；营销/上架费在现金不足时自动停止。
+   不修改任何真实研发记录，不产生 XP。 */
+const SimEngine = (() => {
+  const PLAT = ['etsy', 'gumroad', 'payhip'];
+  const INTENT = 0.25; /* assumption：带购买意图的访问者比例 */
+  const CAT_OF = { 'PRODUCT 001': 'seller-tools', 'PRODUCT 002': 'real-estate-templates', 'PRODUCT 003': 'personal-finance' };
+  const pad = (n, w) => String(n).padStart(w, '0');
+  const lab = n => (SimMarket.LABELS && (SimMarket.LABELS[n] || (SimMarket.LABELS.fees && SimMarket.LABELS.fees[n]))) || n;
+  const r2 = x => Math.round(x * 100) / 100;
+  const simMonth = d => Math.floor(Math.max(0, d - 1) / 30) + 1;
+  function init(seed) {
+    seed = (seed >>> 0) || 20261126;
+    return { v: 1, seed, rng: seed ^ 0x9e3779b9, day: 0, paused: false, listings: [], orders: [], reviews: [], events: [], reports: [], custHist: {},
+      comp: SimCompetition.init(seed), pstats: Object.fromEntries(PLAT.map(p => [p, { orders: 0, revenue: 0, refunds: 0, ratingSum: 0, ratingN: 0, lv: 1 }])),
+      nL: 1, nO: 1, nR: 1, daily: [], warnings: [] };
+  }
+  let _cust = null, _custSeed = null;
+  function customers(sim) { if (_custSeed !== sim.seed) { _cust = SimCustomers.generate(sim.seed); _custSeed = sim.seed; } return _cust; }
+  /* ---------- 产品成长等级（研发等级由真实证据推导；销售等级为模拟成绩） ---------- */
+  const DEV = [['点子', p => true], ['市场研究', (p, t) => t.some(x => x.type === 'research')], ['立项批准', p => !!p.approvedAt],
+    ['原型', (p, t) => t.some(x => x.type === 'proto')], ['研发完成', (p, t) => t.some(x => x.type === 'soft')],
+    ['功能测试', (p, t) => t.some(x => x.type === 'test')], ['风险审核', (p, t) => t.some(x => x.type === 'copyright')]];
+  const SALES = [['模拟发布', 0], ['第一笔模拟订单', 1], ['累计10单', 10], ['累计50单', 50], ['累计100单', 100], ['累计500单', 500], ['累计1,000单', 1000], ['累计5,000单', 5000], ['累计10,000单', 10000]];
+  function productLevel(S, p, sim, mode) {
+    const tasks = S.tasks.filter(t => t.status === 'approved' && t.product === p.id);
+    const met = DEV.map(([n, f]) => !!f(p, tasks));
+    let lv = 0; while (lv < 7 && met[lv]) lv++;
+    const eligible = met[4] && met[5] && met[6];
+    const missing = DEV.filter((d, i) => !met[i]).map(d => d[0]);
+    let salesLv = 0, orders = 0, published = false;
+    if (sim) { const ls = sim.listings.filter(l => l.productId === p.id && l.mode === mode); published = ls.length > 0; orders = ls.reduce((a, l) => a + l.stats.orders, 0);
+      if (published && lv >= 7) SALES.forEach(([n, th], i) => { if (orders >= th) salesLv = i + 1; }); }
+    const total = lv + salesLv;
+    const name = total <= 7 ? DEV[Math.max(0, total - 1)][0] : SALES[total - 8][0];
+    return { lv: total, devLv: lv, salesLv, name, met, missing, eligible, orders, published, evidence: r2((met[4] ? .45 : 0) + (met[5] ? .3 : 0) + (met[6] ? .25 : 0)) };
+  }
+  /* ---------- 发布 ---------- */
+  function listingQuality(l) { let q = 0; if ((l.title || '').length >= 8) q += .2; if ((l.desc || '').length >= 60) q += .3; else if ((l.desc || '').length >= 20) q += .15; if (l.hasImage) q += .3; if ((l.target || '').length >= 2) q += .2; return r2(Math.min(1, q)); }
+  function publish(S, sim, form, mode) {
+    const p = S.products.find(x => x.id === form.productId); if (!p) throw '找不到产品';
+    if (!PLAT.includes(form.platform)) throw '未知平台';
+    const pl = productLevel(S, p, sim, mode);
+    if (mode === 'live' && !pl.eligible) throw '该产品还未完成「研发完成 + 功能测试 + 风险审核」，只能在测试沙盒体验发布';
+    if (sim.listings.some(l => l.productId === p.id && l.platform === form.platform && l.mode === mode && l.status !== 'closed')) throw '该产品已在此平台上架，可直接修改售价或营销预算';
+    const price = +form.price; if (!isFinite(price) || price <= 0 || price > 10000) throw '售价必须大于 0';
+    const sale = form.salePrice === '' || form.salePrice == null ? null : +form.salePrice; if (sale !== null && (!isFinite(sale) || sale <= 0 || sale >= price)) throw '优惠价必须大于 0 且低于原价';
+    const bud = +form.mktBudget || 0; if (bud < 0 || bud > 1000) throw '营销预算范围 0–1000 G/天';
+    const l = { id: 'L-' + pad(sim.nL++, 4), productId: p.id, platform: form.platform, category: form.category || CAT_OF[p.id] || 'software-tool',
+      title: String(form.title || p.name).slice(0, 80), desc: String(form.desc || '').slice(0, 600), hasImage: !!form.image, image: form.image || null,
+      target: String(form.target || '').slice(0, 40), price: r2(price), salePrice: sale === null ? null : r2(sale), mktBudget: r2(bud),
+      evidence: pl.evidence, mode, createdDay: sim.day, status: 'live', stats: { impressions: 0, clicks: 0, orders: 0, revenue: 0, refunds: 0, ratingSum: 0, ratingN: 0, rejects: {}, compWins: 0 } };
+    l.priceLog = [l.price].concat(l.salePrice === null ? [] : [l.salePrice]);
+    l.listingQuality = listingQuality(l); sim.listings.push(l); return l;
+  }
+  function updateListing(sim, id, ch) { const l = sim.listings.find(x => x.id === id); if (!l) throw '找不到商品';
+    if (ch.price !== undefined) { const v = +ch.price; if (!(v > 0)) throw '售价必须大于 0'; l.price = r2(v); }
+    if (ch.salePrice !== undefined) { const v = ch.salePrice === '' || ch.salePrice === null ? null : +ch.salePrice; if (v !== null && !(v > 0 && v < l.price)) throw '优惠价必须低于原价'; l.salePrice = v === null ? null : r2(v); }
+    if (ch.mktBudget !== undefined) { const v = +ch.mktBudget; if (!(v >= 0 && v <= 1000)) throw '营销预算范围 0–1000'; l.mktBudget = r2(v); }
+    if (!Array.isArray(l.priceLog)) l.priceLog = [];
+    [l.price, l.salePrice].forEach(v => { if (v != null && !l.priceLog.includes(v)) l.priceLog.push(v); }); if (l.priceLog.length > 50) l.priceLog = l.priceLog.slice(-50);
+    if (ch.status) l.status = ch.status; return l; }
+  /* ---------- 成本预估 ---------- */
+  function estCost(sim, days, mode) { let c = 0; sim.listings.filter(l => l.status === 'live' && l.mode === mode).forEach(l => { c += l.mktBudget * days; const lc = SimMarket.listingCost(l.platform);
+    if (lc.amt > 0) { let paid = l.feePaid || 0; for (let d = sim.day + 1; d <= sim.day + days; d++) if (!paid || d - paid >= lc.every) { c += lc.amt; paid = d; } } }); return r2(c); }
+  /* ---------- 推进一天 ---------- */
+  function stepDay(S, sim, G) {
+    const rng = SimRng.make(sim.rng), day = sim.day + 1, mode = G.mode, simDate = 'SIM-' + pad(day, 4);
+    const res = { day, orders: 0, revenue: 0, fees: 0, refunds: 0, costs: 0, reviews: [], events: [], warn: [], firstOrders: [], refundsList: [] };
+    const live = sim.listings.filter(l => l.status === 'live' && l.mode === mode);
+    const recent = sim.reviews.filter(r => r.day >= day - 7).map(r => ({ listingId: r.listingId, rating: r.rating, complaint: r.complaint }));
+    res.events = SimCompetition.step(sim.comp, day, { rng, listings: live, recentReviews: recent }).map(e => Object.assign({}, e, { mode }));
+    sim.events.push(...res.events); if (sim.events.length > 300) sim.events = sim.events.slice(-300);
+    let cash = G.cash();
+    const cust = customers(sim);
+    for (const l of live) {
+      /* 上架费（如平台收取） */
+      const lc = SimMarket.listingCost(l.platform);
+      if (lc.amt > 0 && (!l.feePaid || (day - l.feePaid) >= lc.every)) {
+        if (cash >= lc.amt) { G.cost({ ext: 'LFEE-' + l.id + '-' + simDate, amt: lc.amt, product: l.productId, platform: l.platform, note: lab(lc.name), kind: 'listing', simDay: day }); cash -= lc.amt; res.costs += lc.amt; l.feePaid = day; }
+        else { l.status = 'paused'; res.warn.push(l.id + ' 现金不足以支付上架费，商品已暂停'); continue; } }
+      /* 营销支出（现金不足时停止） */
+      let bud = l.mktBudget;
+      if (bud > 0) { if (cash >= bud) { G.cost({ ext: 'MKT-' + l.id + '-' + simDate, amt: bud, product: l.productId, platform: l.platform, note: '模拟营销支出', kind: 'marketing', simDay: day }); cash -= bud; res.costs += bud; }
+        else { res.warn.push(l.id + ' 现金不足，今日营销预算未执行'); bud = 0; } }
+      const ps = sim.pstats[l.platform];
+      const mods = SimCompetition.modifiers(sim.comp, day, l.category, l.platform);
+      const tr = SimMarket.dailyTraffic(l.platform, Object.assign({}, l, { mktBudget: bud }), { day, rng, demandMult: mods.demandMult, pressure: mods.pressure, platformLevel: ps.lv });
+      l.stats.impressions += tr.impressions; l.stats.clicks += tr.clicks;
+      const comps = SimCompetition.forListing(sim.comp, l);
+      const price = l.salePrice ?? l.price;
+      for (let k = 0; k < Math.min(tr.clicks, 200); k++) {
+        /* 模拟假设：只有约 25% 的访问者带着购买意图进入比较流程，其余只是浏览（校准到第三方引用的 Etsy 1–5% 转化区间附近） */
+        if (!rng.chance(INTENT)) { l.stats.rejects.just_browsing = (l.stats.rejects.just_browsing || 0) + 1; continue; }
+        const c = SimCustomers.pickVisitor(cust, l.platform, l.category, rng); if (!c) continue;
+        const h = sim.custHist[c.id] || (sim.custHist[c.id] = { purchases: [], refunds: [], rejects: 0 });
+        /* 只传买家可见信息：商品页字段 + l.stats（ratingSum/ratingN/orders 即可见评价与销量）+ 平台等级；内部 evidence 只在购后 experience 中使用 */
+        const dec = SimCustomers.decide(c, { listing: l, price, platform: l.platform, competitors: comps, platformLevel: ps.lv }, { rng, history: h, day, platformLevel: ps.lv });
+        if (!dec.buy) { h.rejects++; l.stats.rejects[dec.reason] = (l.stats.rejects[dec.reason] || 0) + 1; if (dec.choice === 'competitor' || dec.choice === 'free') l.stats.compWins++; continue; }
+        const fee = SimMarket.feeFor(l.platform, price);
+        const oid = 'O-' + pad(sim.nO, 6);
+        try { G.atomic(() => G.order({ ext: oid, price, fee: fee.total, product: l.productId, platform: l.platform, simDay: day })); }
+        catch (e) { res.warn.push('订单 ' + oid + ' 入账失败：' + e); continue; }
+        sim.nO++;
+        const o = { id: oid, day, listingId: l.id, productId: l.productId, platform: l.platform, customerId: c.id, price, fee: fee.total, refunded: 0, status: 'paid', mode };
+        sim.orders.push(o); h.purchases.push({ listingId: l.id, orderId: oid, day });
+        if (l.stats.orders === 0) res.firstOrders.push(l.id);
+        l.stats.orders++; l.stats.revenue = r2(l.stats.revenue + price); ps.orders++; ps.revenue = r2(ps.revenue + price);
+        res.orders++; res.revenue = r2(res.revenue + price); res.fees = r2(res.fees + fee.total); cash += price - fee.total;
+        const ex = SimCustomers.experience(c, l, { rng, day });
+        const rv = { id: 'R-' + pad(sim.nR++, 6), day, orderId: oid, listingId: l.id, productId: l.productId, platform: l.platform, customerId: c.id, rating: ex.rating, text: ex.text, complaint: ex.complaint, mode };
+        sim.reviews.push(rv); res.reviews.push(rv); o.rating = ex.rating; h.purchases[h.purchases.length - 1].rating = ex.rating; l.stats.ratingSum += ex.rating; l.stats.ratingN++; ps.ratingSum += ex.rating; ps.ratingN++;
+        if (ex.refund) { try { refund(S, sim, oid, price, ex.refundReason, G, day); res.refunds = r2(res.refunds + price); res.refundsList.push(oid); cash -= price; } catch (e) { res.warn.push(String(e)); } }
+      }
+      const xp = SimMarket.platformXp({ orders: ps.orders, revenue: ps.revenue, ratingAvg: ps.ratingN ? ps.ratingSum / ps.ratingN : 0, refunds: ps.refunds });
+      const nl = SimMarket.platformLevel(xp).lv; if (nl > ps.lv) res.platformUp = (res.platformUp || []).concat([[l.platform, nl]]); ps.lv = nl;
+    }
+    sim.day = day; sim.rng = rng.state;
+    sim.daily.push({ day, orders: res.orders, revenue: res.revenue, fees: res.fees, refunds: res.refunds, costs: r2(res.costs), mode });
+    if (sim.daily.length > 400) sim.daily = sim.daily.slice(-400);
+    if (sim.orders.length > 5000) sim.orders = sim.orders.slice(-5000);
+    if (sim.reviews.length > 3000) sim.reviews = sim.reviews.slice(-3000);
+    return res;
+  }
+  function refund(S, sim, orderId, amt, reason, G, day) {
+    const o = sim.orders.find(x => x.id === orderId); if (!o) throw '找不到原订单 ' + orderId;
+    const left = r2(o.price - o.refunded); amt = r2(+amt);
+    if (!(amt > 0)) throw '退款金额必须大于 0'; if (amt > left + 1e-9) throw '退款超过可退金额（剩余 ' + left + ' G）';
+    const rn = (o.refundN || 0) + 1;
+    G.refund({ ext: orderId + (rn > 1 ? '-R' + rn : ''), amt, product: o.productId, platform: o.platform, simDay: day ?? sim.day, reason });
+    o.refundN = rn; o.refunded = r2(o.refunded + amt); o.status = o.refunded >= o.price ? 'refunded' : 'partial'; o.refundReason = reason;
+    const l = sim.listings.find(x => x.id === o.listingId); if (l) l.stats.refunds++; sim.pstats[o.platform].refunds++;
+    const h = sim.custHist[o.customerId]; if (h) h.refunds.push({ orderId, day: day ?? sim.day, reason });
+  }
+  /* ---------- 推进 N 天 + 经营报告 ---------- */
+  function advance(S, sim, days, G) {
+    const out = { from: sim.day + 1, to: sim.day + days, days: [], orders: 0, revenue: 0, fees: 0, refunds: 0, costs: 0, reviews: [], events: [], warn: [], firstOrders: [], platformUp: [] };
+    for (let i = 0; i < days; i++) { const r = stepDay(S, sim, G); out.days.push(r); ['orders'].forEach(k => out[k] += r[k]); ['revenue', 'fees', 'refunds', 'costs'].forEach(k => out[k] = r2(out[k] + r[k]));
+      out.reviews.push(...r.reviews); out.events.push(...r.events); out.warn.push(...r.warn); out.firstOrders.push(...r.firstOrders); if (r.platformUp) out.platformUp.push(...r.platformUp); }
+    out.net = r2(out.revenue - out.fees - out.refunds - out.costs);
+    out.report = report(S, sim, out, G.mode); sim.reports.push(out.report); if (sim.reports.length > 60) sim.reports = sim.reports.slice(-60);
+    return out;
+  }
+  function report(S, sim, out, mode) {
+    const by = (key) => { const m = {}; sim.orders.filter(o => o.mode === mode && o.day >= out.from && o.day <= out.to).forEach(o => { m[o[key]] = m[o[key]] || { n: 0, rev: 0 }; m[o[key]].n++; m[o[key]].rev = r2(m[o[key]].rev + o.price); }); return Object.entries(m).sort((a, b) => b[1].rev - a[1].rev); };
+    const prods = by('productId'), plats = by('platform');
+    const rej = {}; sim.listings.filter(l => l.mode === mode).forEach(l => Object.entries(l.stats.rejects).forEach(([k, v]) => rej[k] = (rej[k] || 0) + v));
+    const comp = {}; out.reviews.filter(r => r.complaint).forEach(r => comp[r.complaint] = (comp[r.complaint] || 0) + 1);
+    const avg = out.reviews.length ? r2(out.reviews.reduce((a, r) => a + r.rating, 0) / out.reviews.length) : null;
+    const pricing = sim.listings.filter(l => l.mode === mode && l.status === 'live').map(l => { const tooExp = (l.stats.rejects.too_expensive || 0) + (l.stats.rejects.over_budget || 0); const tot = Object.values(l.stats.rejects).reduce((a, b) => a + b, 0) + l.stats.orders;
+      return { id: l.id, productId: l.productId, platform: l.platform, price: l.salePrice ?? l.price, verdict: tot < 10 ? '样本不足' : tooExp / tot > .35 ? '偏贵' : l.stats.orders / tot > .25 && tooExp / tot < .1 ? '可尝试提价' : '大致合理' }; });
+    const diag = []; sim.listings.filter(l => l.mode === mode && l.status !== 'closed').forEach(l => { const n = l.id + ' ' + l.platform;
+      if (!l.hasImage) diag.push(n + '：没有商品图，点击率按模型降到约 40%');
+      if ((l.desc || '').length < 60) diag.push(n + '：介绍少于 60 字，商品页质量偏低');
+      if ((l.target || '').length < 2) diag.push(n + '：没有填写目标客户');
+      if (l.stats.impressions >= 200 && l.stats.clicks / l.stats.impressions < 0.01) diag.push(n + '：曝光 ' + l.stats.impressions + ' 次但点击率低于 1%');
+      if (l.status === 'paused') diag.push(n + '：因经营现金不足被暂停'); });
+    return { id: 'RP-' + pad(sim.reports.length + 1, 4), mode, from: out.from, to: out.to, orders: out.orders, revenue: out.revenue, fees: out.fees, refunds: out.refunds, costs: out.costs, net: out.net,
+      bestProduct: prods[0] || null, bestPlatform: plats[0] || null, buyReasons: out.orders ? ['需求匹配', '价格在预算内', '商品页/评价可信'] : [],
+      rejectTop: Object.entries(rej).sort((a, b) => b[1] - a[1]).slice(0, 4), complaintTop: Object.entries(comp).sort((a, b) => b[1] - a[1]).slice(0, 3), avgRating: avg, pricing,
+      diag: diag.slice(0, 6),
+      improve: Object.entries(comp).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k]) => k),
+      verify: ['真实目标客户是否愿意以此价格付费（需真实市场验证）', '平台流量与转化率（目前为模拟假设）', '退款与差评原因是否与真实用户一致'],
+      events: out.events.map(e => e.title).slice(0, 5), note: '以上结论全部来自规则驱动的模拟，不能作为真实付费需求证据。' };
+  }
+  return { INTENT, init, customers, productLevel, publish, updateListing, estCost, stepDay, advance, refund, simMonth, listingQuality, CAT_OF, PLAT, DEV, SALES };
+})();
 
 /* =================== 员工名册（虚构人物，动画仅为游戏表现） =================== */
 const SK={a:'#F1C7A0',b:'#E8B996',c:'#D9A27A',d:'#B97F57',e:'#8A5A3B'};
@@ -623,8 +1797,8 @@ const ICON_SVG=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" 
 </svg>`;
 /* =================== UI（P01.6 游戏化） =================== */
 let tab='menu',preDept='research',sheetOpen=false,selFloor=-1,selStaff=null,camMode='hq',notice=null,inGame=false;
-const TABS=[['menu','菜单','i-grid'],['quest','任务','i-scroll'],['fin','财务','i-gem'],['dept','部门','i-team'],['tech','科技树','i-tree'],['vault','资产库','i-box'],['task','记录','i-pen'],['ach','成就','i-trophy'],['data','数据','i-cloud'],['set','设置','i-gear']];
-const TITLES={fin:'财务管理中心 · 双金币账本',menu:'游戏菜单',quest:'任务中心',dept:'部门',tech:'科技树',vault:'产品研发 · 永久资产库',task:'记录成果',ach:'公司奖杯',data:'数据备份及恢复',set:'游戏设置',staff:'员工档案',appr:'董事长审批中心',hq:'公司总览',boss:'BOSS 晋级任务',build:'建筑扩张'};
+const TABS=[['menu','菜单','i-grid'],['quest','任务','i-scroll'],['mkt','市场','i-globe'],['cust','客户','i-users'],['fin','财务','i-gem'],['dept','部门','i-team'],['tech','科技树','i-tree'],['vault','资产库','i-box'],['task','记录','i-pen'],['ach','成就','i-trophy'],['data','数据','i-cloud'],['set','设置','i-gear']];
+const TITLES={mkt:'全球市场 · 2F 商业营销中心',cust:'虚拟客户 · 1F 客户体验中心',fin:'财务管理中心 · 双金币账本',menu:'游戏菜单',quest:'任务中心',dept:'部门',tech:'科技树',vault:'产品研发 · 永久资产库',task:'记录成果',ach:'公司奖杯',data:'数据备份及恢复',set:'游戏设置',staff:'员工档案',appr:'董事长审批中心',hq:'公司总览',boss:'BOSS 晋级任务',build:'建筑扩张'};
 const ic=(id,cls='i')=>`<svg class="${cls}"><use href="#${id}"/></svg>`;
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),2600)}
 /* ---------- 音效（WebAudio 合成，原创，无外部素材） ---------- */
@@ -643,12 +1817,12 @@ function fxXp(n,pv){const fx=$('fx'),W=innerWidth,H=innerHeight,r=$('ring').getB
  t.animate([{transform:'translateY(20px) scale(.6)',opacity:0},{transform:'translateY(0) scale(1.15)',opacity:1,offset:.25},{transform:'translateY(-40px) scale(1)',opacity:0}],{duration:1400,easing:'ease-out'}).onfinish=()=>t.remove();
  if(FXR)return;for(let i=0;i<10;i++){const o=document.createElement('div');o.className='orb';const sx=W/2+(Math.random()-.5)*160,sy=H/2+(Math.random()-.5)*90;o.style.left=sx+'px';o.style.top=sy+'px';fx.append(o);
   o.animate([{transform:'translate(0,0) scale(.4)',opacity:0},{transform:'translate(0,-20px) scale(1)',opacity:1,offset:.2},{transform:`translate(${r.left+r.width/2-sx}px,${r.top+r.height/2-sy}px) scale(.5)`,opacity:.9}],{duration:900+i*60,delay:200+i*40,easing:'cubic-bezier(.5,0,.8,.4)'}).onfinish=()=>{o.remove();$('ring').animate([{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:220})}}}
-function fxLevel(lv,txt,preview){const fx=$('fx'),d=document.createElement('div');d.className='lvup';
- d.innerHTML=`<div class="rays"></div><div class="lvbox"><p class="big">LEVEL UP</p><div class="lv">LV.${lv}</div><div class="sub2">${esc(txt)}${preview?'<br><span class="tag sim" style="font-size:12px">特效预览 · 不改变数据</span>':''}</div></div>`;fx.append(d);sfx.lvl();
+function fxLevel(lv,txt,preview,big){const fx=$('fx'),d=document.createElement('div');d.className='lvup';
+ d.innerHTML=`<div class="rays"></div><div class="lvbox"><p class="big">${big||'LEVEL UP'}</p><div class="lv">${big?'':'LV.'+lv}</div><div class="sub2">${esc(txt)}${preview?'<br><span class="tag sim" style="font-size:12px">特效预览 · 不改变数据</span>':''}</div></div>`;fx.append(d);sfx.lvl();
  if(!FXR){const cs=['#ffe08a','#5ec2ff','#ff7a9a','#46d08a','#fff'];for(let i=0;i<46;i++){const c=document.createElement('div');c.className='conf';c.style.left=Math.random()*100+'%';c.style.background=cs[i%5];d.append(c);c.animate([{transform:`translateY(0) rotate(0)`},{transform:`translateY(${innerHeight+60}px) rotate(${720*(Math.random()-.5)}deg)`}],{duration:1800+Math.random()*1400,delay:Math.random()*500,easing:'ease-in'})}}
  if(window.HQ3D&&!preview)HQ3D.burst();const close=()=>{d.animate([{opacity:1},{opacity:0}],{duration:300}).onfinish=()=>d.remove()};d.onclick=close;setTimeout(close,3400)}
-function fxCoins(n,lab){const fx=$('fx'),W=innerWidth,H=innerHeight,r=$('coin').getBoundingClientRect();
- for(let i=0;i<Math.min(n,14);i++){const c=document.createElement('div');c.className='coin';c.textContent='G';const sx=W/2+(Math.random()-.5)*200,sy=H/2+(Math.random()-.5)*80;c.style.left=sx+'px';c.style.top=sy+'px';fx.append(c);
+function fxCoins(n,lab,kind){const fx=$('fx'),W=innerWidth,H=innerHeight,r=$(kind==='b'?'cash':'coin').getBoundingClientRect();
+ for(let i=0;i<Math.min(n,14);i++){const c=document.createElement('div');c.className='coin';c.textContent=kind==='b'?'营':'G';if(kind==='b'){c.style.background='radial-gradient(circle at 35% 30%,#e8fff2,#3fcf8a 55%,#167a4a)';c.style.color='#063a20'}const sx=W/2+(Math.random()-.5)*200,sy=H/2+(Math.random()-.5)*80;c.style.left=sx+'px';c.style.top=sy+'px';fx.append(c);
   c.animate([{transform:'scale(0) rotateY(0)',opacity:0},{transform:'scale(1.2) rotateY(180deg)',opacity:1,offset:.25},{transform:`translate(${r.left+12-sx}px,${r.top+6-sy}px) scale(.6) rotateY(720deg)`,opacity:1}],{duration:1000+i*50,delay:i*60,easing:'cubic-bezier(.5,0,.8,.4)'}).onfinish=()=>{c.remove();sfx.coin()}}
  const t=document.createElement('div');t.className='fxt';t.style.color='#ffe39a';t.textContent=lab||('+'+n+' G · 预览');t.style.left=(W/2-60)+'px';t.style.top=(H/2-30)+'px';fx.append(t);t.animate([{opacity:0},{opacity:1,offset:.2},{opacity:0,transform:'translateY(-40px)'}],{duration:1500}).onfinish=()=>t.remove()}
 function fxWealth(w,net){const fx=$('fx'),d=document.createElement('div');d.className='lvup';d.innerHTML=`<div class="rays" style="background:repeating-conic-gradient(rgba(190,150,255,.25) 0 8deg,transparent 8deg 20deg)"></div><div class="lvbox"><p class="big" style="font-size:clamp(30px,7vw,60px)">WEALTH UP</p><div class="lv" style="color:#d6c3ff">${wName(w)}</div><div class="sub2">累计模拟净利润 ${fmtG(net)}${MODE==='sandbox'?'<br><span class="tag r">测试沙盒</span>':''}</div></div>`;fx.append(d);sfx.lvl();const close=()=>{d.animate([{opacity:1},{opacity:0}],{duration:300}).onfinish=()=>d.remove()};d.onclick=close;setTimeout(close,3000)}
@@ -701,8 +1875,8 @@ async function quickBackup(){const BO=MODE==='sandbox'?Object.assign({sandbox:tr
  if(dl){try{await dl.save({filename:name,data:json});markBackedUp();toast('备份文件已下载');sfx.ok();return}catch(e){}}
  try{await navigator.clipboard.writeText(JSON.stringify(S));markBackedUp();toast('当前环境不能存文件，已改为复制文字备份');sfx.ok()}catch(_){openSheet('data');toast('请在下方备份框里长按全选复制')}}
 let pendingRestore=null;
-function restoreCard(){if(!pendingRestore)return '';const r=pendingRestore,s2=r.s,c=compLv(s2);return `<div class="card" style="border-color:var(--gold)"><b>确认恢复？</b><p class="sub" style="margin:4px 0 8px">来源：${esc(r.src)}<br>${esc(s2.name)} · LV.${c.lv} · ${s2.tasks.length} 条记录 · ${s2.products.length} 个产品${r.notes.length?'<br>'+esc(r.notes.join('；')):''}<br>恢复前会自动为当前存档保留一份快照。</p><div class="row"><button class="btn" id="rsGo">确认恢复</button><button class="btn ghost" id="rsNo">取消</button></div></div>`}
-function doRestore(){if(!pendingRestore)return;snapPush();S=pendingRestore.s;pendingRestore=null;quietFx=true;save('已恢复存档');saveSummary();renderPanel()}
+function restoreCard(){if(!pendingRestore)return '';const r=pendingRestore,s2=r.s,c=compLv(s2);return `<div class="card" style="border-color:var(--gold)"><b>确认恢复？</b><p class="sub" style="margin:4px 0 8px">来源：${esc(r.src)}<br>${esc(s2.name)} · LV.${c.lv} · ${s2.tasks.length} 条记录 · ${s2.products.length} 个产品${r.notes.length?'<br><b style="color:#ff8a7a">注意：导入检查发现问题，以下记录不会恢复：</b><br>'+r.notes.map(esc).join('<br>'):'<br>导入检查：未发现异常记录。'}<br>恢复前会自动为当前存档保留一份快照。</p><div class="row"><button class="btn" id="rsGo">确认恢复</button><button class="btn ghost" id="rsNo">取消</button></div></div>`}
+function doRestore(){if(!pendingRestore)return;snapPush();const pr=pendingRestore;S=pr.s;if(pr.notes.length){S.importLog=(S.importLog||[]).concat([{at:Date.now(),src:pr.src,notes:pr.notes}]).slice(-20)}pendingRestore=null;quietFx=true;save(pr.notes.length?'已恢复存档（'+pr.notes.length+' 项导入检查提示，已记录在数据页）':'已恢复存档');saveSummary();renderPanel()}
 /* ---------- HUD ---------- */
 let lastLv=null,lastXp=null,lastE=null;
 function header(){
@@ -754,7 +1928,8 @@ function apprView(){
  const q=S.tasks.filter(t=>t.status==='pending');
  return `<h2>董事长审批中心</h2><p class="sub">7F · 董事长办公桌</p>
  <div class="card"><div class="t"><b>待风险审核（${q.length}）</b></div><p class="sub">审批权在 6F 风险管理部（独立否决权），董事长在此查看。</p>${q.length?`<ul class="log">${q.map(t=>taskLi(t,0)).join('')}</ul>`:''}<button class="btn sm" data-gofloor="6">前往 6F 风险审核</button></div>
- <div class="card"><div class="t"><b>商业机会立项审批</b> <span class="tag">P05 未开放</span></div><p class="sub" style="margin:0">商业机会雷达与立项审批尚未开发，此处没有任何正在运行的审批流程。</p></div>
+ <div class="card"><div class="t"><b>产品立项批准</b></div><p class="sub">董事长亲自批准产品立项（产品等级 LV.3 的依据）。这是你的真实决策记录，会写入产品升级历史。</p>${S.products.map(p=>`<div class="toggle"><span>${esc(p.id)} · ${esc(p.name)}</span>${p.approvedAt?`<span class="tag ok">已批准 ${esc(p.approvedAt)}</span>`:`<button class="btn sm" data-approve-prod="${esc(p.id)}">批准立项</button>`}</div>`).join('')}</div>
+ <div class="card"><div class="t"><b>商业机会雷达</b> <span class="tag">P05 未开放</span></div><p class="sub" style="margin:0">商业机会雷达尚未开发。</p></div>
  <h3>重大晋级任务</h3><div class="card"><ul class="log">${gatesHtml()}</ul></div>`;
 }
 function floorView(i){
@@ -776,13 +1951,14 @@ const fv=v=>v&&v!==P?esc(v):`<span class="pending">${P}</span>`;
 function sanitize(o){const notes=[];const str=(v,n=600)=>String(v==null?'':v).slice(0,n);const ST=['approved','pending','vetoed'];let bad=0,fixed=0;
  const tasks=[];(o.tasks||[]).forEach(t=>{if(!t||!RW[t.type]||!DEPTS[t.primary]||!ST.includes(t.status)){bad++;return}const xp=RW[t.type].xp;if(t.xp!==xp)fixed++;
   tasks.push({id:str(t.id||('T'+Math.random().toString(36).slice(2)),40),title:str(t.title,100),type:t.type,primary:t.primary,assist:(Array.isArray(t.assist)?t.assist:[]).filter(d=>DEPTS[d]&&d!==t.primary),product:str(t.product,40),evidence:str(t.evidence),xp,date:str(t.date,10),status:t.status,reviewed:t.reviewed?str(t.reviewed,10):undefined,vetoReason:t.vetoReason?str(t.vetoReason,200):undefined})});
- const prods=(o.products||[]).filter(p=>p&&p.id&&p.name).map(p=>{const q=Object.assign(mkProd(str(p.id,40),str(p.name,80),str(p.status||'原型',40),str(p.stage||'研发中',40),{}),{});FIELDS.forEach(([k])=>{if(p[k]!=null)q[k]=str(p[k])});if(Array.isArray(p.history))q.history=p.history.slice(0,200).map(h=>({d:str(h&&h.d,10),t:str(h&&h.t,200)}));return q});
+ const prods=(o.products||[]).filter(p=>p&&p.id&&p.name).map(p=>{const q=Object.assign(mkProd(str(p.id,40),str(p.name,80),str(p.status||'原型',40),str(p.stage||'研发中',40),{}),{});FIELDS.forEach(([k])=>{if(p[k]!=null)q[k]=str(p[k])});if(p.approvedAt)q.approvedAt=str(p.approvedAt,30);if(Array.isArray(p.history))q.history=p.history.slice(0,200).map(h=>({d:str(h&&h.d,10),t:str(h&&h.t,200)}));return q});
  let kept=0;S.products.forEach(p=>{if(!prods.some(q=>q.id===p.id)){prods.push(Object.assign({},p,{history:(p.history||[]).concat([{d:today(),t:'导入备份时保留（永久资产不删除）'}])}));kept++}});
  if(bad)notes.push('丢弃 '+bad+' 条无效记录');if(fixed)notes.push(fixed+' 条记录的 XP 已按规则重算');if(kept)notes.push('保留 '+kept+' 个备份中没有的产品');
- return {s:{v:1,name:str(o.name||'My Company',40),savedAt:Date.now(),tasks,products:prods,econ:econSanitize(o,notes)},notes}}
+ _imp={tasks,products:prods};_impNotes=notes;const sim=simSanitize(o.sim);_imp={};_impNotes=null;const econ=econSanitize(Object.assign({},o,{sim,tasks,products:prods}),notes);const importLog=(Array.isArray(o.importLog)?o.importLog:[]).filter(x=>x&&Array.isArray(x.notes)).slice(-20).map(x=>({at:+x.at||0,src:str(x.src,60),notes:x.notes.slice(0,10).map(n=>str(n,300))}));return {s:{v:1,name:str(o.name||'My Company',40),savedAt:Date.now(),tasks,products:prods,econ,sim,importLog},notes}}
+let _imp={},_impNotes=null;function simSanitize(x){if(!x||typeof x!=='object'||!Array.isArray(x.listings)||!Array.isArray(x.orders))return undefined;try{const c=JSON.parse(JSON.stringify(x));if(!Number.isInteger(c.day)||c.day<0)return undefined;c.seed=c.seed>>>0;c.rng=c.rng>>>0;['listings','orders','reviews','events','reports','daily','warnings'].forEach(k=>{if(!Array.isArray(c[k]))c[k]=[]});if(!c.custHist||typeof c.custHist!=='object')c.custHist={};if(MODE!=='sandbox'){const n0=[c.listings.length,c.orders.length,c.reviews.length];c.listings=c.listings.filter(l=>liveListingOk(_imp,c,l));c.orders=c.orders.filter(q=>liveOrderOk(_imp,c,q));const ok=new Set(c.orders.map(q=>q.id));c.reviews=c.reviews.filter(r=>r&&r.mode==='live'&&ok.has(r.orderId));const d=[n0[0]-c.listings.length,n0[1]-c.orders.length,n0[2]-c.reviews.length];if(d.some(x=>x>0)&&_impNotes)_impNotes.push('剔除 '+d[0]+' 个不合格商品、'+d[1]+' 笔不合格订单、'+d[2]+' 条评价（沙盒记录、未满足正式发布条件、价格或日期不符）')}return c}catch(e){return undefined}}
 function vaultView(){
  return `<h2>永久产品资产库</h2><p class="sub">B1 · 所有产品、原型及失败项目永久归档。未取得的文件一律标记「待导入」。封面为系统生成占位图，非产品图片。</p>
- ${S.products.map((p,i)=>`<div class="card"><div class="prod">${cover(p,i)}<div><div style="color:var(--dim);font-size:12px">${esc(p.id)}</div><h2 style="font-size:17px">${esc(p.name)}</h2><span class="tag g">${esc(p.status)}</span><span class="tag">${esc(p.risk)}</span>
+ ${S.products.map((p,i)=>`<div class="card"><div class="prod">${cover(p,i)}<div><div style="color:var(--dim);font-size:12px">${esc(p.id)}</div><h2 style="font-size:17px">${esc(p.name)}</h2><span class="tag g">${esc(p.status)}</span><span class="tag">${esc(p.risk)}</span>${plevelsHtml(p)}
  <div class="row" style="margin-top:8px">${/^https:\/\//.test(p.link)?`<a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(p.link)}" target="_blank" rel="noopener">打开产品</a>`:`<button class="btn" disabled>打开产品（链接待导入）</button>`}<button class="btn ghost" data-edit="${i}">编辑</button></div></div></div>
  <details><summary>完整档案</summary><dl>${FIELDS.map(([k,n])=>`<dt>${n}</dt><dd>${k==='link'?(p.link?esc(p.link):`<span class="pending">${P}</span>`):fv(p[k])}</dd>`).join('')}<dt>升级历史</dt><dd>${p.history.map(h=>esc(h.d+' '+h.t)).join('<br>')}</dd></dl></details>
  <div id="edit${i}"></div></div>`).join('')}
@@ -809,7 +1985,8 @@ function achView(){
  return `<h2>公司奖杯</h2><p class="sub">已获得 ${got} / ${ACH.length}（含隐藏成就）· 7F 奖杯柜里的金杯数量与此同步</p><div class="skills">${ACH.map(a=>{const on=a.chk(S);return `<div class="ach ${on?'on':''}"><div class="i">${on?'★':'?'}</div><div><div>${a.h&&!on?'？？？':a.n}</div><div class="d">${a.h&&!on?'隐藏成就':a.d}</div></div></div>`}).join('')}</div>`;
 }
 function dataView(){const bk=bkState();
- return `<h2>数据保存与备份</h2><div class="card" style="border-color:${MODE==='sandbox'?'#ff8a7a':'var(--line)'}"><b>${MODE==='sandbox'?'当前：测试沙盒':'测试沙盒'}</b><p class="sub" style="margin:4px 0 8px">${MODE==='sandbox'?'沙盒里的虚构交易和记录只存在沙盒中，退出后正式存档保持原样。':'复制一份当前存档到独立的沙盒，用虚构交易测试账本。沙盒数据不会写回正式存档，沙盒备份也不能导入正式存档。'}</p><button class="btn ${MODE==='sandbox'?'red':'ghost'}" id="${MODE==='sandbox'?'sbxOut':'sbxIn'}">${MODE==='sandbox'?'退出沙盒，回到正式存档':'进入测试沙盒'}</button></div><div class="card" style="border-color:${bk.need?'#ff8a7a':'#46d08a'}"><b>${bk.need?'⚠ 有新进度还没备份':'✓ 存档已备份'}</b><p class="sub" style="margin:4px 0 8px">上次备份：${bk.at?new Date(bk.at).toLocaleString('zh-CN'):'从未'}。存档只保存在这部手机上，删除 App 或系统清理会丢失。</p><div class="row"><button class="btn" id="bkFile">备份到文件（推荐）</button><label class="btn ghost" style="display:inline-flex;align-items:center;margin:0;color:var(--ink)">从文件恢复<input type="file" id="rsFile" accept=".json,application/json,text/plain" hidden></label></div><p class="note">备份到文件：在弹出的菜单里选「存储到文件」→ iCloud 云盘 →「存储」。</p></div>${restoreCard()}<div class="card"><b>自动快照（最近 10 份）</b><p class="sub" style="margin:4px 0 6px">每次有新进度自动保留，只存在这部手机里，删除 App 会一起删除。</p>${snaps().length?snaps().map((x,i)=>`<div class="toggle"><span style="font-size:13px">${new Date(x.at).toLocaleString('zh-CN')} · LV.${x.lv} · ${x.n} 条记录</span><button class="btn sm ghost" data-snap="${i}">回到这里</button></div>`).join(''):'<p class="sub">还没有快照。</p>'}</div>
+ const il=(S.importLog||[]).slice(-3).reverse();const ilH=il.length?`<div class="card"><b>最近导入检查记录</b>${il.map(x=>`<p class="sub" style="margin:4px 0">${new Date(x.at).toLocaleString('zh-CN')} · ${esc(x.src)}<br>${x.notes.map(esc).join('<br>')}</p>`).join('')}</div>`:'';
+ return `<h2>数据保存与备份</h2>`+ilH+`<div class="card" style="border-color:${MODE==='sandbox'?'#ff8a7a':'var(--line)'}"><b>${MODE==='sandbox'?'当前：测试沙盒':'测试沙盒'}</b><p class="sub" style="margin:4px 0 8px">${MODE==='sandbox'?'沙盒里的虚构交易和记录只存在沙盒中，退出后正式存档保持原样。':'复制一份当前存档到独立的沙盒，用虚构交易测试账本。沙盒数据不会写回正式存档，沙盒备份也不能导入正式存档。'}</p><button class="btn ${MODE==='sandbox'?'red':'ghost'}" id="${MODE==='sandbox'?'sbxOut':'sbxIn'}">${MODE==='sandbox'?'退出沙盒，回到正式存档':'进入测试沙盒'}</button></div><div class="card" style="border-color:${bk.need?'#ff8a7a':'#46d08a'}"><b>${bk.need?'⚠ 有新进度还没备份':'✓ 存档已备份'}</b><p class="sub" style="margin:4px 0 8px">上次备份：${bk.at?new Date(bk.at).toLocaleString('zh-CN'):'从未'}。存档只保存在这部手机上，删除 App 或系统清理会丢失。</p><div class="row"><button class="btn" id="bkFile">备份到文件（推荐）</button><label class="btn ghost" style="display:inline-flex;align-items:center;margin:0;color:var(--ink)">从文件恢复<input type="file" id="rsFile" accept=".json,application/json,text/plain" hidden></label></div><p class="note">备份到文件：在弹出的菜单里选「存储到文件」→ iCloud 云盘 →「存储」。</p></div>${restoreCard()}<div class="card"><b>自动快照（最近 10 份）</b><p class="sub" style="margin:4px 0 6px">每次有新进度自动保留，只存在这部手机里，删除 App 会一起删除。</p>${snaps().length?snaps().map((x,i)=>`<div class="toggle"><span style="font-size:13px">${new Date(x.at).toLocaleString('zh-CN')} · LV.${x.lv} · ${x.n} 条记录</span><button class="btn sm ghost" data-snap="${i}">回到这里</button></div>`).join(''):'<p class="sub">还没有快照。</p>'}</div>
  <div class="card"><div class="t"><b>从 P01 / P01.5 迁移数据</b></div><p class="sub">各版本是独立 App，浏览器数据不互通。在旧版「数据」页点「复制备份」，再粘贴到下方「恢复」框即可。</p></div>
  <div class="card"><div class="t">本机自动保存</div><p class="sub">每次操作立即保存在此设备浏览器中，可能被系统清除。</p>
  <div class="t">云端保存</div><p class="sub" id="cloudSt">${cloudDirty?'有未上传的更改。':'云端与本机一致。'}</p><div class="row"><button class="btn" id="cloudSave">保存到云端</button></div><p class="note">云端保存会把当前数据写入 App 本身的新版本，页面会自动重新载入；换设备打开也能看到。</p></div>
@@ -842,8 +2019,8 @@ NOTICES.events=['随机商业事件','总部','待排期','随机商业事件尚
 NOTICES.launch=['产品发布','产品研发','P03','把产品发布到模拟平台需要 P03 的全球市场引擎。真实上架仍需董事长批准与注册，本游戏不会代为上架。'];
 const TILES=[['quest','任务中心','i-scroll','#4fb0ff','#1f62c4'],['boss','BOSS 晋级','i-crown','#ff7a6b','#b8322a'],['dept','部门','i-team','#5fd6a0','#1f8a5b'],['tech','科技树','i-tree','#b18cff','#5b3fa0'],
  ['vault','产品研发','i-box','#ffb36b','#d9701e'],['build','建筑扩张','i-crane','#7fd2ff','#2f7fc0'],['ach','成就','i-trophy','#ffe08a','#d99a1e'],['task','记录成果','i-pen','#6fe0d0','#1f8a8a'],
- ['fin','财务中心','i-gem','#e0b84a','#8a6a1e'],['fin:hist','财富等级','i-gem','#c9a4ff','#6b55a8'],['n:market','全球市场','i-globe','#6fb8ff','#2a5a9a','P03'],['n:customers','虚拟客户','i-users','#7fd0ff','#2a6a9a','P03'],
- ['n:launch','产品发布','i-play','#ff9fb0','#b0405a','P03'],['n:compete','商业竞争','i-swords','#ff8a7a','#8a2a26','P04'],['n:radar','机会雷达','i-flask','#8ae0b0','#2a7a5a','P05'],['n:events','随机事件','i-dice','#c0c8d8','#4a5568','待排期'],
+ ['fin','财务中心','i-gem','#e0b84a','#8a6a1e'],['fin:hist','财富等级','i-gem','#c9a4ff','#6b55a8'],['mkt','全球市场','i-globe','#6fb8ff','#2a5a9a'],['cust','虚拟客户','i-users','#7fd0ff','#2a6a9a'],
+ ['mkt:pub','产品发布','i-play','#ff9fb0','#b0405a'],['mkt:comp','商业竞争','i-swords','#ff8a7a','#8a2a26'],['n:radar','机会雷达','i-flask','#8ae0b0','#2a7a5a','P05'],['mkt:comp','商业事件','i-dice','#c0c8d8','#4a5568'],['mkt:rep','经营报告','i-scroll','#9fe0c0','#2a7a5a'],
  ['data','数据备份','i-cloud','#9fc0e8','#3a5a8a'],['set','设置','i-gear','#a8b4c8','#3e4a60']];
 function menuView(){return `<div class="tiles">${TILES.map(([k,n,i,c1,c2,lk])=>`<button class="tile ${lk?'lock':''}" style="--c1:${c1};--c2:${c2}" data-go="${k}">${ic(i)}<span>${n}</span><span class="st">${lk?lk+' 未开放':k==='data'&&bkState().need?'需要备份':'已开放'}</span></button>`).join('')}</div><p class="note">带锁的功能尚未开发，打开后只显示说明，不会产生任何数据。</p>`}
 function stepsHtml(st){return st.map(x=>`<div class="qcard ${x.d?'done':''}"><span class="ck">${x.d?'✓':''}</span><div style="flex:1"><div>${esc(x.n)}</div><div class="pb"><i style="width:${Math.min(100,x.a/x.b*100)}%"></i></div><div class="m" style="font-size:11px;color:var(--dim)">${x.a} / ${x.b}</div></div></div>`).join('')}
@@ -867,20 +2044,20 @@ function setView(){const pOK=LS('companyhq_portrait')==='1';
  <div class="toggle"><span>性能</span><span id="fps" style="color:var(--dim);font-size:13px">帧率测量中…</span></div></div>
  <div class="card"><div class="t"><b>特效预览</b> <span class="tag sim">不改变任何数据</span></div><div class="row" style="margin-top:8px"><button class="btn sm" data-prev="lv">升级特效</button><button class="btn sm" data-prev="coin">金币动画</button><button class="btn sm" data-prev="xp">XP 飞入</button><button class="btn sm" data-prev="quest">任务奖章</button></div></div>
  <div class="card"><label for="cn">公司名称</label><input id="cn" value="${esc(S.name)}" maxlength="40"><div class="row" style="margin-top:8px"><button class="btn ghost" id="cnSave">修改名称</button></div></div>
- <p class="note">My Company P02 测试版 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
+ <p class="note">My Company 版本 P03-P04 正式版 · v3.4.0 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
 /* ---------- P02 财务中心 ---------- */
 let finSeg='sum',revOpen=null;
 function finView(){const c=econCalc(S),E=econInit(S),rv=revSet(S);const sbx=MODE==='sandbox';
  const tierB=c.tier?`<span class="tierB" style="--tc:${TIERC[c.tier]}">${c.tier}</span>`:'<span class="tierB" style="--tc:#5a6478">未定级</span>';
  const wPct=c.nextW===null?100:c.w===0?0:Math.max(0,Math.min(100,(c.net-W_TH[c.w-1])/(c.nextW-W_TH[c.w-1])*100));
  const months=Object.keys(c.month).sort().reverse().slice(0,6);
- const seg=`<div class="seg" style="margin:4px 0 10px">${[['sum','总览'],['b','经营流水'],['a','任务金币'],['pl','产品/平台损益'],['hist','财富历史']].map(([k,n])=>`<button data-fseg="${k}" class="${finSeg===k?'on':''}">${n}</button>`).join('')}</div>`;
+ const seg=`<div class="seg" style="margin:4px 0 10px">${[['sum','总览'],['ord','订单'],['b','经营流水'],['a','任务金币'],['pl','产品/平台损益'],['hist','财富历史']].map(([k,n])=>`<button data-fseg="${k}" class="${finSeg===k?'on':''}">${n}</button>`).join('')}</div>`;
  let h=`<div class="row" style="justify-content:space-between"><h2 style="margin:0">财务管理中心</h2><span class="tag ${sbx?'r':'ok'}">${sbx?'测试沙盒 · 虚构交易':'正式存档'}</span></div>
- <p class="sub">6F 财务管理部 · 两种金币都不具备真实货币价值，不能兑换现金。</p>${seg}`;
+ <p class="sub">6F 财务管理部 · 两种金币都是独立模拟货币，不具备真实价值，不能兑换现金；G 金额不等于任何真实货币金额。</p>${seg}`;
  if(finSeg==='sum'){
   h+=`<div class="coins2"><div class="cbox a"><span class="coinI a">任</span><div><div class="n">A · 任务奖励金币</div><div class="v">${fmtG(c.aBal)}</div><div class="d">来自 ${c.A.length} 个已审核任务 · 不计入商业利润</div></div></div>
   <div class="cbox b"><span class="coinI b">营</span><div><div class="n">B · 模拟经营现金</div><div class="v ${c.cash<0?'neg':''}">${fmtG(c.cash)}</div><div class="d">= 初始本金 + 模拟净利润</div></div></div></div>
-  <div class="grid" style="margin-top:10px">${[['初始本金（不计利润）',c.sum.capital],['累计模拟销售收入',c.sum.sale],['累计退款',-c.sum.refund],['累计平台费用',-c.sum.fee],['累计经营成本',-c.sum.cost],['累计模拟净利润',c.net],['本月模拟净利润 '+c.mk,c.mNet]].map(([n,v])=>`<div class="mini"><div class="n">${n}</div><div class="v ${v<0?'neg':v>0&&n.includes('净利润')?'pos':''}">${fmtG(v)}</div></div>`).join('')}</div>
+  <div class="grid" style="margin-top:10px">${[['初始本金（不计利润）',c.sum.capital],['累计模拟销售收入',c.sum.sale],['累计退款',-c.sum.refund],['累计平台费用',-c.sum.fee],['累计经营成本',-c.sum.cost],['累计模拟净利润',c.net],['本月模拟净利润（'+monthLabel(c.mk)+'）',c.mNet]].map(([n,v])=>`<div class="mini"><div class="n">${n}</div><div class="v ${v<0?'neg':v>0&&n.includes('净利润')?'pos':''}">${fmtG(v)}</div></div>`).join('')}</div>
   <div class="card wcard"><div class="row" style="justify-content:space-between"><div><div class="sub" style="margin:0">财富等级（按累计模拟净利润）</div><div class="wlv">${wName(c.w)}</div></div><div style="text-align:right"><div class="sub" style="margin:0">本月段位</div>${tierB}</div></div>
   <div class="bar" style="margin:8px 0 4px;height:10px;border-radius:6px;background:rgba(0,0,0,.35);overflow:hidden"><i style="display:block;height:100%;width:${wPct}%;background:linear-gradient(90deg,#b18cff,#ffe39a)"></i></div>
   <div class="sub" style="margin:0">${c.nextW===null?'已达最高等级 W20':'距 '+wName(c.w+1)+' 还差 '+fmtG(Math.max(0,c.nextW-c.net))}${c.net<0?' · <b style="color:#ff9c95">目前亏损，财富等级会随利润下降</b>':''} · 历史最高 ${wName(c.wMax)}（永久成就）</div></div>
@@ -897,8 +2074,9 @@ function finView(){const c=econCalc(S),E=econInit(S),rv=revSet(S);const sbx=MODE
   h+='<p class="note">历史流水不可修改或删除；错误只能通过「冲正」追加一条反向记录。</p>'}
  if(finSeg==='a'){h+=`<div class="card"><b>任务金币规则</b><p class="sub" style="margin:4px 0 0">${esc(ECON_CFG.status)}。每个通过审核的真实任务自动入账一次，不能手工增减，不会转换成经营金币。</p></div>`;
   h+=c.A.length?`<ul class="log">${c.A.slice().reverse().map(a=>`<li><div class="row" style="justify-content:space-between"><span class="t">${esc(a.id)}</span><b class="gold">+${fmtG(a.amt)}</b></div><div class="m">${esc(a.date)} · ${esc(dname(a.dept))}</div><div class="ev">${esc(a.note)}</div></li>`).join('')}</ul>`:'<p class="sub">还没有通过审核的任务。</p>'}
+ if(finSeg==='ord'){h+=`<p class="sub">模拟订单（销售收入与平台费用作为一笔完整交易入账）。营销支出 ${fmtG(c.kind.marketing||0)} · 上架费 ${fmtG(c.kind.listing||0)}</p>`+ordersHtml()}
  if(finSeg==='pl'){const tbl=(o,t)=>{const ks=Object.keys(o);return `<h3>${t}</h3>`+(ks.length?`<div style="overflow-x:auto"><table class="pl"><tr><th></th><th>收入</th><th>退款</th><th>平台费</th><th>成本</th><th>净利润</th></tr>${ks.map(k=>{const x=o[k];return `<tr><td>${esc(k)}</td><td>${kfmt(x.rev)}</td><td>${kfmt(-x.ref)}</td><td>${kfmt(-x.fee)}</td><td>${kfmt(-x.cost)}</td><td class="${x.net<0?'neg':'pos'}">${kfmt(x.net)}</td></tr>`}).join('')}</table></div>`:'<p class="sub">暂无数据。</p>')};h+=tbl(c.prod,'按产品')+tbl(c.plat,'按平台')}
- if(finSeg==='hist'){h+=`<h3>月度模拟净利润</h3>`+(months.length?months.map(m=>{const v=r2(c.month[m]);let t=null;TIERS.forEach(([n,th])=>{if(v>=th)t=n});return `<div class="toggle"><span>${m}</span><span><b class="${v<0?'neg':'pos'}">${fmtG(v)}</b> · ${t||'未定级'}</span></div>`}).join(''):'<p class="sub">暂无。</p>');
+ if(finSeg==='hist'){h+=`<h3>月度模拟净利润</h3>`+(months.length?months.map(m=>{const v=r2(c.month[m]);let t=null;TIERS.forEach(([n,th])=>{if(v>=th)t=n});return `<div class="toggle"><span>${monthLabel(m)}</span><span><b class="${v<0?'neg':'pos'}">${fmtG(v)}</b> · ${t||'未定级'}</span></div>`}).join(''):'<p class="sub">暂无。</p>');
   h+=`<h3>财富等级变化</h3>`+(E.wHist.length?E.wHist.slice().reverse().map(x=>`<div class="toggle"><span>${esc(x.d)}</span><span>${wName(x.from)} → <b class="${x.to<x.from?'neg':'pos'}">${wName(x.to)}</b> · 净利润 ${fmtG(x.net)}</span></div>`).join(''):'<p class="sub">还没有变化记录。</p>')}
  return h}
 function finAct(t){const ds=t.dataset;
@@ -915,6 +2093,112 @@ function finAct(t){const ds=t.dataset;
 function enterSandbox(){LS('companyhq_sbx_v1',localStorage.getItem('companyhq_v1')||JSON.stringify(S));LS('companyhq_sbx_snaps','[]');LS('companyhq_sbx_bkAt',String(Date.now()));LS('companyhq_mode','sandbox');location.reload()}
 function exitSandbox(){LS('companyhq_mode','live');location.reload()}
 
+/* ---------- P03–P04 全球市场 · 虚拟客户 · 经营报告 ---------- */
+let mktSeg='run',custSeg='list',selCust=null,custQ='',pendAdv=0,lastOut=null,pubImg=null,editL=null;
+const PN=p=>(SimMarket.PLATFORMS[p]&&SimMarket.PLATFORMS[p].name)||p;
+const RSN=c=>(SimCustomers.REASONS&&SimCustomers.REASONS[c])||c;
+const CATN={'personal-finance':'个人/情侣理财','seller-tools':'卖家工具','real-estate-templates':'房产营销模板','productivity-templates':'效率模板','software-tool':'软件工具'};
+function ensureSim(){if(!S.sim)S.sim=SimEngine.init(20261126);return S.sim}
+const SG={mode:MODE,cash:()=>econCalc(S).cash,atomic:f=>ledgerAtomic(S,f),order:o=>MarketAPI.order(S,o),refund:o=>MarketAPI.refund(S,o),cost:o=>MarketAPI.cost(S,o)};
+function stars(r){r=Math.round(r||0);return '★'.repeat(r)+'☆'.repeat(5-r)}
+function bars(vals,lab){const mx=Math.max(1,...vals.map(v=>v[1]));return `<div class="bars">${vals.map(([k,v])=>`<div class="br"><span class="bl">${esc(k)}</span><span class="bt"><i style="width:${v/mx*100}%"></i></span><span class="bv">${esc(lab?lab(v):v)}</span></div>`).join('')}</div>`}
+function mktHead(sim){return `<div class="row" style="justify-content:space-between"><div><b style="font-size:18px">模拟第 ${sim.day} 天</b> · ${sim.day?'模拟第 '+SimEngine.simMonth(sim.day)+' 月':'尚未开始经营'}<div class="sub" style="margin:0">模拟日历独立于现实日期；随机种子 ${sim.seed}（可复现）</div></div><span class="tag ${MODE==='sandbox'?'r':'ok'}">${MODE==='sandbox'?'测试沙盒':'正式存档'}</span></div>`}
+function mktView(){const sim=ensureSim();const ec=econCalc(S);const seg=`<div class="seg" style="margin:8px 0 10px;flex-wrap:wrap">${[['run','经营'],['pub','发布产品'],['list','商品管理'],['comp','竞争动态'],['rep','经营报告'],['src','参数来源']].map(([k,n])=>`<button data-mseg="${k}" class="${mktSeg===k?'on':''}">${n}</button>`).join('')}</div>`;
+ let h=mktHead(sim)+seg;const live=sim.listings.filter(l=>l.mode===MODE);
+ if(mktSeg==='run'){
+  const est=pendAdv?SimEngine.estCost(sim,pendAdv,MODE):0;
+  h+=`<div class="card"><div class="row"><b>推进模拟经营</b><span class="sub" style="margin:0">经营现金 ${fmtG(ec.cash)}</span></div><div class="row" style="margin-top:8px">${[1,7,30].map(d=>`<button class="btn" data-adv="${d}" ${sim.paused||!live.some(l=>l.status==='live')?'disabled':''}>推进 ${d} 天</button>`).join('')}<button class="btn ghost" id="simPause">${sim.paused?'恢复经营':'暂停经营'}</button></div>
+  ${!live.length?'<p class="sub" style="margin:8px 0 0">还没有上架商品。先到「发布产品」把产品放上模拟平台。</p>':''}${sim.paused?'<p class="sub" style="margin:8px 0 0">经营已暂停：不会推进日期，也不会产生费用。</p>':''}
+  ${pendAdv?`<div class="card" style="border-color:var(--gold);margin-top:10px"><b>确认推进 ${pendAdv} 个模拟经营日？</b><p class="sub" style="margin:4px 0 8px">预计经营成本 <b>${fmtG(est)}</b>（营销预算 + 上架费；不含平台按单收取的费用和退款）。当前经营现金 ${fmtG(ec.cash)}。${est>ec.cash?'<br><b style="color:#ff8a7a">现金不足：营销支出会被自动停止，必要时商品会暂停。</b>':''}<br>订单不保证产生，可能零订单或亏损。</p><div class="row"><button class="btn" id="advGo">确认推进</button><button class="btn ghost" id="advNo">取消</button></div></div>`:''}</div>`;
+  h+=`<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${SimEngine.PLAT.map(p=>{const ps=sim.pstats[p],ls=live.filter(l=>l.platform===p);const xp=SimMarket.platformXp({orders:ps.orders,revenue:ps.revenue,ratingAvg:ps.ratingN?ps.ratingSum/ps.ratingN:0,refunds:ps.refunds}),L=SimMarket.platformLevel(xp);
+   return `<div class="pcard p-${p}"><div class="row" style="justify-content:space-between"><b>${esc(PN(p))}</b><span class="tag g">LV.${L.lv}</span></div><div class="pb"><i style="width:${L.next>L.cur?Math.min(100,(xp-L.cur)/(L.next-L.cur)*100):100}%"></i></div><div class="kv"><span>上架</span><b>${ls.filter(l=>l.status==='live').length}</b><span>订单</span><b>${ps.orders}</b><span>收入</span><b>${kfmt(ps.revenue)} G</b><span>评分</span><b>${ps.ratingN?r2(ps.ratingSum/ps.ratingN):'—'}</b><span>退款</span><b>${ps.refunds}</b></div><div class="note" style="margin:4px 0 0">${esc(SimMarket.PLATFORMS[p].audience||'')}</div></div>`}).join('')}</div>`;
+  const d=sim.daily.filter(x=>x.mode===MODE).slice(-30);
+  h+=`<h3>销售趋势（最近 ${d.length} 个模拟日）</h3>${d.length?`<div class="spark">${(()=>{const mx=Math.max(1,...d.map(x=>x.revenue));return d.map(x=>`<i title="第${x.day}天 ${x.revenue} G" style="height:${Math.max(2,x.revenue/mx*100)}%" class="${x.revenue-x.fees-x.refunds-x.costs<0?'neg':''}"></i>`).join('')})()}</div><p class="note">柱高 = 当日模拟收入；红色 = 当日亏损。</p>`:'<p class="sub">还没有经营记录。</p>'}`;
+  const cs=SimEngine.customers(sim);const reg={};cs.forEach(c=>reg[c.region]=(reg[c.region]||0)+1);
+  h+=`<h3>全球市场地图 · 虚拟客户分布</h3><p class="sub">100 名规则驱动的虚拟客户（不代表 100 名真实用户）。</p>${bars(Object.entries(reg).sort((a,b)=>b[1]-a[1]))}`;
+  const ev=sim.events.filter(e=>!e.mode||e.mode===MODE).slice(-4).reverse();if(ev.length)h+=`<h3>最新市场动态（模拟事件）</h3>${ev.map(e=>`<div class="qcard"><span class="ck">⚡</span><div><b>${esc(e.title)}</b> <span class="m" style="font-size:11px;color:var(--dim)">模拟第 ${e.day} 天</span><div class="m" style="font-size:12px">${esc(e.desc)}</div></div></div>`).join('')}`;
+ }
+ if(mktSeg==='pub'){const pid=($('pubProd')&&$('pubProd').value)||S.products[0].id;const p=S.products.find(x=>x.id===pid)||S.products[0];const pl=SimEngine.productLevel(S,p,sim,MODE);
+  h+=`<div class="card"><label for="pubProd">产品（来自 B1 永久资产库）</label><select id="pubProd">${S.products.map(x=>{const L=SimEngine.productLevel(S,x,sim,MODE);return `<option value="${esc(x.id)}" ${x.id===p.id?'selected':''}>${esc(x.id)} · ${esc(x.name)} · LV.${L.lv} ${L.eligible?'✓可上架':'✗未达条件'}</option>`}).join('')}</select>
+  ${ec.cash<5?`<div class="card" style="border-color:#ff8a7a;margin:8px 0"><b>经营现金只有 ${fmtG(ec.cash)}</b><p class="sub" style="margin:4px 0 6px">Etsy 上架费、营销预算都要从经营现金支付；现金不足时营销会停止，Etsy 商品会被暂停。可以先在财务中心设置初始模拟本金（不计入利润）。</p><button class="btn sm" data-go="fin">前往财务中心</button></div>`:''}
+  <div class="note">每单平台费（按 4.99 G 估算）：${SimEngine.PLAT.map(x=>esc(PN(x))+' '+SimMarket.feeFor(x,4.99).total+' G').join(' · ')}；Etsy 另有上架费 ${SimMarket.listingCost('etsy').amt} G / ${SimMarket.listingCost('etsy').every} 天。</div>
+  <div class="note">${pl.eligible?'✓ 已完成研发、功能测试与风险审核，可正式进入模拟市场。':MODE==='sandbox'?'测试沙盒：可以体验发布流程（未达正式上架条件，研发证据分会较低）。不会伪造审核记录。':'✗ 正式上架需要以下真实记录通过审核：研发完成（完成软件研发）、功能测试、版权审核。缺少：'+esc(pl.missing.filter(m=>['研发完成','功能测试','风险审核'].includes(m)).join('、'))+'。可先进入测试沙盒体验。'}</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"><label>平台<select id="pubPlat">${SimEngine.PLAT.map(x=>`<option value="${x}">${esc(PN(x))}</option>`).join('')}</select></label><label>商品分类<select id="pubCat">${Object.entries(CATN).map(([k,n])=>`<option value="${k}" ${k===(SimEngine.CAT_OF[p.id]||'software-tool')?'selected':''}>${n}</option>`).join('')}</select></label>
+  <label>模拟售价 G<input id="pubPrice" type="number" inputmode="decimal" value="4.99"></label><label>优惠价 G（可空）<input id="pubSale" type="number" inputmode="decimal" placeholder="不设优惠"></label><label>营销预算 G/天<input id="pubBud" type="number" inputmode="decimal" value="0"></label><label>目标客户<input id="pubTarget" placeholder="例如：情侣、Etsy 卖家" maxlength="40"></label></div>
+  <label for="pubTitle">商品名称</label><input id="pubTitle" value="${esc(p.name)}" maxlength="80"><label for="pubDesc">产品介绍（越完整，转化越高）</label><textarea id="pubDesc" maxlength="600" placeholder="写清楚给谁用、解决什么问题、包含什么"></textarea>
+  <label>产品图片</label><div class="row"><label class="btn ghost" style="display:inline-flex;align-items:center;margin:0;color:var(--ink)">选择图片<input type="file" id="pubImg" accept="image/*" hidden></label><span class="sub" style="margin:0" id="pubImgS">${pubImg?'已选择图片 ✓':'未选择（会降低商品页质量分）'}</span></div>
+  <div class="row" style="margin-top:10px"><button class="btn" id="pubGo" ${!pl.eligible&&MODE!=='sandbox'?'disabled':''}>发布到模拟平台</button></div><p class="note">同一产品可以在不同平台用不同售价和营销策略。所有平台均为模拟环境，不连接真实商家账户。</p></div>`}
+ if(mktSeg==='list'){h+=live.length?live.slice().reverse().map(l=>{const st=l.stats,conv=st.clicks?r2(st.orders/st.clicks*100):0;const rj=Object.entries(st.rejects).sort((a,b)=>b[1]-a[1]).slice(0,2);
+   return `<div class="card"><div class="row" style="justify-content:space-between"><b>${esc(l.title)}</b><span class="tag ${l.status==='live'?'ok':''}">${l.status==='live'?'销售中':'已暂停'}</span></div><div class="m" style="font-size:12px;color:var(--dim)">${esc(l.id)} · ${esc(PN(l.platform))} · ${esc(l.productId)} · ${CATN[l.category]||l.category} · 商品页质量 ${Math.round(l.listingQuality*100)} · 研发证据 ${Math.round(l.evidence*100)}</div>
+   <div class="kv" style="margin-top:6px"><span>售价</span><b>${l.salePrice!=null?`<s>${l.price}</s> ${l.salePrice}`:l.price} G</b><span>营销</span><b>${l.mktBudget} G/天</b><span>曝光</span><b>${st.impressions}</b><span>点击</span><b>${st.clicks}</b><span>订单</span><b>${st.orders}（${conv}%）</b><span>评分</span><b>${st.ratingN?r2(st.ratingSum/st.ratingN)+' ★':'—'}</b><span>退款</span><b>${st.refunds}</b><span>输给竞品</span><b>${st.compWins}</b></div>
+   ${rj.length?`<div class="note">主要拒绝原因：${rj.map(([k,v])=>esc(RSN(k))+' ×'+v).join('，')}</div>`:''}
+   ${editL===l.id?`<div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-top:6px"><label>售价<input id="eP" type="number" value="${l.price}"></label><label>优惠价<input id="eS" type="number" value="${l.salePrice??''}"></label><label>营销/天<input id="eB" type="number" value="${l.mktBudget}"></label></div><div class="row" style="margin-top:6px"><button class="btn sm" data-lsave="${l.id}">保存</button><button class="btn sm ghost" data-lcancel="1">取消</button></div>`:`<div class="row" style="margin-top:6px"><button class="btn sm ghost" data-ledit="${l.id}">改价 / 预算</button><button class="btn sm ghost" data-ltog="${l.id}">${l.status==='live'?'暂停销售':'恢复销售'}</button></div>`}</div>`}).join(''):'<p class="sub">还没有上架商品。</p>'}
+ if(mktSeg==='comp'){const cs=sim.comp.competitors||[];const TL=(SimCompetition.LABELS&&SimCompetition.LABELS.types)||{};
+  h+=`<p class="sub">所有竞争对手与事件均为虚构模拟，不是真实品牌或新闻。</p><h3>竞争对手（${cs.length}）</h3><div style="overflow-x:auto"><table class="pl"><tr><th>名称</th><th>类型</th><th>分类</th><th>平台</th><th>价格</th><th>品质</th><th>信任</th></tr>${cs.map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(TL[c.type]||c.type)}</td><td>${esc(CATN[c.category]||c.category)}</td><td>${esc(c.platform==='any'?'全平台':PN(c.platform))}</td><td>${c.price?c.price+' G':'免费'}</td><td>${Math.round(c.quality*100)}</td><td>${Math.round(c.trust*100)}</td></tr>`).join('')}</table></div>
+  <h3>商业事件记录（可复现）</h3>${sim.events.length?sim.events.slice().reverse().slice(0,40).map(e=>`<div class="qcard"><span class="ck">⚡</span><div><b>${esc(e.title)}</b> <span style="font-size:11px;color:var(--dim)">${esc(e.id)} · 模拟第 ${e.day} 天</span><div style="font-size:12px">${esc(e.desc)}</div><div style="font-size:11px;color:var(--dim)">触发原因：${esc(e.trigger)}</div></div></div>`).join(''):'<p class="sub">还没有事件。推进经营后会出现。</p>'}`}
+ if(mktSeg==='rep'){const rs=sim.reports.filter(r=>r.mode===MODE);h+=rs.length?rs.slice().reverse().slice(0,8).map(repCard).join(''):'<p class="sub">还没有经营报告。每次推进经营后自动生成。</p>'}
+ if(mktSeg==='src'){h+=`<p class="sub">平台参数来源与证据等级。<b>research</b> = 平台官方页面核实；<b>secondary</b> = 第三方资料；<b>assumption</b> = 模拟假设。1 G 按 1 美元换算（模拟假设）。</p>`+SimEngine.PLAT.map(p=>{const P=SimMarket.PLATFORMS[p];return `<h3>${esc(P.name)}</h3><div style="overflow-x:auto"><table class="pl"><tr><th>参数</th><th>数值</th><th>证据</th><th>日期</th></tr>${(P.sources||[]).map(x=>`<tr><td style="white-space:normal">${esc(x.param)}${x.url&&/^https:\/\//.test(x.url)?` <a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--sky)">来源</a>`:''}</td><td>${esc(x.value)} ${esc(x.unit||'')}</td><td><span class="tag ${x.evidence==='research'?'ok':x.evidence==='secondary'?'g':'sim'}">${esc(x.evidence)}</span></td><td>${esc(x.date||'')}</td></tr>`).join('')}</table></div>`}).join('')}
+ return h}
+function repCard(r){return `<div class="card rep"><div class="row" style="justify-content:space-between"><b>经营报告 ${esc(r.id)} · 模拟第 ${r.from}–${r.to} 天</b><span class="tag sim">模拟结论</span></div>
+ <div class="kv" style="margin:6px 0"><span>订单</span><b>${r.orders}</b><span>收入</span><b>${fmtG(r.revenue)}</b><span>平台费</span><b>${fmtG(-r.fees)}</b><span>退款</span><b>${fmtG(-r.refunds)}</b><span>经营成本</span><b>${fmtG(-r.costs)}</b><span>净利润</span><b class="${r.net<0?'neg':'pos'}">${fmtG(r.net)}</b></div>
+ <ul class="rl"><li>卖得最好的产品：${r.bestProduct?esc(r.bestProduct[0])+'（'+r.bestProduct[1].n+' 单）':'本期没有订单'}</li><li>表现最好的平台：${r.bestPlatform?esc(PN(r.bestPlatform[0]))+'（'+r.bestPlatform[1].n+' 单）':'—'}</li>
+ <li>客户为什么购买：${r.buyReasons.length?r.buyReasons.join('、'):'—'}</li><li>客户为什么拒绝：${r.rejectTop.length?r.rejectTop.map(([k,v])=>esc(RSN(k))+' ×'+v).join('，'):'—'}</li>
+ <li>主要投诉：${r.complaintTop.length?r.complaintTop.map(([k,v])=>esc(RSN(k))+' ×'+v).join('，'):'无'}</li><li>平均模拟评分：${r.avgRating??'—'}</li>
+ <li>定价判断：${r.pricing.length?r.pricing.map(x=>esc(PN(x.platform))+' '+x.price+' G → '+x.verdict).join('；'):'—'}</li><li>值得改善：${r.improve.length?r.improve.map(k=>esc(RSN(k))).join('、'):'暂无明显问题'}</li>
+ <li>需要真实市场验证：${r.verify.join('；')}</li>${r.events.length?`<li>期间事件：${r.events.map(esc).join('；')}</li>`:''}</ul><p class="note">${esc(r.note)}</p></div>`}
+function custView(){const sim=ensureSim();const cs=SimEngine.customers(sim);const seg=`<div class="seg" style="margin:8px 0 10px;flex-wrap:wrap">${[['list','客户档案'],['rev','评价'],['cmp','投诉与退款'],['need','客户需求']].map(([k,n])=>`<button data-cseg="${k}" class="${custSeg===k&&!selCust?'on':''}">${n}</button>`).join('')}</div>`;
+ let h=`<p class="sub">1F 客户体验中心 · 100 名规则驱动虚拟客户，身份固定（同一客户跨平台不会重复计算），不代表真实用户。评价全部为规则生成的模拟评价。</p>`+seg;
+ const rv=sim.reviews.filter(r=>r.mode===MODE),od=sim.orders.filter(o=>o.mode===MODE);
+ if(selCust){const c=cs.find(x=>x.id===selCust),hh=sim.custHist[c.id]||{purchases:[],refunds:[],rejects:0};const my=od.filter(o=>o.customerId===c.id);
+  return h+`<div class="card"><div class="row" style="justify-content:space-between"><b style="font-size:17px">${esc(c.id)} · ${esc(c.name)}</b><button class="btn sm ghost" data-cback="1">返回列表</button></div>
+  <div class="kv" style="margin-top:6px"><span>地区</span><b>${esc(c.region)}</b><span>语言</span><b>${esc(c.language)}</b><span>职业</span><b>${esc(c.job)}</b><span>收入</span><b>${esc(c.income)}</b><span>预算</span><b>${c.budget.min}–${c.budget.max} G</b><span>价格敏感</span><b>${Math.round(c.priceSens*100)}</b><span>品质要求</span><b>${Math.round(c.qualityReq*100)}</b><span>品牌信任</span><b>${Math.round(c.trust*100)}</b><span>偏好免费</span><b>${Math.round(c.freePref*100)}</b></div>
+  <div class="note">需求：${c.needs.map(n=>CATN[n]||n).join('、')} · 习惯：${esc(c.habits)} · 平台偏好：${Object.entries(c.platformPrefs).map(([k,v])=>PN(k)+' '+Math.round(v*100)+'%').join(' / ')}</div>
+  <h3>购买记录（${my.length}）· 拒绝 ${hh.rejects} 次 · 退款 ${hh.refunds.length} 次</h3>${my.length?`<ul class="log">${my.slice().reverse().map(o=>{const r=rv.find(x=>x.orderId===o.id);return `<li><div class="t">${esc(o.id)} · ${esc(PN(o.platform))} · ${esc(o.productId)} · ${o.price} G ${o.status!=='paid'?'<span class="tag r">已退款</span>':''}</div><div class="m">模拟第 ${o.day} 天</div>${r?`<div class="ev">${stars(r.rating)} ${esc(r.text)}</div>`:''}</li>`}).join('')}</ul>`:'<p class="sub">还没有购买。</p>'}</div>`}
+ if(custSeg==='list'){const q=custQ.trim().toLowerCase();const L=cs.filter(c=>!q||(c.id+c.name+c.region+c.job).toLowerCase().includes(q));
+  h+=`<input id="custQ" placeholder="搜索编号、名字、地区、职业" value="${esc(custQ)}" style="margin-bottom:8px"><div class="clist">${L.map(c=>{const n=od.filter(o=>o.customerId===c.id).length;return `<button class="cc" data-cust="${c.id}"><b>${esc(c.id)}</b><span>${esc(c.name)}</span><span class="m">${esc(c.region)} · ${esc(c.job)}</span><span class="m">预算 ${c.budget.min}–${c.budget.max} G${n?' · 已购 '+n:''}</span></button>`}).join('')}</div>`}
+ if(custSeg==='rev'){h+=rv.length?`<ul class="log">${rv.slice().reverse().slice(0,60).map(r=>`<li><div class="t">${stars(r.rating)} <span style="font-size:12px;color:var(--dim)">${esc(r.customerId)} · ${esc(PN(r.platform))} · ${esc(r.productId)} · 模拟第 ${r.day} 天</span></div><div class="ev">${esc(r.text)}</div></li>`).join('')}</ul>`:'<p class="sub">还没有模拟评价。</p>'}
+ if(custSeg==='cmp'){const cm=rv.filter(r=>r.complaint),rf=od.filter(o=>o.status!=='paid');const cc={};cm.forEach(r=>cc[r.complaint]=(cc[r.complaint]||0)+1);
+  h+=`<h3>投诉原因</h3>${Object.keys(cc).length?bars(Object.entries(cc).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[RSN(k),v])):'<p class="sub">暂无投诉。</p>'}<h3>退款（${rf.length}）</h3>${rf.length?`<ul class="log">${rf.slice().reverse().slice(0,40).map(o=>`<li><div class="t">${esc(o.id)} · ${esc(o.customerId)} · ${esc(PN(o.platform))} · 退款 ${o.refunded} G</div><div class="m">原因：${esc(RSN(o.refundReason||''))} · 模拟第 ${o.day} 天</div></li>`).join('')}</ul>`:'<p class="sub">暂无退款。</p>'}`}
+ if(custSeg==='need'){const nd={};cs.forEach(c=>c.needs.forEach(n=>nd[n]=(nd[n]||0)+1));const inc={};cs.forEach(c=>inc[c.income]=(inc[c.income]||0)+1);const rj={};sim.listings.filter(l=>l.mode===MODE).forEach(l=>Object.entries(l.stats.rejects).forEach(([k,v])=>rj[k]=(rj[k]||0)+v));
+  h+=`<h3>客户需求分布</h3>${bars(Object.entries(nd).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[CATN[k]||k,v]))}<h3>收入层级</h3>${bars(Object.entries(inc))}<h3>拒绝购买的原因（累计）</h3>${Object.keys(rj).length?bars(Object.entries(rj).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[RSN(k),v])):'<p class="sub">暂无。</p>'}`}
+ return h}
+function ordersHtml(){const sim=S.sim;const od=sim?sim.orders.filter(o=>o.mode===MODE):[];return od.length?`<ul class="log">${od.slice().reverse().slice(0,80).map(o=>`<li><div class="row" style="justify-content:space-between"><span class="t">${esc(o.id)} · ${esc(PN(o.platform))} · ${esc(o.productId)}</span><b class="pos">+${fmtG(o.price)}</b></div><div class="m">模拟第 ${o.day} 天 · ${esc(o.customerId)} · 平台费 ${fmtG(o.fee)}${o.refunded?' · <span style="color:#ff8a7a">已退款 '+fmtG(o.refunded)+'</span>':''}${o.rating?' · '+stars(o.rating):''}</div></li>`).join('')}</ul>`:'<p class="sub">还没有模拟订单。</p>'}
+function plevelsHtml(p){const sim=S.sim;const L=SimEngine.productLevel(S,p,sim,MODE);const ls=sim?sim.listings.filter(l=>l.productId===p.id&&l.mode===MODE):[];
+ return `<div class="plv"><span class="tag g">产品等级 LV.${L.lv} · ${esc(L.name)}</span>${L.salesLv?'<span class="tag sim">销售等级为模拟成绩</span>':''}<div class="note" style="margin:4px 0 0">研发等级 LV.${L.devLv}（由真实审核记录推导）${L.missing.length?' · 未满足：'+esc(L.missing.join('、')):''}</div>${ls.length?`<div class="note" style="margin:2px 0 0">平台记录：${ls.map(l=>esc(PN(l.platform))+' '+l.stats.orders+' 单 / '+kfmt(l.stats.revenue)+' G').join('；')}</div>`:''}</div>`}
+function doAdvance(days){const sim=ensureSim();if(sim.paused){toast('经营已暂停');return}
+ const before=S.products.map(p=>SimEngine.productLevel(S,p,sim,MODE).lv);const prevRev=sim.daily.filter(x=>x.mode===MODE).slice(-days).reduce((a,x)=>a+x.revenue,0);
+ let out;try{out=SimEngine.advance(S,sim,days,SG)}catch(e){toast('推进失败：'+e);sfx.err();return}
+ lastOut=out;pendAdv=0;mktSeg='rep';quietFx=true;save();quietFx=false;lastE=econCalc(S);
+ const after=S.products.map(p=>SimEngine.productLevel(S,p,sim,MODE).lv);
+ let delay=0;const later=(f,d=1200)=>{setTimeout(f,delay);delay+=d};
+ if(out.revenue>0)later(()=>fxCoins(Math.min(14,out.orders+2),'+'+kfmt(out.revenue)+' 经营金币（模拟收入）','b'),900);
+ if(out.firstOrders.length)later(()=>fxLevel('🎉','第一笔模拟订单！'+out.firstOrders.join('、')+(MODE==='sandbox'?'（沙盒）':''),false,'FIRST ORDER'),3400);
+ out.platformUp.forEach(([p,lv])=>later(()=>fxBadge2('平台升级：'+PN(p)+' LV.'+lv),2600));
+ after.forEach((lv,i)=>{if(lv>before[i])later(()=>fxBadge2('产品升级：'+S.products[i].id+' LV.'+lv),2600)});
+ if(out.reviews.length){const low=out.reviews.filter(r=>r.rating<=2).length;later(()=>toast('收到 '+out.reviews.length+' 条模拟评价'+(low?'，其中 '+low+' 条差评':'')),1800)}
+ if(out.refunds>0||out.net<0)later(()=>{toast((out.net<0?'⚠ 本期模拟亏损 '+fmtG(out.net):'')+(out.refunds>0?'  ⚠ 退款 '+fmtG(out.refunds):''));sfx.err()},1800);
+ else if(prevRev>0&&out.revenue>prevRev*1.1)later(()=>toast('📈 销售增长 '+Math.round((out.revenue/prevRev-1)*100)+'%'),1800);
+ if(out.orders===0)later(()=>toast('本期零订单：可以检查定价、商品介绍或营销预算'),1800);
+ renderPanel()}
+function fxBadge2(txt){const fx=$('fx'),b=document.createElement('div');b.className='banner';b.style.background='linear-gradient(#6b55a8,#3e2f6e)';b.style.borderColor='#d6c3ff';b.innerHTML=`<span class="md">▲</span><span>${esc(txt)}<br><small style="font-weight:600;opacity:.85">模拟经营成绩</small></span>`;fx.append(b);sfx.quest();setTimeout(()=>{b.animate([{opacity:1},{opacity:0}],{duration:400}).onfinish=()=>b.remove()},2800)}
+function resizeImg(file,cb){const rd=new FileReader();rd.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),s0=160/Math.max(im.width,im.height);c.width=Math.round(im.width*Math.min(1,s0));c.height=Math.round(im.height*Math.min(1,s0));c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.7))};im.onerror=()=>cb(null);im.src=rd.result};rd.readAsDataURL(file)}
+function mktAct(t){const ds=t.dataset;
+ if(ds.mseg){mktSeg=ds.mseg;pendAdv=0;editL=null;renderPanel();return true}
+ if(ds.cseg){custSeg=ds.cseg;selCust=null;renderPanel();return true}
+ if(ds.cust){selCust=ds.cust;renderPanel();$('panel').scrollTop=0;return true}
+ if(ds.cback){selCust=null;renderPanel();return true}
+ if(ds.adv){pendAdv=+ds.adv;renderPanel();return true}
+ if(t.id==='advNo'){pendAdv=0;renderPanel();return true}
+ if(t.id==='advGo'){doAdvance(pendAdv);return true}
+ if(t.id==='simPause'){const s=ensureSim();s.paused=!s.paused;pendAdv=0;save(s.paused?'模拟经营已暂停':'模拟经营已恢复');return true}
+ if(t.id==='pubGo'){try{const l=SimEngine.publish(S,ensureSim(),{productId:$('pubProd').value,platform:$('pubPlat').value,category:$('pubCat').value,title:$('pubTitle').value,desc:$('pubDesc').value,target:$('pubTarget').value,price:$('pubPrice').value,salePrice:$('pubSale').value,mktBudget:$('pubBud').value,image:pubImg},MODE);pubImg=null;mktSeg='list';save('已上架 '+l.id+' 到 '+PN(l.platform)+'（模拟）')}catch(e){toast(String(e));sfx.err()}return true}
+ if(ds.ledit){editL=ds.ledit;renderPanel();return true}
+ if(ds.lcancel){editL=null;renderPanel();return true}
+ if(ds.lsave){try{SimEngine.updateListing(S.sim,ds.lsave,{price:$('eP').value,salePrice:$('eS').value,mktBudget:$('eB').value});editL=null;save('已更新商品设置')}catch(e){toast(String(e));sfx.err()}return true}
+ if(ds.ltog){const l=S.sim.listings.find(x=>x.id===ds.ltog);SimEngine.updateListing(S.sim,l.id,{status:l.status==='live'?'paused':'live'});save(l.status==='live'?'已恢复销售':'已暂停销售');return true}
+ if(ds.approveProd){const p=S.products.find(x=>x.id===ds.approveProd);if(p&&!p.approvedAt){p.approvedAt=ld();p.history.push({d:today(),t:'董事长批准立项'});save(p.id+' 已批准立项')}return true}
+ return false}
+
 function lockView(k){const n=NOTICES[k];return `<div class="lockcard"><span class="lk">${ic('i-lock')}</span><div><h2 style="margin:0 0 4px">${n[0]}</h2><span class="tag sim">${n[2]}${n[2]==='待排期'?'':' 未开放'}</span><p style="margin:8px 0 0">${n[3]}</p><p class="sub" style="margin:6px 0 0">入口：${n[1]}</p></div></div>`}
 function renderPanel(){
  let h='';
@@ -926,6 +2210,8 @@ function renderPanel(){
  else if(tab==='build')h=buildView();
  else if(tab==='set')h=setView();
  else if(tab==='fin')h=finView();
+ else if(tab==='mkt')h=mktView();
+ else if(tab==='cust')h=custView();
  else if(tab==='staff')h=staffView(selStaff);
  else if(tab==='appr')h=apprView();
  else if(tab==='hq')h=hqView();
@@ -961,6 +2247,8 @@ function doAct(a){
  if(a==='vault'){openSheet('vault');return}
  if(a==='risk'){selFloor=6;openSheet('dept');return}
  if(a==='ledger'){finSeg='sum';openSheet('fin');return}
+ if(a==='market'){mktSeg='run';openSheet('mkt');return}
+ if(a==='cust'){custSeg='list';selCust=null;openSheet('cust');return}
  if(NOTICES[a]){openNotice(a);return}
  if(DEPTS[a]){selFloor=DFLOOR[a];openSheet('dept');return}
 }
@@ -1015,13 +2303,13 @@ $('side').addEventListener('click',e=>{const b=e.target.closest('[data-cam]');if
  else if(m==='dept'){goFloor(selFloor>=0?selFloor:5)}
  else if(m==='staff'){if(selFloor<0)goFloor(5);const id=HQ3D.anyStaff(selFloor);if(id)HQUI.pickStaff(id)}
  setCamBtns()});
-$('panel').addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const ds=t.dataset;if(finAct(t))return;
+$('panel').addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const ds=t.dataset;if(finAct(t))return;if(mktAct(t))return;
  if(t.id==='sbxIn'){enterSandbox();return}if(t.id==='sbxOut'){exitSandbox();return}
  if(t.id==='bkFile'){quickBackup().then(()=>renderPanel());return}
  if(t.id==='rsGo'){doRestore();return}
  if(t.id==='rsNo'){pendingRestore=null;renderPanel();return}
  if(ds.snap!==undefined){const x=snaps()[+ds.snap];if(x){try{const r=sanitize(JSON.parse(x.d));pendingRestore={s:r.s,notes:r.notes,src:'自动快照 '+new Date(x.at).toLocaleString('zh-CN')};renderPanel();$('panel').scrollTop=0}catch(_){toast('快照损坏')}}return}
- if(ds.go){if(ds.go==='fin:hist'){finSeg='hist';ds.go='fin'}if(ds.go.startsWith('n:'))openNotice(ds.go.slice(2));else{tab=ds.go;notice=null;tabsNav();renderPanel();$('panel').scrollTop=0}return}
+ if(ds.go){if(ds.go==='fin:hist'){finSeg='hist';ds.go='fin'}if(ds.go.startsWith('mkt:')){mktSeg=ds.go.slice(4);ds.go='mkt'}if(ds.go.startsWith('n:'))openNotice(ds.go.slice(2));else{tab=ds.go;notice=null;tabsNav();renderPanel();$('panel').scrollTop=0}return}
  if(ds.pv!==undefined){pvEra=+ds.pv;if(window.HQ3D){HQ3D.sync();HQ3D.goFloor(-1)}selFloor=-1;closeSheet();toast('建筑外观预览：'+BUILD_ERAS[pvEra]+'（不改变等级）');return}
  if(ds.snd!==undefined){setSnd(ds.snd==='1');renderPanel();return}
  if(ds.q){Q=ds.q;LS('companyhq_q',Q);if(window.HQ3D)HQ3D.setQuality(Q);renderPanel();return}
@@ -1056,15 +2344,17 @@ $('panel').addEventListener('click',async e=>{
   S.tasks.push(k);preDept=prim;closeSheet();save(r.risk?'已提交，等待 6F 风险管理部审核':'记录通过 +'+r.xp+' XP');if(!r.risk&&window.HQ3D)HQ3D.celebrate(k);return}
  if(t.id==='bkCopy'||t.id==='bkCopy2'){try{await navigator.clipboard.writeText(JSON.stringify(S));markBackedUp();renderPanel();toast('备份已复制，请粘贴到备忘录保存')}catch(_){$('bk').select();toast('请手动长按复制')}return}
  if(t.id==='bkDl'){try{await dl.save({filename:'company-hq-backup-'+today()+'.json',data:JSON.stringify(S,null,1)});markBackedUp();toast('已下载')}catch(_){toast('下载被取消或不可用')}return}
- if(t.id==='impGo'){let o;try{o=JSON.parse($('imp').value);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0}catch(_){toast('备份格式不正确');return}if(o.sandbox&&MODE!=='sandbox'){toast('这是测试沙盒的备份，不能导入正式存档');sfx.err();return}const r=sanitize(o);S=r.s;quietFx=true;save('已从备份恢复'+(r.notes.length?'（'+r.notes.join('；')+'）':''));saveSummary();return}
+ if(t.id==='impGo'){let o;try{o=JSON.parse($('imp').value);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0}catch(_){toast('备份格式不正确');return}if(o.sandbox&&MODE!=='sandbox'){toast('这是测试沙盒的备份，不能导入正式存档');sfx.err();return}const r=sanitize(o);pendingRestore={s:r.s,notes:r.notes,src:'粘贴的备份'};renderPanel();$('panel').scrollTop=0;return}
  if(t.id==='cnSave'){const v=$('cn').value.trim();if(v){S.name=v;save('名称已修改');saveSummary()}return}
  if(t.id==='eraReset'){pvEra=-1;if(window.HQ3D)HQ3D.sync();renderPanel();return}
  if(t.id==='cloudSave'){if(MODE==='sandbox'){toast('测试沙盒不能云端保存');return}if(!art){toast('当前查看方式不支持云端保存，已保存在本机');return}t.disabled=true;
   S.savedAt=Date.now();LS(KEY+'v1',JSON.stringify(S));
   try{await art.publish(buildDoc());cloudDirty=false;markBackedUp();toast('云端已保存')}catch(err){t.disabled=false;toast('云端保存失败：'+((err&&err.code)||'未授权或冲突'))}return}
 });
-$('panel').addEventListener('change',e=>{if(e.target.id!=='rsFile')return;const f=e.target.files&&e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0;if(o.sandbox&&MODE!=='sandbox'){toast('这是测试沙盒的备份，不能恢复到正式存档');return}const r=sanitize(o);pendingRestore={s:r.s,notes:r.notes,src:f.name};renderPanel();$('panel').scrollTop=0}catch(_){toast('这不是有效的备份文件')}};rd.readAsText(f)});
-$('panel').addEventListener('input',e=>{if(e.target.id==='eraPv'){pvEra=+e.target.value;$('eraPvL').textContent=BUILD_ERAS[pvEra]+'（预览）';if(window.HQ3D)HQ3D.sync()}});
+$('panel').addEventListener('change',e=>{if(e.target.id==='pubProd'){const keep={};['pubPlat','pubPrice','pubSale','pubBud','pubTarget','pubDesc'].forEach(k=>keep[k]=$(k).value);renderPanel();Object.entries(keep).forEach(([k,v])=>{if($(k))$(k).value=v});return}
+ if(e.target.id==='pubImg'){const f=e.target.files&&e.target.files[0];if(f)resizeImg(f,u=>{pubImg=u;const x=$('pubImgS');if(x)x.textContent=u?'已选择图片 ✓':'图片读取失败'});return}
+ if(e.target.id!=='rsFile')return;const f=e.target.files&&e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0;if(o.sandbox&&MODE!=='sandbox'){toast('这是测试沙盒的备份，不能恢复到正式存档');return}const r=sanitize(o);pendingRestore={s:r.s,notes:r.notes,src:f.name};renderPanel();$('panel').scrollTop=0}catch(_){toast('这不是有效的备份文件')}};rd.readAsText(f)});
+$('panel').addEventListener('input',e=>{if(e.target.id==='custQ'){custQ=e.target.value;const pos=e.target.selectionStart;renderPanel();const q=$('custQ');q.focus();q.setSelectionRange(pos,pos);return}if(e.target.id==='eraPv'){pvEra=+e.target.value;$('eraPvL').textContent=BUILD_ERAS[pvEra]+'（预览）';if(window.HQ3D)HQ3D.sync()}});
 function buildDoc(){
  const json=JSON.stringify(S).replace(/</g,'\\u003c');
  return '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<title>My Company</title>\n\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">\n<style id="css">'+CSS0+'</style>\n<script type="importmap">'+IMAP+SC+'\n</head>\n<body>\n<div id="root">'+ROOT0+'</div>\n<script type="application/json" id="state">'+json+SC+'\n<script type="module" id="app">'+APP0+SC+'\n</body>\n</html>\n';
@@ -1441,7 +2731,7 @@ const lwood=M(0xcda57a,{roughness:.5});
  rug(g,6,3.6,0xf3b4ab,-3.2,2.4);
  const ss=screen(g,6.4,2.2,SCR.sales,-.6,.9,-6.6,0);hot(g,ss,'market','全球销售屏幕 · 模拟市场',-.6,3.5,-6.4);
  ['Etsy','Gumroad','Payhip'].forEach((p,i)=>{desk(g,-5.6+i*2.2,2.2,Math.PI,{mon:2,scr:[SCR.sales,SCR.bars]});const s2=signBoard(p+' · 模拟',1.2,.3,{bg:'#f06a5b',edge:'#fff',fg:'#fff',size:90});s2.position.set(-5.6+i*2.2,1.42,1.8);g.add(s2)});
- const ps=new THREE.Mesh(new THREE.BoxGeometry(.01,.01,.01));hot(g,ps,'market','平台经营工作站',-3.4,2.4,2.2);
+ const ps=new THREE.Mesh(new THREE.BoxGeometry(.01,.01,.01));hot(g,ps,'market','平台经营工作站 · 发布与定价',-3.4,2.4,2.2);
  desk(g,5.6,1.4,Math.PI,{mon:1,scr:[SCR.design]});gbox(g,.06,1.6,1.2,M(0xffffff),7.6,0,1.4);gbox(g,1,.8,.04,SCR.design,7.4,.9,1.4,Math.PI/2);
  meeting(g,4.4,-3.2,3,2,0,M(0xffffff,{roughness:.3}));
  plant(g,8.8,5.6,1.2);plant(g,-8.8,6);plant(g,-8.8,-4.4);wallArt(g,-9.68,1.4,3.4,Math.PI/2,1.8,1.2,['#fff','#f06a5b','#ffb3a8','#5a5552']);floorLamp(g,1,5.8);sofa(g,-6.8,-2.6,Math.PI/2,2.2,M(0xf06a5b,{roughness:.9}));
@@ -1459,7 +2749,7 @@ const lwood=M(0xcda57a,{roughness:.5});
  hot(g,cs,'vault','产品展示柜 · 产品档案',6.6,2.4,-.9);
  let kp;[-7.4,-5.8,-4.2].forEach(x=>{kp=gbox(g,.6,1.1,.5,M(0xffffff,{roughness:.3}),x,0,-4.6);screen(g,.55,.36,SCR.code,x,1.15,-4.4,0)});hot(g,kp,'vault','软件体验电脑',-5.8,2.6,-4.6);
  sofa(g,-6.6,2.4,Math.PI/2,2.4,M(0x9cc9ea,{roughness:.9}));sofa(g,-4.8,4.6,Math.PI,2.2,M(0x9cc9ea,{roughness:.9}));gbox(g,1,.36,.7,M(0xffffff),-4.8,0,2.8);
- rug(g,4.4,3,0xd8ecfa,6.6,4.4);const vz=signBoard('虚拟客户活动区（模拟）',2.6,.4,{bg:'#ffffff',edge:'#5aaee8',fg:'#2f7fc0',size:80});vz.position.set(6.6,.06,5.9);vz.rotation.x=-Math.PI/2;g.add(vz);
+ rug(g,4.4,3,0xd8ecfa,6.6,4.4);const vz=signBoard('虚拟客户活动区（模拟）',2.6,.4,{bg:'#ffffff',edge:'#5aaee8',fg:'#2f7fc0',size:80});vz.position.set(6.6,.06,5.9);vz.rotation.x=-Math.PI/2;g.add(vz);hot(g,vz,'cust','虚拟客户中心',6.6,2.2,4.4);
  plant(g,8.8,6,1.3);plant(g,-8.8,6,1.3);plant(g,3.4,-5.8,1.1);floorLamp(g,-8.8,.2);
  POI[1].rest=[{x:-6.3,z:2.4,face:Math.PI/2,sit:1}];POI[1].file={x:-5.8,z:-3.6,face:Math.PI}}
 /* ---- B1 永久资产库：石墨灰、古铜金（加亮） ---- */
