@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "COMPANY HQ",
-  "short_name": "COMPANY HQ",
+  "name": "My Company",
+  "short_name": "My Company",
   "description": "COMPANY HQ — 3D business tycoon",
   "lang": "zh-CN",
   "start_url": "./",

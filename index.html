@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>COMPANY HQ</title>
+<title>My Company</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
 <style id="css">
@@ -89,7 +89,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 @media(orientation:landscape){.info .row span{display:none}}
 .info b{color:var(--gold2)}
 .info .row{margin-top:6px}
-.menuB{width:74px;height:74px;border-radius:20px;flex-direction:column;gap:2px;font-size:13px;padding:0}
+.menuB{position:relative;width:74px;height:74px;border-radius:20px;flex-direction:column;gap:2px;font-size:13px;padding:0}
 .menuB svg.i{width:28px;height:28px;stroke-width:2.4}
 .taskB{width:58px;height:58px;border-radius:18px;flex-direction:column;gap:0;font-size:11px;padding:0}
 /* 模态窗口（游戏面板） */
@@ -250,13 +250,13 @@ details summary{cursor:pointer;color:var(--gold2);min-height:36px;display:flex;a
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 
-<!-- PWA (build_pwa.py 20261126-0909-de92e303) -->
+<!-- PWA (build_pwa.py 20261126-0947-5739a919) -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="COMPANY HQ">
+<meta name="apple-mobile-web-app-title" content="My Company">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
 <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png">
@@ -265,7 +265,7 @@ details summary{cursor:pointer;color:var(--gold2);min-height:36px;display:flex;a
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <script>
 (function(){
-  window.HQ_PWA_VERSION='20261126-0909-de92e303';
+  window.HQ_PWA_VERSION='20261126-0947-5739a919';
   if('serviceWorker' in navigator && location.protocol!=='file:'){
     window.addEventListener('load',function(){
       navigator.serviceWorker.register('sw.js').then(function(r){window.HQ_SW=r;}).catch(function(e){console.warn('SW register failed',e);});
@@ -314,23 +314,23 @@ details summary{cursor:pointer;color:var(--gold2);min-height:36px;display:flex;a
 </defs></svg>
 <div class="stage" id="stage"><div class="labels" id="labels"></div></div>
 <div class="game" id="game" hidden>
- <div class="hud tl"><button class="badge panelg" id="coBtn" aria-label="公司总览"><span class="logoS" id="logoS"></span><span class="ring" id="ring"><b><small>LV</small><span id="clv">1</span></b></span><span class="bt"><span class="cname" id="cname">COMPANY HQ</span><span class="era" id="cera">初创工作室</span><span class="xpbar"><i id="cbar" style="width:0%"></i></span><span class="xpn" id="cxp">0/80 XP</span></span></button></div>
+ <div class="hud tl"><button class="badge panelg" id="coBtn" aria-label="公司总览"><span class="logoS" id="logoS"></span><span class="ring" id="ring"><b><small>LV</small><span id="clv">1</span></b></span><span class="bt"><span class="cname" id="cname">My Company</span><span class="era" id="cera">初创工作室</span><span class="xpbar"><i id="cbar" style="width:0%"></i></span><span class="xpn" id="cxp">0/80 XP</span></span></button></div>
  <div class="hud tc"><button class="res" id="coin" aria-label="模拟金币"><span class="ic coin" style="position:static;width:24px;height:24px">G</span>—<em>P02</em></button><button class="res" id="wealth" aria-label="财富等级"><span class="ic" style="background:linear-gradient(#b18cff,#6b55a8)"><svg class="i" style="width:15px;height:15px"><use href="#i-gem"/></svg></span>W—<em>P02</em></button><button class="res" id="prodp" aria-label="产品资产"><span class="ic" style="background:linear-gradient(#7fd2ff,#2f8fe0)"><svg class="i" style="width:15px;height:15px"><use href="#i-box"/></svg></span><span id="prodn">3</span></button></div>
  <div class="hud tr"><button class="rb" id="todBtn" aria-label="时段"><svg class="i"><use href="#i-sun" id="todIc"/></svg><span class="lb" id="todL">日间</span></button><button class="rb" id="msg" aria-label="审批中心"><svg class="i"><use href="#i-bell"/></svg><span class="badgeN" id="msgn" hidden>0</span></button><button class="rb" id="sndBtn" aria-label="音效"><svg class="i"><use href="#i-vol" id="sndIc"/></svg></button><button class="rb" id="setBtn" aria-label="设置"><svg class="i"><use href="#i-gear"/></svg></button><button class="rb" id="homeBtn" aria-label="返回封面"><svg class="i"><use href="#i-home"/></svg></button></div>
  <div class="hud ql"><button class="quest panelg" id="quest"></button></div>
  <div class="hud rc" id="side"><button class="rb" data-cam="city"><svg class="i"><use href="#i-city"/></svg><span class="lb">城市</span></button><button class="rb on" data-cam="hq"><svg class="i"><use href="#i-hq"/></svg><span class="lb">总部</span></button><button class="rb" data-cam="dept"><svg class="i"><use href="#i-layers"/></svg><span class="lb">部门</span></button><button class="rb" data-cam="staff"><svg class="i"><use href="#i-user"/></svg><span class="lb">员工</span></button></div>
  <div class="hud bc"><div class="info panelg" id="info" hidden></div><nav class="dock panelg" id="floors"></nav></div>
  <div class="hud bl"><button class="gb blue taskB" id="taskBtn"><svg class="i"><use href="#i-pen"/></svg>记录</button></div>
- <div class="hud br"><button class="gb menuB" id="menuBtn" data-open="1"><svg class="i"><use href="#i-grid"/></svg>菜单</button></div>
+ <div class="hud br"><button class="gb menuB" id="menuBtn" data-open="1"><svg class="i"><use href="#i-grid"/></svg>菜单<span class="badgeN" id="bkDot" hidden>!</span></button></div>
 </div>
 <div class="modal" id="sheet" hidden><div class="mframe"><div class="mhead"><h1 id="mtitle">菜单</h1><button class="x" id="sheetX" aria-label="关闭">✕</button></div><div class="mbody"><nav class="tabs" id="tabs"></nav><main class="panel" id="panel"></main></div></div></div>
 <div class="start" id="start">
- <div class="brand"><div class="logoB" id="logoB"></div><span class="season">SEASON 01 · 模拟创业时代</span><h1 class="title" id="stName">COMPANY <span>HQ</span></h1><p class="tagline">3D 商业经营 · 从初创工作室到传奇数字帝国</p></div>
+ <div class="brand"><div class="logoB" id="logoB"></div><span class="season">SEASON 01 · 模拟创业时代</span><h1 class="title" id="stName">My <span>Company</span></h1><p class="tagline">3D 商业经营 · 从初创工作室到传奇数字帝国</p></div>
  <div><div class="loadbox" id="loadbox"><div class="lbar"><i id="lbar"></i></div><div class="ltxt" id="ltxt">正在载入引擎…</div></div>
  <div class="sbtns" id="sbtns" hidden><button class="gb" id="btnCont"><svg class="i"><use href="#i-play"/></svg>继续经营</button><button class="gb blue" id="btnNew">开始游戏</button><div class="row2"><button class="gb dark" id="btnSet"><svg class="i"><use href="#i-gear"/></svg>游戏设置</button><button class="gb dark" id="btnData"><svg class="i"><use href="#i-cloud"/></svg>备份恢复</button></div><div class="save" id="saveSum"></div></div></div>
 </div>
-<div class="ver" id="ver">P01.6 测试版 · 模拟经营，不连接真实交易</div>
-<div class="rotate" id="rotate" hidden><div class="phone"></div><h2 style="margin:0">请横置手机</h2><p class="sub" style="max-width:320px;margin:0">COMPANY HQ 为横屏游戏设计。若 Claude App 不随手机旋转，可以继续使用竖屏简化布局。</p><button class="gb dark" id="portraitOk">继续竖屏</button></div>
+<div class="ver" id="ver">P01.7 测试版 · 模拟经营，不连接真实交易</div>
+<div class="rotate" id="rotate" hidden><div class="phone"></div><h2 style="margin:0">请横置手机</h2><p class="sub" style="max-width:320px;margin:0">My Company 为横屏游戏设计。若 Claude App 不随手机旋转，可以继续使用竖屏简化布局。</p><button class="gb dark" id="portraitOk">继续竖屏</button></div>
 <div class="fx" id="fx"></div>
 <div class="tut" id="tut" hidden><div class="card" id="tutCard"></div></div>
 <div class="toast" id="toast"></div>
@@ -404,7 +404,7 @@ const ACH=[
 ];
 const P='待导入';
 const mkProd=(id,name,status,stage,extra)=>Object.assign({id,name,status,stage,version:P,link:'',files:P,market:P,tests:P,license:P,risk:'未审核',simPrice:'待 P02 设定（模拟）',platforms:P,reviews:'无（尚未销售）',money:'收入 0 · 成本 待导入 · 利润 0（尚未销售）',history:[{d:today(),t:'归档入永久资产库'}]},extra);
-const DEFAULT={v:1,name:'COMPANY HQ',savedAt:0,tasks:[],products:[
+const DEFAULT={v:1,name:'My Company',savedAt:0,tasks:[],products:[
  mkProd('PRODUCT 001','Global Seller Profit Toolkit','HOLD','研发储备',{}),
  mkProd('PRODUCT 002','Real Estate Marketing Kit','HOLD','原型储备',{}),
  mkProd('PRODUCT 003','Couples Finance Toolkit','尚未正式销售','包装完成',{})
@@ -414,7 +414,11 @@ function loadState(){
  try{emb=JSON.parse($('state').textContent)}catch(e){}
  try{loc=JSON.parse(LS('companyhq_v1')||'null')}catch(e){}
  const pick=[emb,loc].filter(x=>x&&x.v===1).sort((a,b)=>(b.savedAt||0)-(a.savedAt||0))[0];
- return pick||JSON.parse(JSON.stringify(DEFAULT));
+ const st=pick||JSON.parse(JSON.stringify(DEFAULT));
+ if(st.name==='COMPANY HQ')st.name='My Company';
+ /* 版本更新带来的新产品：只添加存档里没有的编号，绝不覆盖或删除你的数据 */
+ const added=[];DEFAULT.products.forEach(p=>{if(!st.products.some(q=>q.id===p.id)){const c=JSON.parse(JSON.stringify(p));c.history=(c.history||[]).concat([{d:today(),t:'随游戏版本更新加入资产库'}]);st.products.push(c);added.push(c.id)}});
+ st._added=added;return st;
 }
 let S=loadState(),cloudDirty=false;
 function save(msg){S.savedAt=Date.now();cloudDirty=true;LS('companyhq_v1',JSON.stringify(S));renderAll();if(msg)toast(msg)}
@@ -604,16 +608,20 @@ function questHud(){const qs=questState(S),m=qs.main;let h='';
  else h=`<div class="qh">${ic('i-scroll')}<span>主线</span></div><div class="qt">已完成全部开放章节</div>`;
  const pend=S.tasks.filter(t=>t.status==='pending').length;
  const sides=SIDE.map(q=>{const [a,b]=q.p(S);return {n:q.n,a,b}}).filter(x=>x.a<x.b).slice(0,2);
- h+=`<div class="side">${pend?`<div><span style="color:#ffc36b">待 6F 风险审核</span><span>${pend}</span></div>`:''}${sides.map(x=>`<div><span>支线 · ${esc(x.n)}</span><span>${x.a}/${x.b}</span></div>`).join('')}</div>`;
+ const bk=bkState();h+=`<div class="side">${bk.need?`<div style="color:#ffb3a8;font-weight:800"><span>⚠ 存档未备份 · ${bk.days===null?'从未备份':bk.days+' 天前备份'}</span><span>点此</span></div>`:''}${pend?`<div><span style="color:#ffc36b">待 6F 风险审核</span><span>${pend}</span></div>`:''}${sides.map(x=>`<div><span>支线 · ${esc(x.n)}</span><span>${x.a}/${x.b}</span></div>`).join('')}</div>`;
  $('quest').innerHTML=h;$('quest').classList.toggle('mini',selFloor>=0)}
+/* ---------- 备份提醒 ---------- */
+function bkState(){const at=+(LS('companyhq_bkAt')||0);const has=S.tasks.length>0||S.savedAt>0;const need=has&&(S.savedAt||0)>at;return {need,at,days:at?Math.floor((Date.now()-at)/864e5):null}}
+function markBackedUp(){LS('companyhq_bkAt',String(Date.now()));header()}
+async function quickBackup(){try{await navigator.clipboard.writeText(JSON.stringify(S));markBackedUp();toast('备份已复制，请粘贴到备忘录保存');sfx.ok()}catch(_){openSheet('data');toast('请在「复制备份」框里长按全选复制')}}
 /* ---------- HUD ---------- */
 let lastLv=null,lastXp=null;
 function header(){
- const c=compLv(S);$('cname').textContent=S.name||'COMPANY HQ';
+ const c=compLv(S);$('cname').textContent=S.name||'My Company';
  $('clv').textContent=c.lv;$('cera').textContent=era(c.lv)+(c.blocked?' · 待 BOSS 晋级':'');
  const pct=c.lv>=100?100:Math.max(0,Math.min(100,(c.xp-c.cur)/(c.next-c.cur)*100));
  $('cbar').style.width=(c.blocked?100:pct)+'%';$('ring').style.setProperty('--p',c.blocked?100:pct);$('cxp').textContent=c.blocked?'XP 已满 · 完成 BOSS 任务':(c.xp+' / '+c.next+' XP');
- const pend=S.tasks.filter(t=>t.status==='pending').length;$('msgn').hidden=!pend;$('msgn').textContent=pend;$('prodn').textContent=S.products.length;
+ const pend=S.tasks.filter(t=>t.status==='pending').length;$('msgn').hidden=!pend;$('msgn').textContent=pend;const bks=bkState();$('bkDot').hidden=!bks.need;$('prodn').textContent=S.products.length;
  questHud();
 }
 function floorsNav(){
@@ -682,7 +690,7 @@ function sanitize(o){const notes=[];const str=(v,n=600)=>String(v==null?'':v).sl
  const prods=(o.products||[]).filter(p=>p&&p.id&&p.name).map(p=>{const q=Object.assign(mkProd(str(p.id,40),str(p.name,80),str(p.status||'原型',40),str(p.stage||'研发中',40),{}),{});FIELDS.forEach(([k])=>{if(p[k]!=null)q[k]=str(p[k])});if(Array.isArray(p.history))q.history=p.history.slice(0,200).map(h=>({d:str(h&&h.d,10),t:str(h&&h.t,200)}));return q});
  let kept=0;S.products.forEach(p=>{if(!prods.some(q=>q.id===p.id)){prods.push(Object.assign({},p,{history:(p.history||[]).concat([{d:today(),t:'导入备份时保留（永久资产不删除）'}])}));kept++}});
  if(bad)notes.push('丢弃 '+bad+' 条无效记录');if(fixed)notes.push(fixed+' 条记录的 XP 已按规则重算');if(kept)notes.push('保留 '+kept+' 个备份中没有的产品');
- return {s:{v:1,name:str(o.name||'COMPANY HQ',40),savedAt:Date.now(),tasks,products:prods},notes}}
+ return {s:{v:1,name:str(o.name||'My Company',40),savedAt:Date.now(),tasks,products:prods},notes}}
 function vaultView(){
  return `<h2>永久产品资产库</h2><p class="sub">B1 · 所有产品、原型及失败项目永久归档。未取得的文件一律标记「待导入」。封面为系统生成占位图，非产品图片。</p>
  ${S.products.map((p,i)=>`<div class="card"><div class="prod">${cover(p,i)}<div><div style="color:var(--dim);font-size:12px">${esc(p.id)}</div><h2 style="font-size:17px">${esc(p.name)}</h2><span class="tag g">${esc(p.status)}</span><span class="tag">${esc(p.risk)}</span>
@@ -711,8 +719,8 @@ function achView(){
  const got=ACH.filter(a=>a.chk(S)).length;
  return `<h2>公司奖杯</h2><p class="sub">已获得 ${got} / ${ACH.length}（含隐藏成就）· 7F 奖杯柜里的金杯数量与此同步</p><div class="skills">${ACH.map(a=>{const on=a.chk(S);return `<div class="ach ${on?'on':''}"><div class="i">${on?'★':'?'}</div><div><div>${a.h&&!on?'？？？':a.n}</div><div class="d">${a.h&&!on?'隐藏成就':a.d}</div></div></div>`}).join('')}</div>`;
 }
-function dataView(){
- return `<h2>数据保存与备份</h2>
+function dataView(){const bk=bkState();
+ return `<h2>数据保存与备份</h2><div class="card" style="border-color:${bk.need?'#ff8a7a':'#46d08a'}"><b>${bk.need?'⚠ 有新进度还没备份':'✓ 存档已备份'}</b><p class="sub" style="margin:4px 0 8px">上次备份：${bk.at?new Date(bk.at).toLocaleString('zh-CN'):'从未'}。存档只保存在这部手机上，删除 App 或系统清理会丢失。</p><button class="btn" id="bkCopy2">一键复制备份</button></div>
  <div class="card"><div class="t"><b>从 P01 / P01.5 迁移数据</b></div><p class="sub">各版本是独立 App，浏览器数据不互通。在旧版「数据」页点「复制备份」，再粘贴到下方「恢复」框即可。</p></div>
  <div class="card"><div class="t">本机自动保存</div><p class="sub">每次操作立即保存在此设备浏览器中，可能被系统清除。</p>
  <div class="t">云端保存</div><p class="sub" id="cloudSt">${cloudDirty?'有未上传的更改。':'云端与本机一致。'}</p><div class="row"><button class="btn" id="cloudSave">保存到云端</button></div><p class="note">云端保存会把当前数据写入 App 本身的新版本，页面会自动重新载入；换设备打开也能看到。</p></div>
@@ -748,7 +756,7 @@ const TILES=[['quest','任务中心','i-scroll','#4fb0ff','#1f62c4'],['boss','BO
  ['n:ledger','模拟金币','i-gem','#e0b84a','#8a6a1e','P02'],['n:wealth','财富等级','i-gem','#c9a4ff','#6b55a8','P02'],['n:market','全球市场','i-globe','#6fb8ff','#2a5a9a','P03'],['n:customers','虚拟客户','i-users','#7fd0ff','#2a6a9a','P03'],
  ['n:launch','产品发布','i-play','#ff9fb0','#b0405a','P03'],['n:compete','商业竞争','i-swords','#ff8a7a','#8a2a26','P04'],['n:radar','机会雷达','i-flask','#8ae0b0','#2a7a5a','P05'],['n:events','随机事件','i-dice','#c0c8d8','#4a5568','待排期'],
  ['data','数据备份','i-cloud','#9fc0e8','#3a5a8a'],['set','设置','i-gear','#a8b4c8','#3e4a60']];
-function menuView(){return `<div class="tiles">${TILES.map(([k,n,i,c1,c2,lk])=>`<button class="tile ${lk?'lock':''}" style="--c1:${c1};--c2:${c2}" data-go="${k}">${ic(i)}<span>${n}</span><span class="st">${lk?lk+' 未开放':'已开放'}</span></button>`).join('')}</div><p class="note">带锁的功能尚未开发，打开后只显示说明，不会产生任何数据。</p>`}
+function menuView(){return `<div class="tiles">${TILES.map(([k,n,i,c1,c2,lk])=>`<button class="tile ${lk?'lock':''}" style="--c1:${c1};--c2:${c2}" data-go="${k}">${ic(i)}<span>${n}</span><span class="st">${lk?lk+' 未开放':k==='data'&&bkState().need?'需要备份':'已开放'}</span></button>`).join('')}</div><p class="note">带锁的功能尚未开发，打开后只显示说明，不会产生任何数据。</p>`}
 function stepsHtml(st){return st.map(x=>`<div class="qcard ${x.d?'done':''}"><span class="ck">${x.d?'✓':''}</span><div style="flex:1"><div>${esc(x.n)}</div><div class="pb"><i style="width:${Math.min(100,x.a/x.b*100)}%"></i></div><div class="m" style="font-size:11px;color:var(--dim)">${x.a} / ${x.b}</div></div></div>`).join('')}
 function bossCard(i){const g=GATES[i],ch=MAIN.find(c=>c.boss===i);const win=!g.lock&&g.chk(S);
  if(g.lock)return `<div class="boss" style="border-style:dashed;opacity:.75"><b>${ic('i-lock')} LV.${(i+1)*10} · ${esc(g.n)}</b><p class="sub" style="margin:4px 0 0">${esc(g.req)}</p></div>`;
@@ -770,7 +778,7 @@ function setView(){const pOK=LS('companyhq_portrait')==='1';
  <div class="toggle"><span>性能</span><span id="fps" style="color:var(--dim);font-size:13px">帧率测量中…</span></div></div>
  <div class="card"><div class="t"><b>特效预览</b> <span class="tag sim">不改变任何数据</span></div><div class="row" style="margin-top:8px"><button class="btn sm" data-prev="lv">升级特效</button><button class="btn sm" data-prev="coin">金币动画</button><button class="btn sm" data-prev="xp">XP 飞入</button><button class="btn sm" data-prev="quest">任务奖章</button></div></div>
  <div class="card"><label for="cn">公司名称</label><input id="cn" value="${esc(S.name)}" maxlength="40"><div class="row" style="margin-top:8px"><button class="btn ghost" id="cnSave">修改名称</button></div></div>
- <p class="note">COMPANY HQ P01.6 测试版 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
+ <p class="note">My Company P01.7 测试版 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
 function lockView(k){const n=NOTICES[k];return `<div class="lockcard"><span class="lk">${ic('i-lock')}</span><div><h2 style="margin:0 0 4px">${n[0]}</h2><span class="tag sim">${n[2]}${n[2]==='待排期'?'':' 未开放'}</span><p style="margin:8px 0 0">${n[3]}</p><p class="sub" style="margin:6px 0 0">入口：${n[1]}</p></div></div>`}
 function renderPanel(){
  let h='';
@@ -824,13 +832,13 @@ addEventListener('resize',chkRot);addEventListener('orientationchange',()=>setTi
 $('portraitOk').onclick=()=>{portraitOK=true;chkRot()};
 function saveSummary(){const has=S.savedAt>0||S.tasks.length>0;const c=compLv(S);$('btnCont').disabled=!has;
  $('saveSum').textContent=has?`存档：${S.name} · LV.${c.lv} ${era(c.lv)} · ${S.tasks.length} 条记录 · ${S.products.length} 个产品`:`新公司 · 已载入 ${S.products.length} 个真实产品档案`;
- $('stName').innerHTML=esc(S.name||'COMPANY HQ').replace(/ (\S+)$/,' <span>$1</span>')}
+ $('stName').innerHTML=esc(S.name||'My Company').replace(/ (\S+)$/,' <span>$1</span>')}
 function enterGame(tut){inGame=true;$('start').hidden=true;$('ver').hidden=true;$('game').hidden=false;actx();
  try{const d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen({navigationUI:'hide'}).catch(()=>{})}catch(e){}
  try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}
- if(window.HQ3D){HQ3D.attract(false);HQ3D.goFloor(-1)}selFloor=-1;camMode='hq';setCamBtns();lastLv=null;renderAll();sfx.ok();if(tut)tutorial(0)}
+ if(window.HQ3D){HQ3D.attract(false);HQ3D.goFloor(-1)}selFloor=-1;camMode='hq';setCamBtns();lastLv=null;renderAll();sfx.ok();if(tut)tutorial(0);const bk=bkState();if(bk.need&&!tut)setTimeout(()=>toast('提醒：有新进度未备份，点左侧红色提示一键备份'),1200);if(S._added&&S._added.length)setTimeout(()=>fxBadge('资产库新增 '+S._added.join('、')),600)}
 function exitGame(){inGame=false;closeSheet();$('game').hidden=true;$('start').hidden=false;$('ver').hidden=false;saveSummary();if(window.HQ3D){HQ3D.goFloor(-1);HQ3D.attract(true)}}
-const TUT=[['欢迎来到 COMPANY HQ','你是董事长。这座总部和整座城市会随着公司成长而扩张。当前处于 SEASON 01 模拟创业时代：所有等级与晋级都是模拟经营成绩。'],
+const TUT=[['欢迎来到 My Company','你是董事长。这座总部和整座城市会随着公司成长而扩张。当前处于 SEASON 01 模拟创业时代：所有等级与晋级都是模拟经营成绩。'],
  ['总部怎么玩','点大楼楼层或底部楼层坞进入部门；点员工查看档案；点金色标签打开设备功能。右侧按钮切换城市、总部、部门、员工四种镜头。'],
  ['真实成果才会成长','点左下「记录」提交你真正完成的成果和证据。原型、软件、测试、营销方案必须先通过 6F 风险管理部审核，XP 才会入账。任务和 BOSS 进度都由这些记录推导，不会伪造。']];
 function tutorial(k){const t=TUT[k];$('tut').hidden=false;$('tutCard').innerHTML=`<div class="sub" style="color:var(--gold2);font-weight:800">新手引导 ${k+1} / ${TUT.length}</div><h2>${t[0]}</h2><p>${t[1]}</p><div class="row" style="justify-content:flex-end">${k<TUT.length-1?`<button class="btn ghost" data-tut="skip">跳过</button><button class="btn" data-tut="${k+1}">下一步</button>`:`<button class="btn" data-tut="skip">开始经营</button>`}</div>`}
@@ -848,7 +856,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!
 $('floors').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;goFloor(+b.dataset.f)});
 $('menuBtn').onclick=()=>openSheet('menu');
 $('taskBtn').onclick=()=>openSheet('task');
-$('quest').onclick=()=>openSheet('quest');
+$('quest').onclick=()=>{if(bkState().need)quickBackup();else openSheet('quest')};
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){tab=b.dataset.t;notice=null;tabsNav();renderPanel();$('panel').scrollTop=0}});
 $('sheetX').onclick=closeSheet;
 $('sheet').addEventListener('click',e=>{if(e.target===$('sheet'))closeSheet()});
@@ -901,19 +909,19 @@ $('panel').addEventListener('click',async e=>{
   if(S.tasks.some(x=>x.status!=='vetoed'&&x.type===type&&norm(x.title)===norm(title)&&(x.product||'')===prod)){toast('重复：同一成果已领取过 XP');return}
   const r=RW[type];const k={id:'T'+Date.now().toString(36),title,type,primary:prim,assist:as,product:prod,evidence:ev,xp:r.xp,date:today(),status:r.risk?'pending':'approved'};
   S.tasks.push(k);preDept=prim;closeSheet();save(r.risk?'已提交，等待 6F 风险管理部审核':'记录通过 +'+r.xp+' XP');if(!r.risk&&window.HQ3D)HQ3D.celebrate(k);return}
- if(t.id==='bkCopy'){try{await navigator.clipboard.writeText(JSON.stringify(S));toast('备份已复制')}catch(_){$('bk').select();toast('请手动长按复制')}return}
- if(t.id==='bkDl'){try{await dl.save({filename:'company-hq-backup-'+today()+'.json',data:JSON.stringify(S,null,1)});toast('已下载')}catch(_){toast('下载被取消或不可用')}return}
+ if(t.id==='bkCopy'||t.id==='bkCopy2'){try{await navigator.clipboard.writeText(JSON.stringify(S));markBackedUp();renderPanel();toast('备份已复制，请粘贴到备忘录保存')}catch(_){$('bk').select();toast('请手动长按复制')}return}
+ if(t.id==='bkDl'){try{await dl.save({filename:'company-hq-backup-'+today()+'.json',data:JSON.stringify(S,null,1)});markBackedUp();toast('已下载')}catch(_){toast('下载被取消或不可用')}return}
  if(t.id==='impGo'){let o;try{o=JSON.parse($('imp').value);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0}catch(_){toast('备份格式不正确');return}const r=sanitize(o);S=r.s;quietFx=true;save('已从备份恢复'+(r.notes.length?'（'+r.notes.join('；')+'）':''));saveSummary();return}
  if(t.id==='cnSave'){const v=$('cn').value.trim();if(v){S.name=v;save('名称已修改');saveSummary()}return}
  if(t.id==='eraReset'){pvEra=-1;if(window.HQ3D)HQ3D.sync();renderPanel();return}
  if(t.id==='cloudSave'){if(!art){toast('当前查看方式不支持云端保存，已保存在本机');return}t.disabled=true;
   S.savedAt=Date.now();LS('companyhq_v1',JSON.stringify(S));
-  try{await art.publish(buildDoc());cloudDirty=false;toast('云端已保存')}catch(err){t.disabled=false;toast('云端保存失败：'+((err&&err.code)||'未授权或冲突'))}return}
+  try{await art.publish(buildDoc());cloudDirty=false;markBackedUp();toast('云端已保存')}catch(err){t.disabled=false;toast('云端保存失败：'+((err&&err.code)||'未授权或冲突'))}return}
 });
 $('panel').addEventListener('input',e=>{if(e.target.id==='eraPv'){pvEra=+e.target.value;$('eraPvL').textContent=BUILD_ERAS[pvEra]+'（预览）';if(window.HQ3D)HQ3D.sync()}});
 function buildDoc(){
  const json=JSON.stringify(S).replace(/</g,'\\u003c');
- return '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<title>COMPANY HQ</title>\n\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">\n<style id="css">'+CSS0+'</style>\n<script type="importmap">'+IMAP+SC+'\n</head>\n<body>\n<div id="root">'+ROOT0+'</div>\n<script type="application/json" id="state">'+json+SC+'\n<script type="module" id="app">'+APP0+SC+'\n</body>\n</html>\n';
+ return '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<title>My Company</title>\n\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">\n<style id="css">'+CSS0+'</style>\n<script type="importmap">'+IMAP+SC+'\n</head>\n<body>\n<div id="root">'+ROOT0+'</div>\n<script type="application/json" id="state">'+json+SC+'\n<script type="module" id="app">'+APP0+SC+'\n</body>\n</html>\n';
 }
 let art=null,dl=null;
 if(window.claude&&claude.use){claude.use('artifact').then(a=>{art=a}).catch(()=>{});claude.use('downloads').then(d=>{dl=d;if(d&&tab==='data'&&$('bkDl'))$('bkDl').hidden=false}).catch(()=>{})}
