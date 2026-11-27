@@ -279,7 +279,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 
-<!-- PWA (build_pwa.py 20261126-1400-6662c9b5) -->
+<!-- PWA (build_pwa.py 20261127-0038-ce607b5c) -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -294,7 +294,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <script>
 (function(){
-  window.HQ_PWA_VERSION='20261126-1400-6662c9b5';
+  window.HQ_PWA_VERSION='20261127-0038-ce607b5c';
   if('serviceWorker' in navigator && location.protocol!=='file:'){
     window.addEventListener('load',function(){
       navigator.serviceWorker.register('sw.js').then(function(r){window.HQ_SW=r;}).catch(function(e){console.warn('SW register failed',e);});
@@ -358,7 +358,7 @@ table.pl th:first-child,table.pl td:first-child{text-align:left}
  <div><div class="loadbox" id="loadbox"><div class="lbar"><i id="lbar"></i></div><div class="ltxt" id="ltxt">正在载入引擎…</div></div>
  <div class="sbtns" id="sbtns" hidden><button class="gb" id="btnCont"><svg class="i"><use href="#i-play"/></svg>继续经营</button><button class="gb blue" id="btnNew">开始游戏</button><div class="row2"><button class="gb dark" id="btnSet"><svg class="i"><use href="#i-gear"/></svg>游戏设置</button><button class="gb dark" id="btnData"><svg class="i"><use href="#i-cloud"/></svg>备份恢复</button></div><div class="save" id="saveSum"></div></div></div>
 </div>
-<div class="ver" id="ver">版本 P03-P04 正式版 · v3.4.0 · 模拟经营，金币无真实价值</div><div class="sbxbar" id="sbxbar" hidden>测试沙盒 · 虚构交易 · 不会写入正式存档</div>
+<div class="ver" id="ver">版本 P05 正式版 · v3.5.0 · 模拟经营，金币无真实价值</div><div class="sbxbar" id="sbxbar" hidden>测试沙盒 · 虚构交易 · 不会写入正式存档</div>
 <div class="rotate" id="rotate" hidden><div class="phone"></div><h2 style="margin:0">请横置手机</h2><p class="sub" style="max-width:320px;margin:0">My Company 为横屏游戏设计。若 Claude App 不随手机旋转，可以继续使用竖屏简化布局。</p><button class="gb dark" id="portraitOk">继续竖屏</button></div>
 <div class="fx" id="fx"></div>
 <div class="tut" id="tut" hidden><div class="card" id="tutCard"></div></div>
@@ -434,7 +434,7 @@ const ACH=[
 ];
 const P='待导入';
 const mkProd=(id,name,status,stage,extra)=>Object.assign({id,name,status,stage,version:P,link:'',files:P,market:P,tests:P,license:P,risk:'未审核',simPrice:'待 P02 设定（模拟）',platforms:P,reviews:'无（尚未销售）',money:'收入 0 · 成本 待导入 · 利润 0（尚未销售）',history:[{d:today(),t:'归档入永久资产库'}]},extra);
-const DEFAULT={v:1,name:'My Company',savedAt:0,tasks:[],products:[
+const DEFAULT={v:1,name:'My Company',savedAt:0,oppState:{},tasks:[],products:[
  mkProd('PRODUCT 001','Global Seller Profit Toolkit','HOLD','研发储备',{}),
  mkProd('PRODUCT 002','Real Estate Marketing Kit','HOLD','原型储备',{}),
  mkProd('PRODUCT 003','Couples Finance Toolkit','尚未正式销售','包装完成',{})
@@ -538,7 +538,7 @@ function econSanitize(o,notes){const src=o&&o.econ&&Array.isArray(o.econ.b)?o.ec
  const oe=(o&&o.econ)||{};return {v:1,b:out,seq,wMax:Math.min(20,Math.max(0,oe.wMax|0)),wHist:Array.isArray(oe.wHist)?oe.wHist.slice(-200).map(h=>({d:String(h.d||'').slice(0,10),from:h.from|0,to:h.to|0,net:+h.net||0})):[],wCur:oe.wCur===undefined?undefined:(oe.wCur|0)}}
 
 
-/* ---- rng.js ---- */
+/* ---- src/rng.js ---- */
 /* 可复现随机数（mulberry32）：状态可保存、可恢复 */
 const SimRng = (() => {
   function make(state) {
@@ -553,7 +553,7 @@ const SimRng = (() => {
   return { make };
 })();
 
-/* ---- market.js ---- */
+/* ---- src/market.js ---- */
 /* SimMarket · 平台费用 / 流量 / 平台等级（模拟）
  * 默认费用档案：马来西亚卖家（马来西亚银行账户、向全球买家卖数字下载），opts.country 默认 'MY'；旧的美国档案保留为 'US'。
  * 货币 G：模拟币，仅“按美元标价”作为定价参考（1 G 当作 1 USD 来换算美元费用）。G 没有任何真实价值，也不等于令吉（RM）。
@@ -865,7 +865,7 @@ const SimMarket = (() => {
   return { PLATFORMS, CATEGORIES: CATS, COUNTRIES, FX_MYR_PER_USD, feeFor, listingCost, dailyTraffic, expectedTraffic, platformXp, platformLevel, LABELS };
 })();
 
-/* ---- customers.js ---- */
+/* ---- src/customers.js ---- */
 /* 虚拟顾客模块（SimCustomers）：100 位规则驱动的虚构顾客。全部为模拟，非真实用户。 */
 const SimCustomers = (() => {
   const CATS = ['personal-finance', 'seller-tools', 'real-estate-templates', 'productivity-templates', 'software-tool'];
@@ -1189,7 +1189,7 @@ const SimCustomers = (() => {
   return { generate, pickVisitor, decide, experience, trust, productQuality, TRUST_WEIGHTS: TW, REASONS };
 })();
 
-/* ---- competition.js ---- */
+/* ---- src/competition.js ---- */
 /* SimCompetition · 竞争对手与市场事件（全部为模拟，非真实品牌/新闻） */
 const SimCompetition = (() => {
   const CATEGORIES = ['personal-finance', 'seller-tools', 'real-estate-templates', 'productivity-templates', 'software-tool'];
@@ -1517,7 +1517,7 @@ const SimCompetition = (() => {
   return { init, step, forListing, modifiers, LABELS, SOURCES, CATEGORIES, TYPES, EVENT_TYPES, SEASONS, PARAMS: P };
 })();
 
-/* ---- engine.js ---- */
+/* ---- src/engine.js ---- */
 /* =================== P03–P04 模拟经营引擎（主 Claude） ===================
    独立模拟日历；固定随机种子并保存随机状态；所有金额经 P02 统一交易接口入账；
    订单+平台费原子入账；退款关联原订单且不超过可退金额；营销/上架费在现金不足时自动停止。
@@ -1687,6 +1687,615 @@ const SimEngine = (() => {
   return { INTENT, init, customers, productLevel, publish, updateListing, estCost, stepDay, advance, refund, simMonth, listingQuality, CAT_OF, PLAT, DEV, SALES };
 })();
 
+
+/* ---- src/radar.js ---- */
+/* =================== P05 商业机会雷达 RADAR（Agent A） ===================
+   纯逻辑模块：无 DOM、无 Math.random、不修改传入对象。
+   只处理 research/opps_db.js 中的「真实商业研究」记录（dataKind==='real_research'）。
+
+   100 分评分制（各项截断到上限）：
+     需求 demand 25 · 获客 acquisition 20 · 差异化 differentiation 15 · 利润 profit 15
+     自动化 automation 10 · 低客服负担 lowSupport 10 · 低开发成本 lowDevCost 5
+
+   可靠证据门槛 evidenceStrength(opp).ok —— 以下全部满足才算「证据达标」：
+     1) 至少 3 条「有效证据」：demandEvidence 中 level 为 research 或 secondary，
+        且有 https 链接与 YYYY-MM-DD 日期（assumption 不计入）；
+     2) 其中至少 2 条为 research（研究员亲自读过的一手页面）；
+     3) 覆盖需求：至少 1 条 research 级需求证据；
+     4) 覆盖竞品定价：至少 1 个竞品写明价格且有 https 链接（可核实的竞品定价）。
+
+   分级 tier(opp)：
+     'vetoed'   风险部门 riskReview.verdict==='veto'（独立否决，覆盖一切分数）
+     'priority' 总分 ≥80 且证据达标 且未被否决 且 dataKind==='real_research'
+     'watch'    总分 ≥60（或 ≥80 但证据未达标）
+     'weak'     其余
+*/
+const RADAR = (() => {
+  const WEIGHTS = { demand: 25, acquisition: 20, differentiation: 15, profit: 15, automation: 10, lowSupport: 10, lowDevCost: 5 };
+  const SCORE_LABELS = { demand: '市场需求', acquisition: '获客容易度', differentiation: '差异化', profit: '利润空间', automation: '自动化程度', lowSupport: '低客服负担', lowDevCost: '低开发成本' };
+  const PRIORITY_MIN = 80, WATCH_MIN = 60;
+  const GATE = { minValid: 3, minResearch: 2 };
+  const STAGES = ['发现机会', '市场研究', '立项审批', '研发', '功能测试', '风险审核', '永久资产库', '模拟销售', '未来正式销售'];
+  const STATUSES = ['new', 'more_research', 'approved', 'hold', 'rejected'];
+  const STATUS = { new: '待决定', more_research: '需要补充研究', approved: '已批准研发', hold: '暂缓', rejected: '董事长不采纳' };
+  const CATEGORIES = ['office', 'excel_csv', 'pdf', 'ecommerce', 'smb', 'pro_calc', 'other'];
+  const CATEGORY = { office: '办公效率', excel_csv: 'Excel / CSV 工具', pdf: 'PDF 工具', ecommerce: '电商卖家工具', smb: '中小企业工具', pro_calc: '专业计算工具', other: '其他' };
+  const TIER = { priority: '优先机会', watch: '观察名单', weak: '较弱', vetoed: '风控否决' };
+  const VERDICTS = ['pending', 'pass', 'caution', 'veto'];
+  const VERDICT = { pending: '风控待审', pass: '风控通过', caution: '风控提醒', veto: '风控否决' };
+  const LEVELS = ['research', 'secondary', 'assumption'];
+  const LEVEL = { research: '一手核实', secondary: '第三方', assumption: '假设' };
+  const RISK_TYPES = ['ip', 'privacy', 'platform', 'competition', 'legal', 'maintenance', 'ai_replace'];
+  const RISK = { ip: '知识产权', privacy: '隐私', platform: '平台依赖', competition: '竞争', legal: '法律合规', maintenance: '维护', ai_replace: '被 AI 替代' };
+  const LMH = ['low', 'medium', 'high'];
+  const LMH_L = { low: '低', medium: '中', high: '高' };
+  const PRICE_MODELS = ['one-time', 'subscription', 'freemium'];
+
+  const isObj = x => !!x && typeof x === 'object' && !Array.isArray(x);
+  const isStr = x => typeof x === 'string' && x.trim().length > 0;
+  const isUrl = x => typeof x === 'string' && /^https:\/\/[^\s<>"']+\.[^\s<>"']+/.test(x);
+  const isDate = x => typeof x === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x) && !isNaN(Date.parse(x));
+  const num = x => (typeof x === 'number' && isFinite(x)) ? x : (typeof x === 'string' && x.trim() !== '' && isFinite(+x) ? +x : NaN);
+  const r1 = x => Math.round(x * 10) / 10;
+
+  function part(o, k) { const v = num(((o && o.scores) || {})[k]); return isNaN(v) ? 0 : Math.max(0, Math.min(WEIGHTS[k], v)); }
+  function score(o) { let t = 0; for (const k in WEIGHTS) t += part(o, k); return r1(t); }
+  function breakdown(o) {
+    const n = (o && o.scoreNotes) || {};
+    return Object.keys(WEIGHTS).map(k => ({ k, label: SCORE_LABELS[k], v: r1(part(o, k)), max: WEIGHTS[k], note: typeof n[k] === 'string' ? n[k] : '' }));
+  }
+
+  function evidenceStrength(o) {
+    const ev = Array.isArray(o && o.demandEvidence) ? o.demandEvidence : [];
+    let research = 0, secondary = 0, assumption = 0, valid = 0;
+    for (const e of ev) {
+      if (!isObj(e)) continue;
+      if (e.level === 'assumption') { assumption++; continue; }
+      if (!LEVELS.includes(e.level) || !isUrl(e.url) || !isDate(e.date)) continue;
+      valid++;
+      if (e.level === 'research') research++; else secondary++;
+    }
+    const comps = Array.isArray(o && o.competitors) ? o.competitors : [];
+    const pricedCompetitors = comps.filter(c => isObj(c) && /\d/.test(String(c.price == null ? '' : c.price)) && !/unknown|not shown|未知/i.test(String(c.price)) && isUrl(c.url)).length;
+    const demandOk = research >= 1, pricingOk = pricedCompetitors >= 1;
+    const ok = valid >= GATE.minValid && research >= GATE.minResearch && demandOk && pricingOk;
+    const missing = [];
+    if (valid < GATE.minValid) missing.push(`有效证据 ${valid}/${GATE.minValid}`);
+    if (research < GATE.minResearch) missing.push(`一手核实证据 ${research}/${GATE.minResearch}`);
+    if (!pricingOk) missing.push('缺少可核实的竞品定价');
+    return { n: ev.length, valid, research, secondary, assumption, pricedCompetitors, demandOk, pricingOk, ok, missing };
+  }
+
+  function verdictOf(o) { const v = o && o.riskReview && o.riskReview.verdict; return VERDICTS.includes(v) ? v : 'pending'; }
+  function tier(o) {
+    if (verdictOf(o) === 'veto') return 'vetoed';
+    const s = score(o);
+    if (s >= PRIORITY_MIN && evidenceStrength(o).ok && o && o.dataKind === 'real_research') return 'priority';
+    if (s >= WATCH_MIN && evidenceStrength(o).ok) return 'watch'; /* Agent Q 建议：观察级也需通过证据门槛 */
+    return 'weak';
+  }
+  const TIER_ORDER = { priority: 0, watch: 1, weak: 2, vetoed: 3 };
+  /* 排序：风控否决沉底 → 总分降序 → 一手证据数降序 → id 升序（稳定、确定）。返回新数组，不改原数组。 */
+  function rank(opps) {
+    const a = (Array.isArray(opps) ? opps : []).filter(isObj).map(o => ({ o, t: tier(o), s: score(o), r: evidenceStrength(o).research, id: String(o.id || '') }));
+    a.sort((x, y) => ((x.t === 'vetoed') - (y.t === 'vetoed')) || (y.s - x.s) || (TIER_ORDER[x.t] - TIER_ORDER[y.t]) || (y.r - x.r) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+    return a.map(x => x.o);
+  }
+
+  /* 生命周期阶段（0..8）。雷达只能判断到「研发」；之后的阶段由产品研发/风控/资产库数据决定（主 Claude 接入）。 */
+  function stageIndex(o, st) {
+    const s = isObj(st) ? st.status : 'new';
+    if (s === 'approved') return 3;
+    if (s === 'rejected' || s === 'hold' || s === 'more_research') return 1;
+    return tier(o) === 'priority' ? 2 : 1;
+  }
+
+  function validate(o) {
+    const E = [];
+    if (!isObj(o)) return ['记录不是对象'];
+    const req = (c, m) => { if (!c) E.push(m); };
+    req(typeof o.id === 'string' && /^OPP-\d{3,}$/.test(o.id), 'id 必须形如 OPP-001');
+    req(isStr(o.name), '缺少 name');
+    req(CATEGORIES.includes(o.category), `category 不在允许列表：${o.category}`);
+    req(isStr(o.oneLine), '缺少 oneLine 一句话描述');
+    req(isStr(o.targetCustomer), '缺少 targetCustomer');
+    req(Array.isArray(o.targetCountries) && o.targetCountries.length && o.targetCountries.every(c => c === 'Global' || /^[A-Z]{2}$/.test(c)), 'targetCountries 必须是 ISO 两位国家码或 Global');
+    req(Array.isArray(o.painPoints) && o.painPoints.length && o.painPoints.every(p => isStr(p) || (isObj(p) && isStr(p.text))), '缺少 painPoints');
+    if (!Array.isArray(o.demandEvidence) || !o.demandEvidence.length) E.push('缺少 demandEvidence');
+    else o.demandEvidence.forEach((e, i) => {
+      if (!isObj(e)) { E.push(`demandEvidence[${i}] 不是对象`); return; }
+      if (!isStr(e.claim)) E.push(`demandEvidence[${i}] 缺少 claim`);
+      if (!LEVELS.includes(e.level)) E.push(`demandEvidence[${i}] level 无效`);
+      if (e.level !== 'assumption') {
+        if (!isUrl(e.url)) E.push(`demandEvidence[${i}] 缺少 https 链接`);
+        if (!isDate(e.date)) E.push(`demandEvidence[${i}] 日期需为 YYYY-MM-DD`);
+        if (!isStr(e.source)) E.push(`demandEvidence[${i}] 缺少 source`);
+      }
+    });
+    if (!Array.isArray(o.competitors)) E.push('competitors 必须是数组');
+    else o.competitors.forEach((c, i) => { if (!isObj(c) || !isStr(c.name)) E.push(`competitors[${i}] 缺少 name`); else if (c.url != null && c.url !== '' && c.url !== 'unknown' && !isUrl(c.url)) E.push(`competitors[${i}] 链接无效`); });
+    const mp = o.marketPrice;
+    if (!isObj(mp)) E.push('缺少 marketPrice');
+    else {
+      const lo = num(mp.low), hi = num(mp.high);
+      if (mp.high != null && (isNaN(lo) || isNaN(hi) || lo < 0 || hi < lo)) E.push('marketPrice low/high 无效'); /* 两者皆 null = 价格未核实（诚实留空），允许 */
+      if (!isStr(mp.currency)) E.push('marketPrice 缺少 currency');
+      if (!PRICE_MODELS.includes(mp.model)) E.push('marketPrice.model 必须是 one-time|subscription|freemium');
+    }
+    req(isObj(o.devDifficulty) && LMH.includes(o.devDifficulty.level), 'devDifficulty.level 必须是 low|medium|high');
+    req(Array.isArray(o.acquisition) && o.acquisition.length, '缺少 acquisition 获客方式');
+    req(isObj(o.estCost) && !isNaN(num(o.estCost.build)) && !isNaN(num(o.estCost.monthly)), 'estCost build/monthly 必须是数字');
+    req(isObj(o.profitPotential) && (o.profitPotential.perSaleNet === null || !isNaN(num(o.profitPotential.perSaleNet))), 'profitPotential.perSaleNet 必须是数字或 null（未知）');
+    req(isObj(o.supportBurden) && LMH.includes(o.supportBurden.level), 'supportBurden.level 必须是 low|medium|high');
+    req(isObj(o.automation) && LMH.includes(o.automation.level), 'automation.level 必须是 low|medium|high');
+    if (!Array.isArray(o.risks)) E.push('risks 必须是数组');
+    else o.risks.forEach((r, i) => { if (!isObj(r) || !RISK_TYPES.includes(r.type)) E.push(`risks[${i}] type 无效`); else if (!LMH.includes(r.severity)) E.push(`risks[${i}] severity 必须是 low|medium|high`); });
+    if (!isObj(o.scores)) E.push('缺少 scores');
+    else for (const k in WEIGHTS) { const v = num(o.scores[k]); if (isNaN(v)) E.push(`scores.${k} 缺失`); else if (v < 0 || v > WEIGHTS[k]) E.push(`scores.${k}=${v} 超出 0..${WEIGHTS[k]}`); }
+    req(isObj(o.riskReview) && VERDICTS.includes(o.riskReview.verdict), 'riskReview.verdict 必须是 pending|pass|caution|veto');
+    req(Array.isArray(o.sources) && o.sources.some(s => isObj(s) && isUrl(s.url) && isDate(s.date)), '至少需要 1 条带 https 链接和日期的来源');
+    req(Array.isArray(o.researchedBy) && o.researchedBy.length > 0, '缺少 researchedBy');
+    req(isDate(o.checkedAt), 'checkedAt 需为 YYYY-MM-DD');
+    req(o.dataKind === 'real_research', 'dataKind 必须是 real_research（模拟数据不得写入研究库）');
+    return E;
+  }
+
+  /* 清理存档中的 S.oppState。永远返回新对象；丢弃/修正时向 notes 写说明。 */
+  const BAD_KEYS = ['__proto__', 'constructor', 'prototype'];
+  /* 导入后：若产品带 oppId 而审批状态丢失，按产品恢复为已批准（Agent Q BUG-3） */
+  function relinkProducts(state, products, notes) { (products || []).forEach(p => { if (p && typeof p.oppId === 'string' && /^[A-Za-z0-9_-]{1,40}$/.test(p.oppId)) { const st = state[p.oppId]; if (!st || st.status !== 'approved' || st.productId !== p.id) { state[p.oppId] = { status: 'approved', history: (st && st.history || []).concat([{ at: new Date(0).toISOString(), action: 'relink', note: '导入时按 ' + p.id + ' 恢复已批准状态' }]), productId: p.id }; if (notes) notes.push(p.oppId + ' 审批状态按产品 ' + p.id + ' 恢复'); } } }); return state; }
+  function sanitizeState(x, notes) {
+    const note = m => { if (Array.isArray(notes)) notes.push(m); };
+    const out = {};
+    if (x == null) return out;
+    if (!isObj(x)) { note('商业机会状态 oppState 格式错误，已重置'); return out; }
+    let n = 0;
+    for (const k of Object.keys(x)) {
+      if (BAD_KEYS.includes(k) || !/^[A-Za-z0-9_-]{1,40}$/.test(k)) { note(`已丢弃无效的机会编号：${String(k).slice(0, 40)}`); continue; }
+      if (n >= 500) { note('商业机会状态超过 500 条，多余记录已丢弃'); break; }
+      const v = x[k];
+      if (!isObj(v)) { note(`机会 ${k} 的状态不是对象，已丢弃`); continue; }
+      const e = { status: 'new', history: [] };
+      if (STATUSES.includes(v.status)) e.status = v.status;
+      else note(`机会 ${k} 状态「${String(v.status).slice(0, 20)}」未知，已重置为 new`);
+      const hs = Array.isArray(v.history) ? v.history : [];
+      if (v.history != null && !Array.isArray(v.history)) note(`机会 ${k} 的历史记录格式错误，已清空`);
+      let dropped = 0;
+      for (const h of hs) {
+        if (isObj(h) && typeof h.at === 'string' && h.at && typeof h.action === 'string' && h.action && (h.note == null || typeof h.note === 'string'))
+          e.history.push({ at: h.at.slice(0, 40), action: h.action.slice(0, 40), note: (h.note || '').slice(0, 300) });
+        else dropped++;
+      }
+      if (dropped) note(`机会 ${k}：丢弃 ${dropped} 条无效历史记录`);
+      if (e.history.length > 200) { note(`机会 ${k}：历史记录超过 200 条，仅保留最近 200 条`); e.history = e.history.slice(-200); }
+      if (typeof v.productId === 'string' && v.productId.trim()) e.productId = v.productId.trim().slice(0, 40);
+      else if (v.productId != null) note(`机会 ${k}：productId 无效，已移除`);
+      out[k] = e; n++;
+    }
+    return out;
+  }
+
+  return { relinkProducts, WEIGHTS, SCORE_LABELS, PRIORITY_MIN, WATCH_MIN, GATE, STAGES, STATUSES, STATUS, CATEGORIES, CATEGORY, TIER, VERDICTS, VERDICT, LEVELS, LEVEL, RISK_TYPES, RISK, LMH_L,
+    score, breakdown, evidenceStrength, verdictOf, tier, rank, stageIndex, validate, sanitizeState, isUrl };
+})();
+
+/* public build: no private research */
+const OPP_DB = { version: '', checkedAt: '', opps: [] };
+
+/* ---- src/research_store.js ---- */
+/* P05-002：私人研究档案（真实商业研究）存储。
+   - 公开部署版不内置任何研究数据（OPP_DB.opps 为空）；董事长用「导入研究档案」把私人 JSON 文件存进本机。
+   - 存在独立 localStorage 键 companyhq_research，不随正式/沙盒存档切换，不进入 10 个自动快照（避免占满存储空间）。
+   - 每条记录必须通过 RADAR.validate 且 dataKind==='real_research'；不合格的拒绝并列出原因。 */
+const RSTORE = (() => {
+  const KEY = 'companyhq_research', KIND = 'mycompany-research', MAX = 4e6;
+  const ls = () => { try { return typeof localStorage !== 'undefined' ? localStorage : null; } catch (e) { return null; } };
+  function parse(text) {
+    const notes = [];
+    if (typeof text !== 'string' || text.length > MAX) return { ok: false, notes: ['文件为空或超过 4MB'] };
+    let o; try { o = JSON.parse(text); } catch (e) { return { ok: false, notes: ['不是有效的 JSON 文件'] }; }
+    if (Array.isArray(o)) o = { kind: KIND, opps: o };
+    if (!o || typeof o !== 'object' || o.kind !== KIND || !Array.isArray(o.opps)) return { ok: false, notes: ['不是 My Company 研究档案（缺少 kind: "' + KIND + '"）'] };
+    const seen = new Set(), opps = [];
+    o.opps.slice(0, 1000).forEach((x, i) => {
+      const id = x && x.id;
+      if (!x || typeof x !== 'object') { notes.push('第 ' + (i + 1) + ' 条不是对象，已拒绝'); return; }
+      if (seen.has(id)) { notes.push(id + ' 编号重复，已拒绝'); return; }
+      const e = RADAR.validate(x);
+      if (e.length) { notes.push((id || '第 ' + (i + 1) + ' 条') + ' 未通过校验：' + e.slice(0, 3).join('；')); return; }
+      seen.add(id); opps.push(x);
+    });
+    if (o.opps.length > 1000) notes.push('超过 1000 条，只读取前 1000 条');
+    return { ok: opps.length > 0, db: { kind: KIND, version: String(o.version || '').slice(0, 60), checkedAt: String(o.checkedAt || '').slice(0, 20), opps, importedAt: Date.now() }, notes, total: o.opps.length };
+  }
+  function load() { const L = ls(); if (!L) return null; try { const r = parse(L.getItem(KEY) || ''); return r.ok ? r.db : null; } catch (e) { return null; } }
+  function store(db) { const L = ls(); if (!L) throw '本机存储不可用'; L.setItem(KEY, JSON.stringify(db)); }
+  function exportText(db) { return JSON.stringify({ kind: KIND, version: db.version, checkedAt: db.checkedAt, opps: db.opps }, null, 1); }
+  /* 启动：内置数据优先（私人测试版）；否则读取本机私人档案 */
+  function boot(OPP) {
+    if (OPP.opps && OPP.opps.length) { OPP.source = 'built-in'; return OPP; }
+    const db = load();
+    if (db) { OPP.opps = db.opps; OPP.version = db.version; OPP.checkedAt = db.checkedAt; OPP.source = 'private'; OPP.importedAt = db.importedAt; }
+    else OPP.source = 'none';
+    return OPP;
+  }
+  return { KEY, KIND, parse, load, store, exportText, boot };
+})();
+
+/* ---- research/boot.js ---- */
+/* 启动时载入研究档案：内置（私人测试版）或本机私人档案（正式版） */
+RSTORE.boot(OPP_DB);
+
+/* ---- parts_radar.js ---- */
+/* =================== P05 · 5F 商业机会研究室（Agent A） ===================
+   radarView() 返回 HTML；radarAct(btn) 处理本页按钮（返回 true 表示已处理）。
+   只读：显示真实研究库 OPP_DB 与董事长决定 S.oppState；批准/暂缓等决定在 7F 董事长审批中心（apprView）完成。
+   全局：S, esc, OPP_DB, RADAR, renderPanel, $ */
+let rdSeg = 'rank', rdSel = null, rdCat = 'all';
+const RD_TIER_CLS = { priority: 'ok', watch: 'g', weak: '', vetoed: 'r' };
+const RD_VERD_CLS = { pass: 'ok', caution: 'g', veto: 'r', pending: '' };
+const RD_LV_CLS = { research: 'ok', secondary: 'g', assumption: 'sim' };
+const RD_SEV_CLS = { low: '', medium: 'g', high: 'r' };
+function rdOpps() { return (typeof OPP_DB !== 'undefined' && OPP_DB && Array.isArray(OPP_DB.opps)) ? OPP_DB.opps.filter(o => o && typeof o === 'object') : []; }
+function rdSt(id) { const m = (S && S.oppState) || {}; return Object.prototype.hasOwnProperty.call(m, id) ? m[id] : null; }
+function rdLink(url, text) { return RADAR.isUrl(url) ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="color:var(--sky)">${esc(text || '来源')}</a>` : ''; }
+function rdTag(cls, txt) { return `<span class="tag ${cls || ''}">${esc(txt)}</span>`; }
+function rdTxt(x) { return x == null ? '' : typeof x === 'object' ? (x.text || x.desc || x.claim || '') : String(x); }
+function rdBanner() {
+  const db = (typeof OPP_DB !== 'undefined' && OPP_DB) || {};
+  return `<div class="card" style="border-color:#2f7a57;padding:6px 10px;margin:0 0 8px"><div class="row" style="gap:6px">${rdTag('ok', '真实商业研究（非模拟数据）')}<span class="sub" style="margin:0">研究日期 ${esc(db.checkedAt || '—')} · 研究库 ${esc(db.version || '—')} · ${rdOpps().length} 个机会 · 与 2F <span class="tag sim">模拟市场</span>完全分开</span></div></div>`;
+}
+const RD_SMALL = 'min-height:32px;padding:0 10px;font-size:12px';
+function rdSegNav() {
+  return `<div class="seg" style="margin:0 0 8px;flex-wrap:wrap">${[['rank', '排名'], ['detail', '详情'], ['rules', '评分规则'], ['cat', '分类筛选']].map(([k, n]) => `<button data-rdseg="${k}" class="${rdSeg === k ? 'on' : ''}">${n}</button>`).join('')}</div>`;
+}
+function rdStatusTag(id) { const st = rdSt(id); return st ? rdTag(st.status === 'approved' ? 'ok' : st.status === 'rejected' ? 'r' : 'g', '董事长：' + (RADAR.STATUS[st.status] || st.status)) : rdTag('', '董事长：' + RADAR.STATUS.new); }
+function rdFakeTag(o) { return o.dataKind === 'real_research' ? '' : rdTag('r', '非真实研究数据 · 不得用于决策'); }
+function rdItem(o, i) {
+  const s = RADAR.score(o), t = RADAR.tier(o), e = RADAR.evidenceStrength(o), v = RADAR.verdictOf(o);
+  return `<div class="card" style="padding:9px 12px;margin:8px 0">
+ <div class="row" style="justify-content:space-between"><b>${i != null ? '#' + (i + 1) + ' ' : ''}${esc(o.name)}</b><span>${rdTag(RD_TIER_CLS[t], RADAR.TIER[t])}${t === 'vetoed' ? '' : rdTag(RD_VERD_CLS[v], RADAR.VERDICT[v])}${rdStatusTag(o.id)}${rdFakeTag(o)}</span></div>
+ <div class="sub" style="margin:2px 0 6px">${esc(o.id)} · ${esc(RADAR.CATEGORY[o.category] || o.category || '')} · ${esc(o.oneLine || '')}</div>
+ <div class="bars"><div class="br"><span class="bl">总分 / 100</span><span class="bt"><i style="width:${Math.max(0, Math.min(100, s))}%"></i></span><span class="bv"><b>${s}</b></span></div></div>
+ <div class="row" style="justify-content:space-between;margin-top:6px"><span class="note" style="margin:0">证据：一手核实 ${e.research} · 第三方 ${e.secondary} · 假设 ${e.assumption} ${e.ok ? rdTag('ok', '证据达标') : rdTag('r', '证据不足')}</span><button class="btn sm" data-rdsel="${esc(o.id)}">查看详情</button></div></div>`;
+}
+function rdEmpty() {
+  return `<div class="card"><b>研究库暂无商业机会</b><p class="sub" style="margin:6px 0 0">研究部门完成真实调研、主 Claude 核实录入后，机会会显示在这里。本研究室不会用模拟或虚构数据填充。</p></div>`;
+}
+function rdRank() { const r = RADAR.rank(rdOpps()); return r.length ? r.map((o, i) => rdItem(o, i)).join('') : rdEmpty(); }
+function rdCatView() {
+  const all = RADAR.rank(rdOpps());
+  const cnt = {}; all.forEach(o => { cnt[o.category] = (cnt[o.category] || 0) + 1; });
+  const keys = ['all'].concat(RADAR.CATEGORIES);
+  const nav = `<div class="seg" style="margin:0 0 8px;flex-wrap:wrap">${keys.filter(k => k === 'all' || k === rdCat || cnt[k]).map(k => `<button data-rdcat="${k}" style="${RD_SMALL}" class="${rdCat === k ? 'on' : ''}">${k === 'all' ? '全部' : esc(RADAR.CATEGORY[k])} ${k === 'all' ? all.length : (cnt[k] || 0)}</button>`).join('')}</div>`;
+  const list = rdCat === 'all' ? all : all.filter(o => o.category === rdCat);
+  return nav + (list.length ? list.map((o, i) => rdItem(o, i)).join('') : (all.length ? `<p class="sub">该分类暂无机会。</p>` : rdEmpty()));
+}
+function rdRules() {
+  const W = RADAR.WEIGHTS;
+  return `<div class="card"><b>100 分评分制</b><p class="sub" style="margin:4px 0 6px">每项由研究部门依据真实证据打分并写明理由；超过上限的分数会被截断。评分是研究判断，不是销售预测。</p>
+ <div style="overflow-x:auto"><table class="pl"><tr><th>项目</th><th>满分</th></tr>${Object.keys(W).map(k => `<tr><td>${esc(RADAR.SCORE_LABELS[k])}</td><td>${W[k]}</td></tr>`).join('')}<tr><td><b>合计</b></td><td><b>100</b></td></tr></table></div></div>
+ <div class="card"><b>分级规则</b><ul class="log" style="margin-top:4px">
+ <li>${rdTag('ok', RADAR.TIER.priority)} 总分 ≥${RADAR.PRIORITY_MIN} <b>且</b>证据达标 <b>且</b>风控未否决 <b>且</b>是真实研究数据。高分但证据不足只能进观察名单。</li>
+ <li>${rdTag('g', RADAR.TIER.watch)} 总分 ≥${RADAR.WATCH_MIN}，或 ≥${RADAR.PRIORITY_MIN} 但证据未达标。</li>
+ <li>${rdTag('', RADAR.TIER.weak)} 总分 &lt;${RADAR.WATCH_MIN}。</li>
+ <li>${rdTag('r', RADAR.TIER.vetoed)} 6F 风险管理部拥有<b>独立否决权</b>：一旦否决，无论分数多高都沉底，且董事长不能批准立项。</li></ul></div>
+ <div class="card"><b>可靠证据门槛（证据达标）</b><ul class="log" style="margin-top:4px">
+ <li>至少 ${RADAR.GATE.minValid} 条有效需求证据（一手核实或第三方，必须有 https 链接和日期；「假设」不计入）。</li>
+ <li>其中至少 ${RADAR.GATE.minResearch} 条为${rdTag('ok', '一手核实')}（研究员亲自阅读的原始页面，例如官方价格页、真实用户评论/论坛帖子）。</li>
+ <li>必须覆盖需求（≥1 条一手需求证据）和竞品定价（≥1 个竞品写明价格并附链接）。</li></ul>
+ <p class="note">证据等级：${rdTag('ok', '一手核实')} research · ${rdTag('g', '第三方')} secondary · ${rdTag('sim', '假设')} assumption（成本、单笔净利等估算均为假设）。</p></div>
+ <div class="card"><b>机会生命周期</b><div class="row" style="margin-top:6px">${RADAR.STAGES.map((s, i) => `<span class="tag">${i + 1}. ${esc(s)}</span>`).join('')}</div>
+ <p class="note">批准研发只会在产品研发中新建产品，<b>不会自动开始开发</b>；研发进度只来自风险管理部审核通过的真实任务。批准与所有历史永久保留。</p></div>`;
+}
+function rdStages(o) {
+  const cur = RADAR.stageIndex(o, rdSt(o.id));
+  return `<div class="row" style="gap:4px">${RADAR.STAGES.map((s, i) => `<span class="tag ${i < cur ? 'ok' : i === cur ? 'g' : ''}">${i < cur ? '✓ ' : ''}${esc(s)}</span>`).join('')}</div>`;
+}
+function rdLevel(x) { const L = x && x.level; return (RADAR.LMH_L[L] || '—') + (x && x.notes ? ' · ' + x.notes : ''); }
+function rdDetail() {
+  const all = RADAR.rank(rdOpps());
+  if (!all.length) return rdEmpty();
+  const o = all.find(x => x.id === rdSel) || all[0];
+  const s = RADAR.score(o), t = RADAR.tier(o), e = RADAR.evidenceStrength(o), v = RADAR.verdictOf(o), st = rdSt(o.id), errs = RADAR.validate(o);
+  const rr = o.riskReview || {}, mp = o.marketPrice || {}, ec = o.estCost || {}, pp = o.profitPotential || {};
+  const arr = x => Array.isArray(x) ? x : [];
+  const pick = `<div class="row" style="margin-bottom:6px">${all.map(x => `<button class="btn sm ${x.id === o.id ? '' : 'ghost'}" style="${RD_SMALL}" data-rdsel="${esc(x.id)}">${esc(x.id)}</button>`).join('')}</div>`;
+  let h = pick + `<div class="card"><div class="row" style="justify-content:space-between"><b style="font-size:16px">${esc(o.name)}</b><span>${rdTag(RD_TIER_CLS[t], RADAR.TIER[t])}${t === 'vetoed' ? '' : rdTag(RD_VERD_CLS[v], RADAR.VERDICT[v])}${rdFakeTag(o)}</span></div>
+ <p class="sub" style="margin:4px 0 6px">${esc(o.id)} · ${esc(RADAR.CATEGORY[o.category] || o.category || '')} · ${esc(o.oneLine || '')}</p>
+ <div class="bars"><div class="br"><span class="bl">总分 / 100</span><span class="bt"><i style="width:${Math.max(0, Math.min(100, s))}%"></i></span><span class="bv"><b>${s}</b></span></div></div>
+ <div class="note">研究：${esc(arr(o.researchedBy).join('、') || '—')} · 核实日期 ${esc(o.checkedAt || '—')}</div>${rdStages(o)}</div>`;
+  if (errs.length) h += `<div class="card" style="border-color:#8a2a26">${rdTag('r', '数据校验未通过 ' + errs.length + ' 项')}<ul class="log">${errs.slice(0, 8).map(x => `<li class="m">${esc(x)}</li>`).join('')}</ul></div>`;
+  h += `<div class="card"><b>董事长决定</b> ${rdStatusTag(o.id)}${st && st.productId ? rdTag('ok', '产品 ' + st.productId) : ''}
+ ${v === 'veto' ? `<p class="sub" style="margin:6px 0 0;color:#ff9c95">风险管理部已否决，不能批准立项。</p>` : ''}
+ ${st && st.history.length ? `<ul class="log" style="margin-top:4px">${st.history.slice().reverse().slice(0, 6).map(x => `<li><span class="t">${esc(x.action)}</span> <span class="m">${esc(x.at)}</span>${x.note ? `<div class="m">${esc(x.note)}</div>` : ''}</li>`).join('')}</ul>` : '<p class="sub" style="margin:6px 0 0">尚无决定记录。批准研发、要求补充研究、暂缓或不采纳请到 7F 董事长审批中心。</p>'}
+ <div class="row" style="margin-top:6px"><button class="btn sm" data-go="appr">前往 7F 董事长审批中心</button><button class="btn sm ghost" data-rdseg="rank">返回排名</button></div></div>`;
+  h += `<h3>目标客户与痛点</h3><div class="card"><div class="kv" style="grid-template-columns:auto 1fr"><span>目标客户</span><b style="font-weight:600">${esc(o.targetCustomer || '—')}</b><span>目标国家</span><b style="font-weight:600">${esc(arr(o.targetCountries).join('、') || '—')}</b></div>
+ <ul class="log" style="margin-top:6px">${arr(o.painPoints).map(p => `<li class="m">${esc(rdTxt(p))} ${p && p.url ? rdLink(p.url) : ''}</li>`).join('') || '<li class="m">—</li>'}</ul></div>`;
+  h += `<h3>需求证据 ${e.ok ? rdTag('ok', '证据达标') : rdTag('r', '证据不足')}</h3><div class="card">${e.ok ? '' : `<p class="sub" style="margin:0 0 4px">未达标：${esc(e.missing.join('；'))}</p>`}<ul class="log">${arr(o.demandEvidence).map(x => x && typeof x === 'object' ? `<li><div>${rdTag(RD_LV_CLS[x.level], RADAR.LEVEL[x.level] || x.level || '?')}${esc(x.claim || '')}</div><div class="m">${esc(x.source || '')} ${esc(x.date || '')} ${rdLink(x.url, '打开来源')}</div></li>` : '').join('') || '<li class="m">—</li>'}</ul></div>`;
+  h += `<h3>竞品</h3><div class="card"><ul class="log">${arr(o.competitors).map(c => c && typeof c === 'object' ? `<li><div class="row" style="justify-content:space-between"><b>${esc(c.name || '')}</b><span class="tag g">${esc(c.price == null || c.price === '' ? '价格未知' : c.price)}</span></div><div class="m">弱点：${esc(c.weakness || '—')} ${rdLink(c.url, '官网')}</div></li>` : '').join('') || '<li class="m">暂无竞品记录</li>'}</ul></div>`;
+  h += `<h3>经营参数</h3><div class="card"><div class="kv" style="grid-template-columns:auto 1fr">
+ <span>市场价格</span><b style="font-weight:600">${esc(mp.currency || '')} ${esc(mp.low)}–${esc(mp.high)} · ${esc(mp.model || '')}${mp.notes ? ' · ' + esc(mp.notes) : ''}</b>
+ <span>开发难度</span><b style="font-weight:600">${esc(rdLevel(o.devDifficulty))}</b>
+ <span>获客方式</span><b style="font-weight:600">${esc(arr(o.acquisition).map(rdTxt).join('；') || '—')}</b>
+ <span>估算成本</span><b style="font-weight:600">开发 ${esc(ec.build)} · 每月 ${esc(ec.monthly)} ${esc(ec.currency || 'USD')} ${rdTag('sim', '假设')}${ec.notes ? ' ' + esc(ec.notes) : ''}</b>
+ <span>单笔净利</span><b style="font-weight:600">${pp.perSaleNet == null ? '未知' : esc(pp.perSaleNet) + ' ' + esc(pp.currency || 'USD')} ${rdTag('sim', '假设')}${pp.notes ? ' ' + esc(pp.notes) : ''}</b>
+ <span>客服负担</span><b style="font-weight:600">${esc(rdLevel(o.supportBurden))}</b>
+ <span>自动化</span><b style="font-weight:600">${esc(rdLevel(o.automation))}</b></div></div>`;
+  if (arr(o.audit).length) h += `<h3>审核调整记录</h3><div class="card"><ul class="log">${arr(o.audit).map(x => `<li><b>${esc(x.by)}</b> · ${esc(x.date)} · ${esc(x.change)}<br><span class="sub">${esc(x.reason)}</span></li>`).join('')}</ul></div>`;
+  h += `<h3>风险</h3><div class="card"><div class="row">${rdTag(RD_VERD_CLS[v], RADAR.VERDICT[v])}<span class="sub" style="margin:0">风险管理部独立审核${rr.by ? ' · ' + esc(rr.by) : ''}${rr.date ? ' · ' + esc(rr.date) : ''}</span></div>${rr.notes ? `<p class="sub" style="margin:4px 0 0">${esc(rr.notes)}</p>` : ''}
+ <ul class="log" style="margin-top:4px">${arr(o.risks).map(r => r && typeof r === 'object' ? `<li class="m">${rdTag(RD_SEV_CLS[r.severity], (RADAR.RISK[r.type] || r.type || '?') + ' · ' + (RADAR.LMH_L[r.severity] || r.severity || '?'))}${esc(r.desc || '')}</li>` : '').join('') || '<li class="m">暂无风险记录</li>'}</ul></div>`;
+  h += `<h3>评分明细</h3><div class="card"><div class="bars">${RADAR.breakdown(o).map(b => `<div class="br"><span class="bl">${esc(b.label)}</span><span class="bt"><i style="width:${b.max ? b.v / b.max * 100 : 0}%"></i></span><span class="bv">${b.v}/${b.max}</span></div>${b.note ? `<div class="note" style="margin:0 0 4px">${esc(b.note)}</div>` : ''}`).join('')}</div></div>`;
+  h += `<h3>来源</h3><div class="card"><ul class="log">${arr(o.sources).map(x => x && typeof x === 'object' ? `<li class="m">${esc(x.title || '')} · ${esc(x.date || '')} ${rdLink(x.url, '打开')}</li>` : '').join('') || '<li class="m">—</li>'}</ul></div>`;
+  return h;
+}
+function radarView() {
+  let h = rdBanner() + rdSegNav();
+  if (rdSeg === 'detail') h += rdDetail();
+  else if (rdSeg === 'rules') h += rdRules();
+  else if (rdSeg === 'cat') h += rdCatView();
+  else h += rdRank();
+  return h + rdArchiveCard();
+}
+/* ---- P05-002 私人研究档案：导入 / 导出 ---- */
+let rdPendingImp = null;
+function rdArchiveCard() {
+  const src = OPP_DB.source || 'none', n = (OPP_DB.opps || []).length;
+  const srcTxt = src === 'built-in' ? '内置于本测试版（私人）' : src === 'private' ? '本机私人档案（' + (OPP_DB.importedAt ? new Date(OPP_DB.importedAt).toLocaleDateString('zh-CN') + ' 导入' : '已导入') + '）' : '未导入';
+  let h = `<h3>私人研究档案</h3><div class="card"><p class="sub" style="margin:0 0 6px">来源：${esc(srcTxt)} · ${n} 个机会 · 版本 ${esc(OPP_DB.version || '—')}。正式 App 不内置研究数据（公开仓库不含私人研究），请从 iCloud「文件」导入研究档案；档案只存在本机，与游戏存档分开。</p>`;
+  if (rdPendingImp) {
+    const r = rdPendingImp;
+    h += `<div class="card" style="border-color:#8a6d1e"><b>确认导入研究档案？</b><p class="sub" style="margin:4px 0">文件共 ${r.total} 条，可导入 ${r.db.opps.length} 条（版本 ${esc(r.db.version || '—')}）。导入会替换本机现有的研究档案；董事长的审批记录保存在游戏存档里，不受影响。</p>${r.notes.length ? '<b style="color:#ff8a7a">以下记录不会导入：</b><br>' + r.notes.slice(0, 20).map(esc).join('<br>') : '<span class="sub">校验：全部通过。</span>'}<div class="row" style="margin-top:6px"><button class="btn sm" data-rdimp="go">确认导入</button><button class="btn sm ghost" data-rdimp="cancel">取消</button></div></div>`;
+  }
+  h += `<div class="row"><label class="btn sm">导入研究档案<input type="file" id="rdImpFile" accept=".json,application/json" style="display:none"></label>${n ? '<button class="btn sm ghost" data-rdimp="export">导出研究档案</button>' : ''}</div></div>`;
+  return h;
+}
+function rdImportFile(f) {
+  if (!f) return; const rd = new FileReader();
+  rd.onload = () => { const r = RSTORE.parse(String(rd.result || '')); if (!r.ok) { toast((r.notes || ['导入失败'])[0]); rdPendingImp = null; } else rdPendingImp = r; renderPanel(); };
+  rd.readAsText(f);
+}
+async function rdExport() {
+  const db = { version: OPP_DB.version, checkedAt: OPP_DB.checkedAt, opps: OPP_DB.opps || [] }, json = RSTORE.exportText(db);
+  const d = new Date(), z = x => String(x).padStart(2, '0'), name = 'MyCompany-研究档案-' + d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()) + '.json';
+  try { const f = new File([json], name, { type: 'application/json' }); if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: name }); toast('研究档案已导出'); return; } } catch (e) { if (e && e.name === 'AbortError') { toast('已取消'); return; } }
+  try { if (typeof dl !== 'undefined' && dl) { await dl.save({ filename: name, data: json }); toast('研究档案已下载'); return; } } catch (e) {}
+  toast('当前环境不能导出文件');
+}
+function radarAct(t) {
+  if (t.dataset.rdimp) { const a = t.dataset.rdimp;
+    if (a === 'export') rdExport();
+    else if (a === 'cancel') { rdPendingImp = null; renderPanel(); }
+    else if (a === 'go' && rdPendingImp) { try { RSTORE.store(rdPendingImp.db); OPP_DB.opps = rdPendingImp.db.opps; OPP_DB.version = rdPendingImp.db.version; OPP_DB.checkedAt = rdPendingImp.db.checkedAt; OPP_DB.importedAt = rdPendingImp.db.importedAt; if (OPP_DB.source !== 'built-in') OPP_DB.source = 'private'; toast('已导入 ' + rdPendingImp.db.opps.length + ' 个研究机会'); } catch (e) { toast('导入失败：本机存储空间不足'); } rdPendingImp = null; renderPanel(); }
+    return true; }
+  const ds = t.dataset;
+  if (ds.rdseg) rdSeg = ds.rdseg;
+  else if (ds.rdsel) { rdSel = ds.rdsel; rdSeg = 'detail'; }
+  else if (ds.rdcat) rdCat = ds.rdcat;
+  else return false;
+  renderPanel(); if ($('panel')) $('panel').scrollTop = 0;
+  return true;
+}
+
+/* ---- parts_approval.js ---- */
+/* Agent B 负责：7F 董事长审批中心。可用全局：S, esc, save, renderPanel, toast, SimEngine, RADAR, OPP_DB, mkProd 等
+   规则：
+   - 商业机会来自 OPP_DB（真实研究）；模拟销售数据只作「模拟」展示，绝不作为真实证据。
+   - 批准研发只在 S.products 新建「已立项（未开发）」产品，不创建任务、不开始开发。
+   - 风控 verdict==='veto' 时不能批准；所有决定写入 S.oppState[id].history，永不删除。 */
+
+/* ---------- 界面状态（不进存档） ---------- */
+let apprOpen = null;     /* 展开研究报告的机会 id */
+let apprConfirm = null;  /* 等待二次确认批准的机会 id */
+let apprConfirmNote = ''; /* 第一次点击时已写的备注，带入确认卡 */
+
+const APPR_STATUS = { new: '待审批', more_research: '要求继续研究', approved: '已批准研发', hold: '暂缓', rejected: '已拒绝' };
+const APPR_ACTION = { approve: '批准研发', more_research: '要求继续研究', hold: '暂缓', reject: '拒绝', reopen: '重新打开' };
+const APPR_TIER = { priority: ['优先', 'ok'], watch: ['观察', 'g'], weak: ['较弱', ''], vetoed: ['风控否决', 'r'] };
+const APPR_VERDICT = { pending: ['风控待审', ''], pass: ['风控通过', 'ok'], caution: ['风控提示', 'g'], veto: ['风控否决', 'r'] };
+const APPR_STAGES_FALLBACK = ['发现机会', '市场研究', '立项审批', '研发', '功能测试', '风险审核', '永久资产库', '模拟销售', '未来正式销售'];
+
+/* ---------- RADAR 防御性封装（Agent A 并行开发） ---------- */
+function apprRadar() { return typeof RADAR !== 'undefined' && RADAR ? RADAR : {}; }
+function apprScore(o) {
+  const R = apprRadar();
+  if (typeof R.score === 'function') { try { return +R.score(o) || 0; } catch (e) {} }
+  const W = R.WEIGHTS || { demand: 25, acquisition: 20, differentiation: 15, profit: 15, automation: 10, lowSupport: 10, lowDevCost: 5 };
+  let t = 0; for (const k in W) t += Math.max(0, Math.min(W[k], +((o.scores || {})[k]) || 0)); return t;
+}
+function apprVerdict(o) { return ((o && o.riskReview) || {}).verdict || 'pending'; }
+function apprTier(o) {
+  const R = apprRadar();
+  if (typeof R.tier === 'function') { try { const t = R.tier(o); if (t) return t; } catch (e) {} }
+  if (apprVerdict(o) === 'veto') return 'vetoed';
+  const s = apprScore(o), ev = (o.demandEvidence || []).filter(e => e && e.level === 'research').length;
+  return s >= 80 && ev >= 2 ? 'priority' : s >= 60 ? 'watch' : 'weak';
+}
+function apprRank(opps) {
+  const R = apprRadar(), list = (opps || []).slice();
+  if (typeof R.rank === 'function') { try { const r = R.rank(list); if (Array.isArray(r)) return r; } catch (e) {} }
+  const ord = { priority: 0, watch: 1, weak: 2, vetoed: 3 };
+  return list.sort((a, b) => (ord[apprTier(a)] - ord[apprTier(b)]) || (apprScore(b) - apprScore(a)) || String(a.id).localeCompare(String(b.id)));
+}
+function apprStageNames() { const R = apprRadar(); return Array.isArray(R.STAGES) && R.STAGES.length === 9 ? R.STAGES : APPR_STAGES_FALLBACK; }
+function apprOpps() { return typeof OPP_DB !== 'undefined' && OPP_DB && Array.isArray(OPP_DB.opps) ? OPP_DB.opps : []; }
+function apprToday() { if (typeof ld === 'function') return ld(); const d = new Date(), z = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()); }
+function apprMode() { return typeof MODE !== 'undefined' ? MODE : 'live'; }
+
+/* ---------- 存档：S.oppState ---------- */
+function apprState(id) {
+  if (!S.oppState || typeof S.oppState !== 'object' || Array.isArray(S.oppState)) S.oppState = {};
+  let st = S.oppState[id];
+  if (!st || typeof st !== 'object') st = S.oppState[id] = { status: 'new', history: [] };
+  if (!Array.isArray(st.history)) st.history = [];
+  if (!APPR_STATUS[st.status]) st.status = 'new';
+  return st;
+}
+function apprPeek(id) { const st = S.oppState && S.oppState[id]; return st && typeof st === 'object' ? st : { status: 'new', history: [] }; }
+function apprNextProductId(products) {
+  let mx = 0; (products || []).forEach(p => { const m = /^PRODUCT (\d+)$/.exec(String(p && p.id)); if (m) mx = Math.max(mx, +m[1]); });
+  let n = mx + 1, id; do { id = 'PRODUCT ' + String(n++).padStart(3, '0'); } while ((products || []).some(p => p && p.id === id));
+  return id;
+}
+function apprProductFor(id) {
+  const st = apprPeek(id);
+  return S.products.find(p => st.productId && p.id === st.productId) || S.products.find(p => p.oppId === id) || null;
+}
+
+/* 纯逻辑决定（不调用 save/render，便于测试）。返回 { ok, msg, product? } */
+function apprDecide(id, action, note) {
+  const o = apprOpps().find(x => x.id === id);
+  if (!o) return { ok: false, msg: '找不到商业机会 ' + id };
+  if (!APPR_ACTION[action]) return { ok: false, msg: '未知操作' };
+  const st = apprState(id), _now = new Date(), at = apprLocalISO(_now), nt = String(note == null ? '' : note).trim().slice(0, 300);
+  const log = a => st.history.push({ at, action: a, note: nt });
+  if (action === 'approve') {
+    if (apprVerdict(o) === 'veto') return { ok: false, msg: '风险部门已否决，不能批准研发' + (o.riskReview && o.riskReview.notes ? '：' + o.riskReview.notes : '') };
+    if (apprVerdict(o) === 'pending') return { ok: false, msg: '风险部门尚未审核，不能批准研发' };
+    let p = apprProductFor(id);
+    if (p) { /* 已有产品：不重复创建 */
+      if (st.status !== 'approved') { st.status = 'approved'; log('approve'); }
+      st.productId = p.id; return { ok: true, msg: id + ' 已关联 ' + p.id + '（不重复创建产品）', product: p };
+    }
+    const pid = apprNextProductId(S.products);
+    p = mkProd(pid, o.name, '已立项（未开发）', '立项审批', { oppId: id, approvedAt: at.slice(0, 10) });
+    if (!Array.isArray(p.history)) p.history = [];
+    p.history.push({ d: apprToday(), t: '董事长批准研发（来源：' + id + ' 真实研究）' + (nt ? '：' + nt : '') });
+    S.products.push(p);
+    st.status = 'approved'; st.productId = pid; log('approve');
+    return { ok: true, msg: id + ' 已批准研发，新建 ' + pid + '（未开发）', product: p };
+  }
+  if (action === 'reopen') {
+    if (st.status === 'approved') return { ok: false, msg: '已批准的项目不能重新打开' };
+    if (st.status === 'new' || st.status === 'more_research') return { ok: false, msg: '该项目仍在待审批状态' };
+    st.status = 'new'; log('reopen'); return { ok: true, msg: id + ' 已重新打开' };
+  }
+  if (st.status === 'approved') return { ok: false, msg: '已批准研发，不能改为' + APPR_ACTION[action] };
+  if (st.status === 'rejected' || st.status === 'hold') { if (st.status === action) return { ok: false, msg: '已经是' + APPR_STATUS[action] }; }
+  st.status = action === 'reject' ? 'rejected' : action; log(action);
+  return { ok: true, msg: id + ' · ' + APPR_ACTION[action] };
+}
+
+/* ---------- 产品生命周期（只由真实记录推导；模拟销售单独标注） ---------- */
+function apprStages(p) {
+  const names = apprStageNames(), sim = (S.sim && Array.isArray(S.sim.listings)) ? S.sim : { listings: [] };
+  let met = [];
+  try { if (typeof SimEngine !== 'undefined' && SimEngine.productLevel) met = SimEngine.productLevel(S, p, sim, apprMode()).met || []; } catch (e) {}
+  if (!met.length) { const t = (S.tasks || []).filter(x => x.status === 'approved' && x.product === p.id), has = k => t.some(x => x.type === k);
+    met = [true, has('research'), !!p.approvedAt, has('proto'), has('soft'), has('test'), has('copyright')]; }
+  const ls = sim.listings.filter(l => l && l.productId === p.id);
+  const fromOpp = !!p.oppId;
+  const s = [];
+  s.push({ state: 'done', note: fromOpp ? p.oppId + '（真实研究）' : '董事长记录' });
+  s.push(fromOpp || met[1] ? { state: 'done', note: fromOpp ? '真实研究报告' : '已审核研究任务' } : { state: 'todo', note: '缺少已审核的市场研究' });
+  s.push(p.approvedAt ? { state: 'done', note: '批准于 ' + p.approvedAt } : { state: 'todo', note: '等待董事长批准' });
+  s.push(met[4] ? { state: 'done', note: '研发完成' } : met[3] ? { state: 'doing', note: '已有原型，研发未完成' } : { state: 'todo', note: '尚未开始（开发进度只来自已审核任务）' });
+  s.push(met[5] ? { state: 'done', note: '功能测试已审核' } : { state: 'todo', note: '缺少功能测试记录' });
+  s.push(met[6] ? { state: 'done', note: '风险/版权审核通过' } : { state: 'todo', note: '缺少风险审核记录' });
+  const inVault = S.products.some(x => x.id === p.id);
+  s.push(inVault && met[6] ? { state: 'done', note: '已归档（审核完成）' } : { state: 'todo', note: inVault ? '已登记，待风险审核完成' : '未登记' });
+  s.push(ls.length ? { state: 'sim', note: '模拟：' + ls.length + ' 个商品（' + [...new Set(ls.map(l => l.mode === 'sandbox' ? '沙盒' : '正式存档'))].join('/') + '），模拟订单 ' + ls.reduce((a, l) => a + ((l.stats && l.stats.orders) || 0), 0) + ' 笔，非真实销售' } : { state: 'todo', note: '尚未在模拟平台上架' });
+  s.push({ state: 'locked', note: '需董事长另行批准，目前不进行真实销售' });
+  return s.map((x, i) => Object.assign({ name: names[i] }, x));
+}
+
+/* ---------- 视图 ---------- */
+function apprTag(txt, cls) { return `<span class="tag ${cls || ''}">${esc(txt)}</span>`; }
+function apprStatusTag(st) { const c = { approved: 'ok', rejected: 'r', hold: 'g', more_research: 'g', new: '' }[st] || ''; return apprTag(APPR_STATUS[st] || st, c); }
+function apprList(a, f) { return Array.isArray(a) && a.length ? `<ul class="log">${a.map(x => `<li>${f(x)}</li>`).join('')}</ul>` : '<p class="sub" style="margin:0">（无）</p>'; }
+function apprLink(u, t) { return /^https?:\/\//.test(String(u || '')) ? `<a href="${esc(u)}" target="_blank" rel="noopener" style="color:var(--gold2)">${esc(t || u)}</a>` : esc(t || u || ''); }
+function apprDetail(o) {
+  const mp = o.marketPrice || {}, dd = o.devDifficulty || {}, ec = o.estCost || {}, pp = o.profitPotential || {}, rr = o.riskReview || {};
+  const lv = { research: ['一手研究', 'ok'], secondary: ['第三方', 'g'], assumption: ['假设', 'r'] };
+  const W = apprRadar().WEIGHTS || {};
+  return `<div class="card" style="margin:8px 0 0;background:rgba(0,0,0,.2)">
+  <p class="sub" style="margin:0 0 6px">${apprTag('真实研究', 'ok')}${esc(o.researchedBy ? [].concat(o.researchedBy).join('、') : '')} · 核对 ${esc(o.checkedAt || '')} · ${esc(o.category || '')}</p>
+  <div><b>目标客户</b>：${esc(o.targetCustomer || '')}${o.targetCountries && o.targetCountries.length ? '（' + esc(o.targetCountries.join('、')) + '）' : ''}</div>
+  <h3>客户痛点</h3>${apprList(o.painPoints, x => esc(typeof x === 'string' ? x : JSON.stringify(x)))}
+  <h3>需求证据</h3>${apprList(o.demandEvidence, e => `<div class="t">${esc(e.claim)}</div><div class="m">${apprTag((lv[e.level] || [e.level])[0], (lv[e.level] || [])[1])}${apprLink(e.url, e.source || e.url)} ${esc(e.date || '')}</div>`)}
+  <h3>竞争对手</h3>${apprList(o.competitors, c => `<div class="t">${apprLink(c.url, c.name)} · ${esc(c.price || '')}</div><div class="m">弱点：${esc(c.weakness || '')}</div>`)}
+  <h3>经营估算（假设，非模拟成绩）</h3><ul class="log">
+   <li><div class="m">市场价格：${esc(mp.low)}–${esc(mp.high)} ${esc(mp.currency || '')} · ${esc(mp.model || '')} ${esc(mp.notes || '')}</div></li>
+   <li><div class="m">开发难度：${esc(dd.level || '')} ${esc(dd.notes || '')}</div></li>
+   <li><div class="m">估算成本：开发 ${esc(ec.build)} / 每月 ${esc(ec.monthly)} ${esc(ec.currency || '')} ${esc(ec.notes || '')}</div></li>
+   <li><div class="m">单笔净利：${esc(pp.perSaleNet)} ${esc(pp.notes || '')}</div></li>
+   <li><div class="m">获客：${esc((o.acquisition || []).join('、'))}</div></li></ul>
+  <h3>评分明细</h3>${apprList(Object.keys(o.scores || {}), k => `<div class="t">${esc(k)} ${esc(o.scores[k])}${W[k] ? '/' + W[k] : ''}</div><div class="m">${esc((o.scoreNotes || {})[k] || '')}</div>`)}
+  <h3>风险</h3>${apprList(o.risks, r => `<div class="t">${esc(r.type)} · ${esc(r.severity || '')}</div><div class="m">${esc(r.desc || '')}</div>`)}
+  <div class="note">风险部门：${apprTag((APPR_VERDICT[rr.verdict] || [rr.verdict || '待审'])[0], (APPR_VERDICT[rr.verdict] || [])[1])}${esc(rr.by || '')} ${esc(rr.date || '')} ${esc(rr.notes || '')}</div>
+  <h3>来源</h3>${apprList(o.sources, s => `<div class="m">${apprLink(s.url, s.title || s.url)} ${esc(s.date || '')}</div>`)}
+  <div class="row" style="margin-top:8px"><button class="btn sm ghost" data-go="radar">在 5F 商业机会雷达查看</button></div></div>`;
+}
+function apprOppCard(o, i) {
+  const st = apprPeek(o.id), vd = apprVerdict(o), tier = apprTier(o), sc = apprScore(o), veto = vd === 'veto' || vd === 'pending';
+  const T = APPR_TIER[tier] || [tier, ''], V = APPR_VERDICT[vd] || [vd, ''], id = esc(o.id), prod = apprProductFor(o.id);
+  const btn = (a, txt, cls, dis) => `<button class="btn sm ${cls || ''}" data-appr-act="${a}" data-opp="${id}"${dis ? ' disabled' : ''}>${txt}</button>`;
+  let acts = '';
+  if (st.status === 'approved') acts = `<div class="note">${apprTag('已批准研发', 'ok')}${prod ? '已在永久资产库建立 ' + esc(prod.id) + '（' + esc(prod.status) + '）。开发进度只来自经风险审核的任务。' : '产品记录缺失'}</div>${prod ? '<div class="row"><button class="btn sm ghost" data-go="vault">查看永久资产库</button></div>' : ''}`;
+  else if (apprConfirm === o.id) acts = `<div class="card" style="border-color:#8a6d1e;margin:8px 0 0"><b>确认批准研发「${esc(o.name)}」？</b><p class="sub" style="margin:4px 0 6px">将在永久资产库新建 ${esc(apprNextProductId(S.products))}（已立项·未开发）。不会自动创建任务或开始开发。${vd === 'pending' ? '<br>注意：风险部门尚未给出结论。' : vd === 'caution' ? '<br>注意：风险部门有提示，请先读风险说明。' : ''}</p>
+   <label for="an_${id}">批示备注（可选）</label><input id="an_${id}" maxlength="300" placeholder="例如：先做 MVP，限英国市场" value="${esc(apprConfirmNote)}">
+   <div class="row" style="margin-top:8px">${btn('confirm', '确认批准')}${btn('cancel', '取消', 'ghost')}</div></div>`;
+  else if (st.status === 'hold' || st.status === 'rejected') acts = `<label for="an_${id}">备注（可选）</label><input id="an_${id}" maxlength="300" placeholder="重新打开的理由"><div class="row" style="margin-top:8px">${btn('reopen', '重新打开', 'ghost')}</div>`;
+  else acts = `<label for="an_${id}">董事长批示备注（可选）</label><input id="an_${id}" maxlength="300" placeholder="写下你的理由或要求">
+   <div class="row" style="margin-top:8px">${btn('approve', '批准研发', '', veto)}${btn('more_research', '要求继续研究', 'ghost')}${btn('hold', '暂缓', 'ghost')}${btn('reject', '拒绝', 'red')}</div>
+   ${veto ? `<div class="note" style="color:#ff9c95">不能批准：风险部门已否决${o.riskReview && o.riskReview.notes ? '——' + esc(o.riskReview.notes) : ''}</div>` : ''}`;
+  const hist = st.history.length ? `<details style="margin-top:6px"><summary class="sub" style="margin:0">决定记录（${st.history.length}）</summary><ul class="log">${st.history.slice().reverse().map(h => `<li><div class="t">${esc(APPR_ACTION[h.action] || h.action)}</div><div class="m">${esc(String(h.at || '').replace('T', ' ').slice(0, 16))}${h.note ? ' · ' + esc(h.note) : ''}</div></li>`).join('')}</ul></details>` : '';
+  return `<div class="card"><div class="row" style="justify-content:space-between"><b>#${i + 1} ${id} · ${esc(o.name)}</b><span><b style="font-size:18px">${sc}</b><span class="sub">/100</span></span></div>
+  <div style="margin:4px 0">${apprTag('真实研究', 'ok')}${apprTag(T[0], T[1])}${apprTag(V[0], V[1])}${apprStatusTag(st.status)}</div>
+  <p class="sub" style="margin:0 0 6px">${esc(o.oneLine || '')}</p>
+  <div class="row"><button class="btn sm ghost" data-appr-act="view" data-opp="${id}">${apprOpen === o.id ? '收起研究报告' : '查看研究报告'}</button></div>
+  ${apprOpen === o.id ? apprDetail(o) : ''}${acts}${hist}</div>`;
+}
+function apprOppsHtml() {
+  const list = apprRank(apprOpps());
+  const db = typeof OPP_DB !== 'undefined' && OPP_DB ? OPP_DB : {};
+  const head = `<h3>商业机会审批 ${apprTag('真实研究', 'ok')}</h3><p class="sub">来自 5F 商业研究中心的真实研究（数据库 ${esc(db.version || '—')} · 核对 ${esc(db.checkedAt || '—')}），按商业机会雷达评分排序。模拟市场数据不计入评分。</p>`;
+  if (!list.length) return head + `<div class="card"><p class="sub" style="margin:0">研究部尚未录入真实商业机会。</p><div class="row" style="margin-top:8px"><button class="btn sm ghost" data-go="radar">前往 5F 商业机会雷达</button></div></div>`;
+  return head + list.map(apprOppCard).join('');
+}
+function apprProdHtml(p) {
+  const st = apprStages(p), cls = { done: 'ok', doing: 'g', todo: '', sim: 'sim', locked: 'r' }, mk = { done: '✓ ', doing: '… ', todo: '', sim: '', locked: '锁 ' };
+  const hist = Array.isArray(p.history) && p.history.length ? `<details><summary class="sub" style="margin:0">版本 ${esc(p.version || '—')} · 升级历史（${p.history.length}）</summary><ul class="log">${p.history.slice().reverse().map(h => `<li><div class="m">${esc(h.d || '')} ${esc(h.t || '')}</div></li>`).join('')}</ul></details>` : `<p class="sub" style="margin:0">版本 ${esc(p.version || '—')}</p>`;
+  return `<div class="card"><div class="row" style="justify-content:space-between"><b>${esc(p.id)} · ${esc(p.name)}</b><span class="sub" style="margin:0">${esc(p.status || '')}</span></div>
+  <div style="margin:6px 0;line-height:1.9">${st.map(s => `<span class="tag ${cls[s.state]}" title="${esc(s.note)}">${mk[s.state]}${esc(s.name)}${s.state === 'sim' ? '（模拟）' : ''}</span>`).join('')}</div>
+  <ul class="log">${st.filter(s => s.state !== 'todo').map(s => `<li><div class="m"><b>${esc(s.name)}</b>：${esc(s.note)}</div></li>`).join('')}</ul>${hist}</div>`;
+}
+function apprView() {
+  const q = S.tasks.filter(t => t.status === 'pending');
+  return `<h2>董事长审批中心</h2><p class="sub">7F · 董事长办公桌 · 研究为${apprTag('真实研究', 'ok')}，销售为${apprTag('模拟', 'sim')}，二者不混用</p>
+ <div class="card"><div class="t"><b>待风险审核（${q.length}）</b></div><p class="sub">审批权在 6F 风险管理部（独立否决权），董事长在此查看。</p>${q.length ? `<ul class="log">${q.map(t => taskLi(t, 0)).join('')}</ul>` : ''}<button class="btn sm" data-gofloor="6">前往 6F 风险审核</button></div>
+ ${apprOppsHtml()}
+ <h3>产品研发进度</h3><p class="sub">阶段只由已审核的真实记录推导；「模拟销售」来自模拟市场，不是真实销售证据；「未来正式销售」需董事长另行批准，目前不进行真实销售。</p>
+ ${S.products.map(apprProdHtml).join('')}
+ <div class="card"><div class="t"><b>产品立项批准</b></div><p class="sub">董事长亲自批准产品立项（产品等级 LV.3 的依据）。这是你的真实决策记录，会写入产品升级历史。</p>${S.products.map(p => `<div class="toggle"><span>${esc(p.id)} · ${esc(p.name)}</span>${p.approvedAt ? `<span class="tag ok">已批准 ${esc(p.approvedAt)}</span>` : `<button class="btn sm" data-approve-prod="${esc(p.id)}">批准立项</button>`}</div>`).join('')}</div>
+ <h3>重大晋级任务</h3><div class="card"><ul class="log">${gatesHtml()}</ul></div>`;
+}
+
+/* ---------- 点击处理 ---------- */
+function apprNoteVal(id) { try { const el = typeof $ === 'function' ? $('an_' + id) : null; return el && el.value ? String(el.value) : ''; } catch (e) { return ''; } }
+function apprRefresh(msg) { if (typeof save === 'function') save(msg); if (typeof renderPanel === 'function') renderPanel(); }
+function apprAct(t) {
+  const ds = (t && t.dataset) || {}, a = ds.apprAct, id = ds.opp;
+  if (!a || !id) return false;
+  if (a === 'view') { apprOpen = apprOpen === id ? null : id; if (typeof renderPanel === 'function') renderPanel(); return true; }
+  if (a === 'cancel') { apprConfirm = null; if (typeof renderPanel === 'function') renderPanel(); return true; }
+  if (a === 'approve') {
+    const o = apprOpps().find(x => x.id === id);
+    if (o && apprVerdict(o) === 'veto') { if (typeof toast === 'function') toast('风险部门已否决，不能批准研发'); return true; }
+    apprConfirmNote = apprNoteVal(id); apprConfirm = id; if (typeof renderPanel === 'function') renderPanel(); return true;
+  }
+  const action = a === 'confirm' ? 'approve' : a;
+  if (action === 'approve' && apprConfirm !== id) { apprConfirm = id; if (typeof renderPanel === 'function') renderPanel(); return true; }
+  const r = apprDecide(id, action, apprNoteVal(id));
+  apprConfirm = null; apprConfirmNote = '';
+  if (!r.ok) { if (typeof toast === 'function') toast(r.msg); if (typeof renderPanel === 'function') renderPanel(); return true; }
+  apprRefresh(r.msg);
+  return true;
+}
+
+/* P05-002：审批日期与历史记录统一使用本地时间（含时区偏移），approvedAt = 同一时刻的本地日期 */
+function apprLocalISO(d) { const z = n => String(Math.abs(n)).padStart(2, '0'), off = -d.getTimezoneOffset(); return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()) + 'T' + z(d.getHours()) + ':' + z(d.getMinutes()) + ':' + z(d.getSeconds()) + (off >= 0 ? '+' : '-') + z(Math.trunc(off / 60)) + ':' + z(off % 60); }
+
 /* =================== 员工名册（虚构人物，动画仅为游戏表现） =================== */
 const SK={a:'#F1C7A0',b:'#E8B996',c:'#D9A27A',d:'#B97F57',e:'#8A5A3B'};
 const ROSTER=[
@@ -1797,8 +2406,8 @@ const ICON_SVG=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" 
 </svg>`;
 /* =================== UI（P01.6 游戏化） =================== */
 let tab='menu',preDept='research',sheetOpen=false,selFloor=-1,selStaff=null,camMode='hq',notice=null,inGame=false;
-const TABS=[['menu','菜单','i-grid'],['quest','任务','i-scroll'],['mkt','市场','i-globe'],['cust','客户','i-users'],['fin','财务','i-gem'],['dept','部门','i-team'],['tech','科技树','i-tree'],['vault','资产库','i-box'],['task','记录','i-pen'],['ach','成就','i-trophy'],['data','数据','i-cloud'],['set','设置','i-gear']];
-const TITLES={mkt:'全球市场 · 2F 商业营销中心',cust:'虚拟客户 · 1F 客户体验中心',fin:'财务管理中心 · 双金币账本',menu:'游戏菜单',quest:'任务中心',dept:'部门',tech:'科技树',vault:'产品研发 · 永久资产库',task:'记录成果',ach:'公司奖杯',data:'数据备份及恢复',set:'游戏设置',staff:'员工档案',appr:'董事长审批中心',hq:'公司总览',boss:'BOSS 晋级任务',build:'建筑扩张'};
+const TABS=[['menu','菜单','i-grid'],['quest','任务','i-scroll'],['radar','雷达','i-globe'],['mkt','市场','i-globe'],['cust','客户','i-users'],['fin','财务','i-gem'],['dept','部门','i-team'],['tech','科技树','i-tree'],['vault','资产库','i-box'],['task','记录','i-pen'],['ach','成就','i-trophy'],['data','数据','i-cloud'],['set','设置','i-gear']];
+const TITLES={radar:'商业机会雷达 · 5F 商业研究中心',mkt:'全球市场 · 2F 商业营销中心',cust:'虚拟客户 · 1F 客户体验中心',fin:'财务管理中心 · 双金币账本',menu:'游戏菜单',quest:'任务中心',dept:'部门',tech:'科技树',vault:'产品研发 · 永久资产库',task:'记录成果',ach:'公司奖杯',data:'数据备份及恢复',set:'游戏设置',staff:'员工档案',appr:'董事长审批中心',hq:'公司总览',boss:'BOSS 晋级任务',build:'建筑扩张'};
 const ic=(id,cls='i')=>`<svg class="${cls}"><use href="#${id}"/></svg>`;
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),2600)}
 /* ---------- 音效（WebAudio 合成，原创，无外部素材） ---------- */
@@ -1924,14 +2533,6 @@ function hqView(){
  <h3>部门一览</h3><div class="grid">${Object.keys(DEPTS).map(d=>{const L=deptLv(S,d);return `<button class="mini" style="text-align:left;color:inherit" data-gofloor="${DFLOOR[d]}"><div class="n">${FLOORS[DFLOOR[d]].id} · ${DEPTS[d].n}</div><div class="v">LV.${L.lv}</div>${barH(L.cur,L.next,L.xp)}</button>`}).join('')}</div>
  <h3>重大晋级任务</h3><div class="card"><ul class="log">${gatesHtml()}</ul></div>`;
 }
-function apprView(){
- const q=S.tasks.filter(t=>t.status==='pending');
- return `<h2>董事长审批中心</h2><p class="sub">7F · 董事长办公桌</p>
- <div class="card"><div class="t"><b>待风险审核（${q.length}）</b></div><p class="sub">审批权在 6F 风险管理部（独立否决权），董事长在此查看。</p>${q.length?`<ul class="log">${q.map(t=>taskLi(t,0)).join('')}</ul>`:''}<button class="btn sm" data-gofloor="6">前往 6F 风险审核</button></div>
- <div class="card"><div class="t"><b>产品立项批准</b></div><p class="sub">董事长亲自批准产品立项（产品等级 LV.3 的依据）。这是你的真实决策记录，会写入产品升级历史。</p>${S.products.map(p=>`<div class="toggle"><span>${esc(p.id)} · ${esc(p.name)}</span>${p.approvedAt?`<span class="tag ok">已批准 ${esc(p.approvedAt)}</span>`:`<button class="btn sm" data-approve-prod="${esc(p.id)}">批准立项</button>`}</div>`).join('')}</div>
- <div class="card"><div class="t"><b>商业机会雷达</b> <span class="tag">P05 未开放</span></div><p class="sub" style="margin:0">商业机会雷达尚未开发。</p></div>
- <h3>重大晋级任务</h3><div class="card"><ul class="log">${gatesHtml()}</ul></div>`;
-}
 function floorView(i){
  const f=FLOORS[i];
  if(f.k==='vault')return vaultView();
@@ -1951,10 +2552,10 @@ const fv=v=>v&&v!==P?esc(v):`<span class="pending">${P}</span>`;
 function sanitize(o){const notes=[];const str=(v,n=600)=>String(v==null?'':v).slice(0,n);const ST=['approved','pending','vetoed'];let bad=0,fixed=0;
  const tasks=[];(o.tasks||[]).forEach(t=>{if(!t||!RW[t.type]||!DEPTS[t.primary]||!ST.includes(t.status)){bad++;return}const xp=RW[t.type].xp;if(t.xp!==xp)fixed++;
   tasks.push({id:str(t.id||('T'+Math.random().toString(36).slice(2)),40),title:str(t.title,100),type:t.type,primary:t.primary,assist:(Array.isArray(t.assist)?t.assist:[]).filter(d=>DEPTS[d]&&d!==t.primary),product:str(t.product,40),evidence:str(t.evidence),xp,date:str(t.date,10),status:t.status,reviewed:t.reviewed?str(t.reviewed,10):undefined,vetoReason:t.vetoReason?str(t.vetoReason,200):undefined})});
- const prods=(o.products||[]).filter(p=>p&&p.id&&p.name).map(p=>{const q=Object.assign(mkProd(str(p.id,40),str(p.name,80),str(p.status||'原型',40),str(p.stage||'研发中',40),{}),{});FIELDS.forEach(([k])=>{if(p[k]!=null)q[k]=str(p[k])});if(p.approvedAt)q.approvedAt=str(p.approvedAt,30);if(Array.isArray(p.history))q.history=p.history.slice(0,200).map(h=>({d:str(h&&h.d,10),t:str(h&&h.t,200)}));return q});
+ const prods=(o.products||[]).filter(p=>p&&p.id&&p.name).map(p=>{const q=Object.assign(mkProd(str(p.id,40),str(p.name,80),str(p.status||'原型',40),str(p.stage||'研发中',40),{}),{});FIELDS.forEach(([k])=>{if(p[k]!=null)q[k]=str(p[k])});if(p.approvedAt)q.approvedAt=str(p.approvedAt,30);if(p.oppId)q.oppId=str(p.oppId,40);if(Array.isArray(p.history))q.history=p.history.slice(0,200).map(h=>({d:str(h&&h.d,10),t:str(h&&h.t,200)}));return q});
  let kept=0;S.products.forEach(p=>{if(!prods.some(q=>q.id===p.id)){prods.push(Object.assign({},p,{history:(p.history||[]).concat([{d:today(),t:'导入备份时保留（永久资产不删除）'}])}));kept++}});
  if(bad)notes.push('丢弃 '+bad+' 条无效记录');if(fixed)notes.push(fixed+' 条记录的 XP 已按规则重算');if(kept)notes.push('保留 '+kept+' 个备份中没有的产品');
- _imp={tasks,products:prods};_impNotes=notes;const sim=simSanitize(o.sim);_imp={};_impNotes=null;const econ=econSanitize(Object.assign({},o,{sim,tasks,products:prods}),notes);const importLog=(Array.isArray(o.importLog)?o.importLog:[]).filter(x=>x&&Array.isArray(x.notes)).slice(-20).map(x=>({at:+x.at||0,src:str(x.src,60),notes:x.notes.slice(0,10).map(n=>str(n,300))}));return {s:{v:1,name:str(o.name||'My Company',40),savedAt:Date.now(),tasks,products:prods,econ,sim,importLog},notes}}
+ _imp={tasks,products:prods};_impNotes=notes;const sim=simSanitize(o.sim);_imp={};_impNotes=null;const econ=econSanitize(Object.assign({},o,{sim,tasks,products:prods}),notes);const importLog=(Array.isArray(o.importLog)?o.importLog:[]).filter(x=>x&&Array.isArray(x.notes)).slice(-20).map(x=>({at:+x.at||0,src:str(x.src,60),notes:x.notes.slice(0,10).map(n=>str(n,300))}));return {s:{v:1,name:str(o.name||'My Company',40),savedAt:Date.now(),tasks,products:prods,econ,sim,importLog,oppState:RADAR.relinkProducts(RADAR.sanitizeState(o.oppState,notes),prods,notes)},notes}}
 let _imp={},_impNotes=null;function simSanitize(x){if(!x||typeof x!=='object'||!Array.isArray(x.listings)||!Array.isArray(x.orders))return undefined;try{const c=JSON.parse(JSON.stringify(x));if(!Number.isInteger(c.day)||c.day<0)return undefined;c.seed=c.seed>>>0;c.rng=c.rng>>>0;['listings','orders','reviews','events','reports','daily','warnings'].forEach(k=>{if(!Array.isArray(c[k]))c[k]=[]});if(!c.custHist||typeof c.custHist!=='object')c.custHist={};if(MODE!=='sandbox'){const n0=[c.listings.length,c.orders.length,c.reviews.length];c.listings=c.listings.filter(l=>liveListingOk(_imp,c,l));c.orders=c.orders.filter(q=>liveOrderOk(_imp,c,q));const ok=new Set(c.orders.map(q=>q.id));c.reviews=c.reviews.filter(r=>r&&r.mode==='live'&&ok.has(r.orderId));const d=[n0[0]-c.listings.length,n0[1]-c.orders.length,n0[2]-c.reviews.length];if(d.some(x=>x>0)&&_impNotes)_impNotes.push('剔除 '+d[0]+' 个不合格商品、'+d[1]+' 笔不合格订单、'+d[2]+' 条评价（沙盒记录、未满足正式发布条件、价格或日期不符）')}return c}catch(e){return undefined}}
 function vaultView(){
  return `<h2>永久产品资产库</h2><p class="sub">B1 · 所有产品、原型及失败项目永久归档。未取得的文件一律标记「待导入」。封面为系统生成占位图，非产品图片。</p>
@@ -2020,7 +2621,7 @@ NOTICES.launch=['产品发布','产品研发','P03','把产品发布到模拟平
 const TILES=[['quest','任务中心','i-scroll','#4fb0ff','#1f62c4'],['boss','BOSS 晋级','i-crown','#ff7a6b','#b8322a'],['dept','部门','i-team','#5fd6a0','#1f8a5b'],['tech','科技树','i-tree','#b18cff','#5b3fa0'],
  ['vault','产品研发','i-box','#ffb36b','#d9701e'],['build','建筑扩张','i-crane','#7fd2ff','#2f7fc0'],['ach','成就','i-trophy','#ffe08a','#d99a1e'],['task','记录成果','i-pen','#6fe0d0','#1f8a8a'],
  ['fin','财务中心','i-gem','#e0b84a','#8a6a1e'],['fin:hist','财富等级','i-gem','#c9a4ff','#6b55a8'],['mkt','全球市场','i-globe','#6fb8ff','#2a5a9a'],['cust','虚拟客户','i-users','#7fd0ff','#2a6a9a'],
- ['mkt:pub','产品发布','i-play','#ff9fb0','#b0405a'],['mkt:comp','商业竞争','i-swords','#ff8a7a','#8a2a26'],['n:radar','机会雷达','i-flask','#8ae0b0','#2a7a5a','P05'],['mkt:comp','商业事件','i-dice','#c0c8d8','#4a5568'],['mkt:rep','经营报告','i-scroll','#9fe0c0','#2a7a5a'],
+ ['mkt:pub','产品发布','i-play','#ff9fb0','#b0405a'],['mkt:comp','商业竞争','i-swords','#ff8a7a','#8a2a26'],['radar','机会雷达','i-flask','#8ae0b0','#2a7a5a'],['mkt:comp','商业事件','i-dice','#c0c8d8','#4a5568'],['mkt:rep','经营报告','i-scroll','#9fe0c0','#2a7a5a'],
  ['data','数据备份','i-cloud','#9fc0e8','#3a5a8a'],['set','设置','i-gear','#a8b4c8','#3e4a60']];
 function menuView(){return `<div class="tiles">${TILES.map(([k,n,i,c1,c2,lk])=>`<button class="tile ${lk?'lock':''}" style="--c1:${c1};--c2:${c2}" data-go="${k}">${ic(i)}<span>${n}</span><span class="st">${lk?lk+' 未开放':k==='data'&&bkState().need?'需要备份':'已开放'}</span></button>`).join('')}</div><p class="note">带锁的功能尚未开发，打开后只显示说明，不会产生任何数据。</p>`}
 function stepsHtml(st){return st.map(x=>`<div class="qcard ${x.d?'done':''}"><span class="ck">${x.d?'✓':''}</span><div style="flex:1"><div>${esc(x.n)}</div><div class="pb"><i style="width:${Math.min(100,x.a/x.b*100)}%"></i></div><div class="m" style="font-size:11px;color:var(--dim)">${x.a} / ${x.b}</div></div></div>`).join('')}
@@ -2044,7 +2645,7 @@ function setView(){const pOK=LS('companyhq_portrait')==='1';
  <div class="toggle"><span>性能</span><span id="fps" style="color:var(--dim);font-size:13px">帧率测量中…</span></div></div>
  <div class="card"><div class="t"><b>特效预览</b> <span class="tag sim">不改变任何数据</span></div><div class="row" style="margin-top:8px"><button class="btn sm" data-prev="lv">升级特效</button><button class="btn sm" data-prev="coin">金币动画</button><button class="btn sm" data-prev="xp">XP 飞入</button><button class="btn sm" data-prev="quest">任务奖章</button></div></div>
  <div class="card"><label for="cn">公司名称</label><input id="cn" value="${esc(S.name)}" maxlength="40"><div class="row" style="margin-top:8px"><button class="btn ghost" id="cnSave">修改名称</button></div></div>
- <p class="note">My Company 版本 P03-P04 正式版 · v3.4.0 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
+ <p class="note">My Company 版本 P05 正式版 · v3.5.0 · 模拟创业阶段 · 模拟金币不能兑换真实资金 · 不连接任何真实交易或支付。</p>`}
 /* ---------- P02 财务中心 ---------- */
 let finSeg='sum',revOpen=null;
 function finView(){const c=econCalc(S),E=econInit(S),rv=revSet(S);const sbx=MODE==='sandbox';
@@ -2210,6 +2811,7 @@ function renderPanel(){
  else if(tab==='build')h=buildView();
  else if(tab==='set')h=setView();
  else if(tab==='fin')h=finView();
+ else if(tab==='radar')h=radarView();
  else if(tab==='mkt')h=mktView();
  else if(tab==='cust')h=custView();
  else if(tab==='staff')h=staffView(selStaff);
@@ -2249,6 +2851,7 @@ function doAct(a){
  if(a==='ledger'){finSeg='sum';openSheet('fin');return}
  if(a==='market'){mktSeg='run';openSheet('mkt');return}
  if(a==='cust'){custSeg='list';selCust=null;openSheet('cust');return}
+ if(a==='radar'){openSheet('radar');return}
  if(NOTICES[a]){openNotice(a);return}
  if(DEPTS[a]){selFloor=DFLOOR[a];openSheet('dept');return}
 }
@@ -2278,6 +2881,7 @@ window.HQUI={goFloor,doAct,pickStaff:id=>{selStaff=id;camMode='staff';setCamBtns
  ready:()=>{$('loadbox').hidden=true;$('sbtns').hidden=false;saveSummary();if(window.HQ3D)HQ3D.attract(true)},
  fail:m=>{$('ltxt').textContent='3D 场景未能载入：'+m+'（管理功能仍可使用）';$('sbtns').hidden=false;saveSummary()},enter:enterGame,exit:exitGame,fxLevel,fxCoins,fxXp,fxBadge};
 HQUI._econ={econCalc,ledgerPost,ledgerReverse,MarketAPI,econInit,save:m=>save(m),mode:MODE};
+HQUI._p05={OPP_DB,RSTORE,RADAR,SimEngine,openSheet:t=>openSheet(t),quickBackup:()=>quickBackup()};
 /* ---------- 事件绑定 ---------- */
 document.addEventListener('pointerdown',()=>actx(),{once:true});
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.closest('#start')&&b.id!=='sheetX')sfx.click()},true);
@@ -2303,7 +2907,7 @@ $('side').addEventListener('click',e=>{const b=e.target.closest('[data-cam]');if
  else if(m==='dept'){goFloor(selFloor>=0?selFloor:5)}
  else if(m==='staff'){if(selFloor<0)goFloor(5);const id=HQ3D.anyStaff(selFloor);if(id)HQUI.pickStaff(id)}
  setCamBtns()});
-$('panel').addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const ds=t.dataset;if(finAct(t))return;if(mktAct(t))return;
+$('panel').addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const ds=t.dataset;if(finAct(t))return;if(mktAct(t))return;if(radarAct(t))return;if(apprAct(t))return;
  if(t.id==='sbxIn'){enterSandbox();return}if(t.id==='sbxOut'){exitSandbox();return}
  if(t.id==='bkFile'){quickBackup().then(()=>renderPanel());return}
  if(t.id==='rsGo'){doRestore();return}
@@ -2351,7 +2955,7 @@ $('panel').addEventListener('click',async e=>{
   S.savedAt=Date.now();LS(KEY+'v1',JSON.stringify(S));
   try{await art.publish(buildDoc());cloudDirty=false;markBackedUp();toast('云端已保存')}catch(err){t.disabled=false;toast('云端保存失败：'+((err&&err.code)||'未授权或冲突'))}return}
 });
-$('panel').addEventListener('change',e=>{if(e.target.id==='pubProd'){const keep={};['pubPlat','pubPrice','pubSale','pubBud','pubTarget','pubDesc'].forEach(k=>keep[k]=$(k).value);renderPanel();Object.entries(keep).forEach(([k,v])=>{if($(k))$(k).value=v});return}
+$('panel').addEventListener('change',e=>{if(e.target.id==='rdImpFile'){rdImportFile(e.target.files[0]);e.target.value='';return}if(e.target.id==='pubProd'){const keep={};['pubPlat','pubPrice','pubSale','pubBud','pubTarget','pubDesc'].forEach(k=>keep[k]=$(k).value);renderPanel();Object.entries(keep).forEach(([k,v])=>{if($(k))$(k).value=v});return}
  if(e.target.id==='pubImg'){const f=e.target.files&&e.target.files[0];if(f)resizeImg(f,u=>{pubImg=u;const x=$('pubImgS');if(x)x.textContent=u?'已选择图片 ✓':'图片读取失败'});return}
  if(e.target.id!=='rsFile')return;const f=e.target.files&&e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o||o.v!==1||!Array.isArray(o.tasks)||!Array.isArray(o.products))throw 0;if(o.sandbox&&MODE!=='sandbox'){toast('这是测试沙盒的备份，不能恢复到正式存档');return}const r=sanitize(o);pendingRestore={s:r.s,notes:r.notes,src:f.name};renderPanel();$('panel').scrollTop=0}catch(_){toast('这不是有效的备份文件')}};rd.readAsText(f)});
 $('panel').addEventListener('input',e=>{if(e.target.id==='custQ'){custQ=e.target.value;const pos=e.target.selectionStart;renderPanel();const q=$('custQ');q.focus();q.setSelectionRange(pos,pos);return}if(e.target.id==='eraPv'){pvEra=+e.target.value;$('eraPvL').textContent=BUILD_ERAS[pvEra]+'（预览）';if(window.HQ3D)HQ3D.sync()}});

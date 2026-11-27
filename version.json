@@ -1,8 +1,8 @@
 {
-  "version": "20261126-1400-6662c9b5",
-  "cache": "companyhq-20261126-1400-6662c9b5",
-  "built_utc": "2026-11-26T14:00:57+00:00",
+  "version": "20261127-0038-ce607b5c",
+  "cache": "companyhq-20261127-0038-ce607b5c",
+  "built_utc": "2026-11-27T00:38:23+00:00",
   "source": "index.html",
-  "source_sha256": "6662c9b5cf501e88611bcd38774c8d8fd9155c7dc6f328bc37ec0e081f22a2c7",
+  "source_sha256": "ce607b5ce86422a0494ce23c335a00b4c135871115d9404db51a2bd0d3a68a5d",
   "three": "0.160.0"
 }
